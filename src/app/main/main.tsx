@@ -1,3 +1,5 @@
+"use clinet";
+
 export default function Main() {
   return (
     <>
