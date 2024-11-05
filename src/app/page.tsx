@@ -18,7 +18,7 @@
 import Main from "./main/page"; // 클라이언트 컴포넌트 사용
 
 export default async function HomePage() {
-  const response = await fetch("http://localhost:3000/api/loadRotationChamp", {
+  const response = await fetch("/api/loadRotationChamp", {
     cache: "no-store", // 최신 데이터를 가져오도록 설정 (선택 사항)
   });
 
@@ -27,6 +27,7 @@ export default async function HomePage() {
   }
 
   const data = await response.json();
+  console.log(data);
 
   return (
     <div>

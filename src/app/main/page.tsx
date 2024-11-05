@@ -22,7 +22,7 @@
 //     </div>
 //   );
 // }
-"use client"; // 클라이언트 컴포넌트로 전환
+"use client";
 
 type MainProps = {
   data: any;

@@ -1,13 +1,14 @@
-// app/api/loadRotationChamp/route.ts
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function fetchRotationChamp(
+  url: string,
+  method: "GET" | "POST" | "PUT" | "DELETE" = "GET"
+) {
   const API_KEY = process.env.API_KEY; // 환경 변수에서 API 키 가져오기
-  const url = "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations";
 
   try {
     const response = await fetch(url, {
-      method: "GET",
+      method,
       headers: {
         "X-Riot-Token": API_KEY || "",
       },
