@@ -28,3 +28,10 @@ export async function fetchRotationChamp(
     );
   }
 }
+
+// Next.js의 GET 핸들러로 설정
+export const GET = async () => {
+  const url = "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations";
+  const data = await fetchRotationChamp(url, "GET");
+  return NextResponse.json(data);
+};
