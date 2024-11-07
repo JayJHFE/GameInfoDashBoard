@@ -4,7 +4,7 @@ export async function fetchRotationChamp(
   url: string,
   method: "GET" | "POST" | "PUT" | "DELETE" = "GET"
 ) {
-  const API_KEY = process.env.API_KEY; // 환경 변수에서 API 키 가져오기
+  const API_KEY = process.env.API_KEY; //
 
   try {
     const response = await fetch(url, {
@@ -19,7 +19,9 @@ export async function fetchRotationChamp(
     }
 
     const data = await response.json();
-    return NextResponse.json(data); // 데이터를 JSON으로 반환
+
+    return data;
+    // return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching data from Riot Games API:", error);
     return NextResponse.json(

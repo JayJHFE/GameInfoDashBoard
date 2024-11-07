@@ -5,16 +5,20 @@ export default function MainClient() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    console.log("Fetching data from custom API route...");
-    fetch("/api/loadRotationChamp") // 절대 경로로 설정
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("Data fetched from API route:", result);
-        setData(result);
-      })
-      .catch((error) => console.error("Error fetching data on client:", error));
+    async function fetchData() {
+      try {
+        const response = await fetch("/api/loadRotationChamp");
+        const result = await response.json();
+
+        setData(result); // 상태에 저장
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
   }, []);
-  console.log(data);
+
   return (
     <div>
       <h1>Data from API Route:</h1>
@@ -22,12 +26,3 @@ export default function MainClient() {
     </div>
   );
 }
-// "use client";
-
-// export default function Main() {
-//   return (
-//     <div>
-//       <h1>오찌도찌</h1>
-//     </div>
-//   );
-// }
