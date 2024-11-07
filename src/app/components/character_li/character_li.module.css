@@ -1,13 +1,14 @@
 .li {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    /* align-items: center; */
-    /* padding: 10px; */
-    /* border-bottom: 1px solid #ccc; */
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  /* padding: 10px; */
+  /* border-bottom: 1px solid #ccc; */
+  position: relative;
+  /* height: 10vh; */
 }
 .h3 {
-    position: absolute;
-    top: 150%;
+  position: absolute;
+  top: 0;
 }
