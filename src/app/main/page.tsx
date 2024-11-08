@@ -111,6 +111,7 @@ interface ChampionData {
 
 export default function MainClient() {
   const [data, setData] = useState<{ freeChampionIds: number[] } | null>(null);
+  const [allChampionData, setAllChampionData] = useState<ChampionData>({});
   const [freeChampions, setFreeChampions] = useState<
     { name: string; tags: string; image: string; key: string; id: string; }[]
   >([]);
@@ -126,6 +127,9 @@ export default function MainClient() {
         const champResponse = await fetch("/LeagueofLegendData/champion.json");
         const championDatajson: { data: ChampionData } = await champResponse.json();
         const championData = championDatajson.data;
+        setAllChampionData(championData);
+
+        console.log(championData);
 
         const matchedChampions = result.freeChampionIds
           .map((id: number) => {
@@ -179,7 +183,7 @@ export default function MainClient() {
           ))}
         </ul>
       </div>
-      <AramChampionTier aramChamps = {aramChamps}/>
+      <AramChampionTier allChampionData = {allChampionData} aramChamps = {aramChamps}/>
     </>
   );
 }
