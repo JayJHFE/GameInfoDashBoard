@@ -106,7 +106,9 @@ export async function scrapAramChamp() {
 
     $("tbody tr").each((_, element) => {
       // console.log(element,"1");
-      const name = $(element).find("td>a>img").attr("alt")?.trim();
+      // name에 기호나 공백이 있으면 제거
+
+      const name = $(element).find("td>a>img").attr("alt")?.trim().replace(/[^a-zA-Z]/g, "").toLowerCase().replace(/^./, (char) => char.toUpperCase());
       const tier = $(element).find("td:nth-child(3)").text()?.trim(); // 'img'로 수정하여 이미지의 'alt' 속성 사용
 
       if (name && tier) {

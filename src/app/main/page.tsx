@@ -169,9 +169,9 @@ export default function MainClient() {
     fetchData2();
   }, []);
 
-  // useEffect(() => {
-  //   console.log(aramChamps);
-  // }, [aramChamps]);
+  useEffect(() => {
+    console.log(aramChamps);
+  }, [aramChamps]);
 
   return (
     <>
