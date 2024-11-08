@@ -95,6 +95,7 @@
 import { useEffect, useState } from "react";
 import CharacterLi from "../components/character_li/character_li";
 import characterStyles from './character_ul.module.css';
+import AramChampionTier from "../components/aramChampionTier/aramChampionTier";
 
 interface Champion {
   tags: string;
@@ -113,7 +114,7 @@ export default function MainClient() {
   const [freeChampions, setFreeChampions] = useState<
     { name: string; tags: string; image: string; key: string; id: string; }[]
   >([]);
-  const [tiers, setTiers] = useState<{ name: string; tier: string }[]>([]);
+  const [aramChamps, setaramChamps] = useState<{ name: string; tier: string }[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -154,7 +155,7 @@ export default function MainClient() {
       try {
         const response = await fetch("/api/scrapAramChamp");
         const data = await response.json();
-        setTiers(data);
+        setaramChamps(data);
       } catch (error) {
         console.error("Error fetching champion tiers:", error);
       }
@@ -164,18 +165,21 @@ export default function MainClient() {
     fetchData2();
   }, []);
 
-  useEffect(() => {
-    console.log(tiers);
-  }, [tiers]);
+  // useEffect(() => {
+  //   console.log(aramChamps);
+  // }, [aramChamps]);
 
   return (
-    <div>
-      <h1>옵션 추가</h1>
-      <ul className={characterStyles.ul_container}>
-        {freeChampions.map((freechampion) => (
-          <CharacterLi key={freechampion.key} champion={freechampion} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div>
+        <h1>옵션 추가</h1>
+        <ul className={characterStyles.ul_container}>
+          {freeChampions.map((freechampion) => (
+            <CharacterLi key={freechampion.key} champion={freechampion} />
+          ))}
+        </ul>
+      </div>
+      <AramChampionTier aramChamps = {aramChamps}/>
+    </>
   );
 }
