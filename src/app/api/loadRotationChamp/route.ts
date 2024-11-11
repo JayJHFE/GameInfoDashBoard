@@ -4,13 +4,11 @@ export async function fetchRotationChamp(
   url: string,
   method: "GET" | "POST" | "PUT" | "DELETE" = "GET"
 ) {
-  const API_KEY = process.env.API_KEY; //
-
   try {
     const response = await fetch(url, {
       method,
       headers: {
-        "X-Riot-Token": API_KEY || "",
+        "X-Riot-Token": "RGAPI-d0ef7619-7f3f-4fae-a38b-68eff7631dff",
       },
     });
 
