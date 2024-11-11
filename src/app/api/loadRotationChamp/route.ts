@@ -8,7 +8,7 @@ export async function fetchRotationChamp(
     const response = await fetch(url, {
       method,
       headers: {
-        "X-Riot-Token": "RGAPI-d0ef7619-7f3f-4fae-a38b-68eff7631dff",
+        "X-Riot-Token": "",
       },
     });
 
