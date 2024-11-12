@@ -23,7 +23,6 @@
 //   >([]);
 //   const [tiers, setTiers] = useState<{ name: string; tier: string }[]>([]);
 
-
 //   useEffect(() => {
 //     async function fetchData() {
 //       try {
@@ -94,7 +93,7 @@
 
 import { useEffect, useState } from "react";
 import CharacterLi from "../components/character_li/character_li";
-import characterStyles from './character_ul.module.css';
+import characterStyles from "./character_ul.module.css";
 import AramChampionTier from "../components/aramChampionTier/aramChampionTier";
 
 interface Champion {
@@ -113,9 +112,11 @@ export default function MainClient() {
   const [data, setData] = useState<{ freeChampionIds: number[] } | null>(null);
   const [allChampionData, setAllChampionData] = useState<ChampionData>({});
   const [freeChampions, setFreeChampions] = useState<
-    { name: string; tags: string; image: string; key: string; id: string; }[]
+    { name: string; tags: string; image: string; key: string; id: string }[]
   >([]);
-  const [aramChamps, setaramChamps] = useState<{ name: string; tier: string }[]>([]);
+  const [aramChamps, setaramChamps] = useState<
+    { name: string; tier: string }[]
+  >([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -125,7 +126,10 @@ export default function MainClient() {
         setData(result);
 
         const champResponse = await fetch("/LeagueofLegendData/champion.json");
-        const championDatajson: { data: ChampionData } = await champResponse.json();
+        const championDatajson: { data: ChampionData } =
+          await champResponse.json();
+        // json stringify로 데이터 변환
+        // console.log(JSON.stringify(championDatajson));
         const championData = championDatajson.data;
         setAllChampionData(championData);
 
@@ -133,9 +137,11 @@ export default function MainClient() {
 
         const matchedChampions = result.freeChampionIds
           .map((id: number) => {
-            const matchedChampion = Object.values(championData).find((champ: Champion) => {
-              return champ.key === id.toString();
-            });
+            const matchedChampion = Object.values(championData).find(
+              (champ: Champion) => {
+                return champ.key === id.toString();
+              }
+            );
 
             return matchedChampion
               ? {
@@ -147,7 +153,17 @@ export default function MainClient() {
                 }
               : null;
           })
-          .filter((champion : object): champion is { name: string; tags: string; image: string; key: string; id: string } => champion !== null);
+          .filter(
+            (
+              champion: object
+            ): champion is {
+              name: string;
+              tags: string;
+              image: string;
+              key: string;
+              id: string;
+            } => champion !== null
+          );
 
         setFreeChampions(matchedChampions);
       } catch (error) {
@@ -183,7 +199,10 @@ export default function MainClient() {
           ))}
         </ul>
       </div>
-      <AramChampionTier allChampionData = {allChampionData} aramChamps = {aramChamps}/>
+      <AramChampionTier
+        allChampionData={allChampionData}
+        aramChamps={aramChamps}
+      />
     </>
   );
 }

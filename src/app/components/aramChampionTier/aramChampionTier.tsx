@@ -11,33 +11,41 @@ interface ChampionData {
 }
 interface AramChampionTierProps {
   aramChamps: { name: string; tier: string }[];
-  allChampionData: ChampionData;  // ChampionData 타입을 사용하여 allChampionData 선언
+  allChampionData: ChampionData; // ChampionData 타입을 사용하여 allChampionData 선언
 }
-export default function AramChampionTier ({ aramChamps, allChampionData }: AramChampionTierProps ) {
-    console.log(aramChamps);
-    console.log(allChampionData);
-    return <>
-            <h2>정보 표기</h2>
-              <ul>
-                {aramChamps.map((aramChamp) => {
-                  // allChampionData에서 name이 일치하는 챔피언을 찾기
-                  const matchedChampion = Object.values(allChampionData).find(
-                    (champion) => champion.id === aramChamp.name
-                  );
+export default function AramChampionTier({
+  aramChamps,
+  allChampionData,
+}: AramChampionTierProps) {
+  console.log(aramChamps, "오찌");
+  // console.log(allChampionData, "도찌");
+  // console.log("allChampionData:", JSON.stringify(allChampionData, null, 2));
 
-                  if (!matchedChampion) {
-                    console.warn(`No match found for ARAM champion: ${aramChamp.name}`);
-                  }
+  return (
+    <>
+      <h2>정보 표기</h2>
+      <ul>
+        {aramChamps.map((aramChamp) => {
+          // allChampionData에서 name이 일치하는 챔피언을 찾기
+          const matchedChampion = Object.values(allChampionData).find(
+            (champion) => champion.id === aramChamp.name
+          );
 
-                  return (
-                    <li key={aramChamp.name}>
-                      <img src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${matchedChampion?.id}.png`} />
-                      <strong>{matchedChampion?.name}</strong> - Tier: {aramChamp.tier}
-                    </li>
-                  );
-                })}
-              </ul>
-              {/* <ul>
+          if (!matchedChampion) {
+            console.log(`No match found for ARAM champion: ${aramChamp.name}`);
+          }
+
+          return (
+            <li key={aramChamp.name}>
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${matchedChampion?.id}.png`}
+              />
+              <strong>{matchedChampion?.name}</strong> - Tier: {aramChamp.tier}
+            </li>
+          );
+        })}
+      </ul>
+      {/* <ul>
               {aramChamps.map((aramChamp) => {
                 // allChampionData에서 name이 일치하는 챔피언을 찾기
                 const matchedChampion = Object.values(allChampionData).find(
@@ -66,5 +74,6 @@ export default function AramChampionTier ({ aramChamps, allChampionData }: AramC
                 );
               })}
             </ul> */}
-           </>
+    </>
+  );
 }
