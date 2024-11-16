@@ -29,7 +29,7 @@ export default function CharacterLi(data: CharacterLiProps) {
           style={{ width: "100px", height: "20vh" }}
         />
         {/* <div className={character_li.shape}></div> */}
-        <h3 className={character_li.h3}>{data.champion.name}</h3>
+        <p className={character_li.h3}>{data.champion.name}</p>
         {/* <p>{data.champion.tags}</p> */}
       </li>
     </>
