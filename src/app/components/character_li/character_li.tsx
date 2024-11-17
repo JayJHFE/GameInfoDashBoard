@@ -26,10 +26,11 @@ export default function CharacterLi(data: CharacterLiProps) {
         <img
           src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${data.champion.id}_0.jpg`}
           alt={data.champion.name}
-          style={{ width: "100px", height: "20vh" }}
+          style={{ width: "100px" }}
         />
+        {data.champion.name}
         {/* <div className={character_li.shape}></div> */}
-        <p className={character_li.h3}>{data.champion.name}</p>
+        {/* <div>{data.champion.name}</div> */}
         {/* <p>{data.champion.tags}</p> */}
       </li>
     </>
