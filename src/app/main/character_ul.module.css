@@ -1,8 +1,0 @@
-.ul_container {
-  width: 80vw;
-  height: 20vh;
-  display: flex;
-  flex-direction: row;
-  background-color: white;
-  overflow-x: auto;
-}

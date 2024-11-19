@@ -234,7 +234,7 @@
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import CharacterLi from "../components/character_li/character_li";
 import characterStyles2 from "../components/character_li/character_li.module.css";
-import characterStyles from "./character_ul.module.css";
+import styles from "./mainPage.module.css";
 
 import AramChampionTier from "../components/aramChampionTier/aramChampionTier";
 
@@ -441,9 +441,9 @@ export default function MainClient() {
         ) : (
         <div style={{display:"flex", flexDirection:"row", overflow: "hidden"}}>
             <button onClick={handlePrev}>Previous</button>
-          <div className={characterStyles2.scene}>
+          <div className={styles.scene}>
             <div
-              className={characterStyles2.carousel}
+              className={styles.carousel}
               ref={carouselRef}
               style={{
                 transition: "transform 1s ease-in-out",
