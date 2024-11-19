@@ -14,9 +14,10 @@ interface CharacterLiProps {
 
     id: string;
   };
+  isSelected: boolean;
 }
 
-export default function CharacterLi(data: CharacterLiProps) {
+export default function CharacterLi(data: CharacterLiProps, isSelected: boolean) {
   // console.log(data.champion.id);
   // console.log(`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${data.champion.id}_0.jpg`);
   return (
@@ -27,6 +28,7 @@ export default function CharacterLi(data: CharacterLiProps) {
           src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${data.champion.id}_0.jpg`}
           alt={data.champion.name}
           style={{ width: "100px" }}
+          className={`${character_li}.${isSelected ? 'selectedChampionImg' : 'championImg'}`}
         />
         {data.champion.name}
         {/* <div className={character_li.shape}></div> */}

@@ -416,18 +416,11 @@ export default function MainClient() {
   return (
     <>
       <div>
-        {/* <h1>로테이션 챔피언</h1> */}
         <h1>테스트</h1>
-        {/* <ul className={characterStyles.ul_container}>
-          {freeChampions.map((freechampion) => (
-            <CharacterLi key={freechampion.key} champion={freechampion} />
-          ))}
-        </ul> */}
         {!isCarouselVisible ? (
           <div>
-            {/* <h2>무료챔피언을 확인하세요</h2> */}
             <h2>테스트2</h2>
-            <div style={{backgroundImage:"url('/valley.png')", backgroundSize: "cover", backgroundPosition:"center", height:"15vh", position:"relative", borderRadius:"18px"}}>
+            <div className={styles.beforeCarousel}>
                 <button
                 style={{position:"absolute", top:"50%", left:"50%"}}
                 onClick={() => {
@@ -439,7 +432,7 @@ export default function MainClient() {
             </div>
           </div>
         ) : (
-        <div style={{display:"flex", flexDirection:"row", overflow: "hidden"}}>
+        <div className={styles.carouselContainer}>
             <button onClick={handlePrev}>Previous</button>
           <div className={styles.scene}>
             <div
@@ -449,8 +442,8 @@ export default function MainClient() {
                 transition: "transform 1s ease-in-out",
               }}
             >
-              {freeChampions.map((freechampion) => (
-                <CharacterLi key={freechampion.key} champion={freechampion} />
+              {freeChampions.map((freechampion, index) => (
+                <CharacterLi key={freechampion.key} champion={freechampion} isSelected={index === selectedIndex}  />
               ))}
             </div>
             {/* <div className={characterStyles2.carouselOption}>
