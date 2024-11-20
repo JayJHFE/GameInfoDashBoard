@@ -51,9 +51,13 @@ export default function MainClient() {
     //   setRadius(newRadius);
       const cellSize = carousel.offsetWidth || 300; // 기본 크기 보장
       const newRadius = Math.min(
-        Math.max(Math.round(cellSize / 2 / Math.sin(Math.PI / cellCount)), 200), // 최소 반지름 제한
-        400 // 최대 반지름 제한
+        Math.max(Math.round(cellSize / 2 / Math.sin(Math.PI / cellCount)), 300), // 최소 반지름 제한
+        600 // 최대 반지름 제한
       );
+      // const newRadius = Math.min(
+      //   Math.max(Math.round(cellSize / 2 / Math.sin(Math.PI / cellCount)), 200), // 최소 반지름 제한
+      //   400 // 최대 반지름 제한
+      // );
       setRadius(newRadius);
 
       const cells = Array.from(carousel.children); // Carousel Cell
