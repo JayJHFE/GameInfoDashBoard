@@ -228,7 +228,7 @@ export default function MainClient() {
         allChampionData={allChampionData}
         aramChamps={aramChamps}
       /> */}
-      <RandomChampionCard />
+      <RandomChampionCard allChampionData={allChampionData}/>
     </>
   );
 }
