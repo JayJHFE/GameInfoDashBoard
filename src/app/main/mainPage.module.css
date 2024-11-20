@@ -52,6 +52,61 @@
   transition: transform 1s, opacity 1s;
 }
 
+.carouselOptions {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  background: hsla(0, 0%, 100%, 0.8);
+}
+.beforeCarousel {
+  background-image: url('/valley.png');
+  background-size: cover;
+  background-position: center;
+  height: 15vh;
+  position: relative;
+  border-radius: 18px;
+  border: 2.5px solid rgb(200, 170, 110);
+  /* border: 2.5px solid rgb(240, 170, 0); */
+  box-shadow: 6px 7px 10px 1px rgb(127, 125, 125);
+}
+/* .beforeCarousel:hover {
+  border-image: none;
+  border: 3px solid;
+} */
+
+.beforeCarousel > button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 40px;
+  background-color: #0A323C;
+  border: 1px solid #C89B3C;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #C89B3C;
+  box-shadow: 0 0 10px 0 #C89B3C;
+}
+/* .beforeCarousel > button:hover {
+  background-color: #C89B3C;
+  color: #0A323C;
+} */
+.beforeCarousel > button:hover {
+  box-shadow: 0 0 10px 0 #A09B8C;
+  transform: scale(1.06);
+}
+.carouselContainer {
+  display:flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+
+
+
+
+
 /* .carousel__cell:nth-child(9n + 1) {
   background: hsla(0, 100%, 50%, 0.8);
 }
@@ -107,27 +162,3 @@
 .carousel__cell:nth-child(9) {
   transform: rotateY(320deg) translateZ(288px);
 } */
-
-.carouselOptions {
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  background: hsla(0, 0%, 100%, 0.8);
-}
-
-.beforeCarousel {
-  background-image: url('/valley.png');
-  background-size: cover;
-  background-position: center;
-  height: 15vh;
-  position: relative;
-  border-radius: 18px;
-  border: 1px solid rgb(79, 78, 78);
-  box-shadow: 6px 7px 10px 1px rgb(127, 125, 125);
-}
-
-.carouselContainer {
-  display:flex;
-  flex-direction: row;
-  overflow: hidden;
-}

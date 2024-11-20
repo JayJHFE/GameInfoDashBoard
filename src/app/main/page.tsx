@@ -422,12 +422,11 @@ export default function MainClient() {
             <h2>테스트2</h2>
             <div className={styles.beforeCarousel}>
                 <button
-                style={{position:"absolute", top:"50%", left:"50%"}}
                 onClick={() => {
                     setIsCarouselVisible(true);
                 }}
                 >
-                    보기
+                    열기
                 </button>
             </div>
           </div>
