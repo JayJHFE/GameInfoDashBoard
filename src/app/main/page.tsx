@@ -206,7 +206,6 @@ export default function MainClient() {
           </div>
         ) : (
         <div className={styles.carouselContainer}>
-            <button onClick={handlePrev}>Previous</button>
           <div className={styles.scene}>
             <div
               className={styles.carousel}
@@ -222,9 +221,12 @@ export default function MainClient() {
             {/* <div className={characterStyles2.carouselOption}>
               <p>
               </p>
-            </div> */}
+              </div> */}
           </div>
-                <button onClick={handleNext}>Next</button>
+          <div style={{display:"flex", flexDirection:"row", justifyContent:"space-evenly"}}>
+              <button onClick={handlePrev}>◀︎</button>
+              <button onClick={handleNext}>►</button>
+          </div>
         </div>
         )}
       </div>
