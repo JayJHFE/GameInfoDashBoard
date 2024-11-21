@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import CharacterLi from "../components/character_li/character_li";
-import characterStyles2 from "../components/character_li/character_li.module.css";
 import styles from "./mainPage.module.css";
 
 import AramChampionTier from "../components/aramChampionTier/aramChampionTier";
@@ -10,7 +9,7 @@ import RandomChampionCard from "../components/randomChampionCard/randomChampionC
 import SearchingZone from "../components/serchingZone/searchingZone";
 
 interface Champion {
-  tags: string;
+  tags: Array<string>;
   id: string;
   key: string;
   name: string;
@@ -23,7 +22,7 @@ interface ChampionData {
 
 interface PickData {
   checkNormal: string;
-  lane : string;
+  lane: string;
   damageType: string;
 }
 
@@ -41,8 +40,8 @@ export default function MainClient() {
   const [isHorizontal, setIsHorizontal] = useState(true); // 방향
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [pickData, setPickData] = useState<PickData>({
-    checkNormal: "",
-    lane : "",
+    checkNormal: "normal",
+    lane: "top",
     damageType: "",
   });
   const [isSearch, setIsSearch] = useState(false);
@@ -53,15 +52,15 @@ export default function MainClient() {
   const initializeCarousel = () => {
     const carousel = carouselRef.current;
     if (carousel) {
-    //   const cellSize = isHorizontal
-    //     ? carousel.offsetWidth
-    //     : carousel.offsetHeight;
+      //   const cellSize = isHorizontal
+      //     ? carousel.offsetWidth
+      //     : carousel.offsetHeight;
 
-    //   const newRadius = Math.max(
-    //     Math.round(cellSize / 2 / Math.sin(Math.PI / cellCount)),
-    //     300 // 최소 반지름 제한
-    //   );
-    //   setRadius(newRadius);
+      //   const newRadius = Math.max(
+      //     Math.round(cellSize / 2 / Math.sin(Math.PI / cellCount)),
+      //     300 // 최소 반지름 제한
+      //   );
+      //   setRadius(newRadius);
       const cellSize = carousel.offsetWidth || 300; // 기본 크기 보장
       const newRadius = Math.min(
         Math.max(Math.round(cellSize / 2 / Math.sin(Math.PI / cellCount)), 300), // 최소 반지름 제한
@@ -100,13 +99,13 @@ export default function MainClient() {
       }(${angle}deg)`;
     }
   };
-// const rotateCarousel = () => {
-//     const carousel = carouselRef.current;
-//     if (carousel) {
-//       const angle = theta * selectedIndex * -1;
-//       carousel.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
-//     }
-//   };
+  // const rotateCarousel = () => {
+  //     const carousel = carouselRef.current;
+  //     if (carousel) {
+  //       const angle = theta * selectedIndex * -1;
+  //       carousel.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
+  //     }
+  //   };
 
   // 초기화
   useLayoutEffect(() => {
@@ -143,7 +142,7 @@ export default function MainClient() {
         const championData = championDatajson.data;
         setAllChampionData(championData);
 
-        console.log(championData);
+        // console.log(championData);
 
         const matchedChampions = result.freeChampionIds
           .map((id: number) => {
@@ -195,10 +194,10 @@ export default function MainClient() {
     fetchData2();
   }, []);
 
-  useEffect(() => {
-    console.log(aramChamps);
-    console.log(freeChampions, "freechampions");
-  }, [aramChamps]);
+  // useEffect(() => {
+  //   console.log(aramChamps);
+  //   console.log(freeChampions, "freechampions");
+  // }, [aramChamps]);
 
   return (
     <>
@@ -208,39 +207,49 @@ export default function MainClient() {
           <div>
             <h2>테스트2</h2>
             <div className={styles.beforeCarousel}>
-                <button
+              <button
                 onClick={() => {
-                    setIsCarouselVisible(true);
+                  setIsCarouselVisible(true);
                 }}
-                >
-                    열기
-                </button>
+              >
+                열기
+              </button>
             </div>
           </div>
         ) : (
-        <div className={styles.carouselContainer}>
-          <div className={styles.scene}>
-            <div
-              className={styles.carousel}
-              ref={carouselRef}
-              style={{
-                transition: "transform 1s ease-in-out",
-              }}
-            >
-              {freeChampions.map((freechampion, index) => (
-                <CharacterLi key={freechampion.key} champion={freechampion} isSelected={index === selectedIndex}  />
-              ))}
-            </div>
-            {/* <div className={characterStyles2.carouselOption}>
+          <div className={styles.carouselContainer}>
+            <div className={styles.scene}>
+              <div
+                className={styles.carousel}
+                ref={carouselRef}
+                style={{
+                  transition: "transform 1s ease-in-out",
+                }}
+              >
+                {freeChampions.map((freechampion, index) => (
+                  <CharacterLi
+                    key={freechampion.key}
+                    champion={freechampion}
+                    isSelected={index === selectedIndex}
+                  />
+                ))}
+              </div>
+              {/* <div className={characterStyles2.carouselOption}>
               <p>
               </p>
               </div> */}
-          </div>
-          <div style={{display:"flex", flexDirection:"row", justifyContent:"space-evenly"}}>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+              }}
+            >
               <button onClick={handlePrev}>◀︎</button>
               <button onClick={handleNext}>►</button>
+            </div>
           </div>
-        </div>
         )}
       </div>
       {/* <AramChampionTier
@@ -248,8 +257,16 @@ export default function MainClient() {
         aramChamps={aramChamps}
       /> */}
       <div className={styles.serachingZoneContainer}>
-        <SearchingZone pickData={pickData} setPickData={setPickData} setIsSearch={setIsSearch}/>
-        <RandomChampionCard allChampionData={allChampionData} pickData={pickData} isSearch={isSearch}/>
+        <SearchingZone
+          pickData={pickData}
+          setPickData={setPickData}
+          setIsSearch={setIsSearch}
+        />
+        <RandomChampionCard
+          allChampionData={allChampionData}
+          pickData={pickData}
+          isSearch={isSearch}
+        />
       </div>
     </>
   );
