@@ -24,6 +24,7 @@ interface ChampionData {
 interface PickData {
   checkNormal: string;
   lane : string;
+  damageType: string;
 }
 
 export default function MainClient() {
@@ -41,8 +42,10 @@ export default function MainClient() {
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [pickData, setPickData] = useState<PickData>({
     checkNormal: "",
-    lane : ""
+    lane : "",
+    damageType: "",
   });
+  const [isSearch, setIsSearch] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [radius, setRadius] = useState(288); // Carousel 반지름 계산
   const theta = 360 / cellCount; // 각도 계산
@@ -245,8 +248,8 @@ export default function MainClient() {
         aramChamps={aramChamps}
       /> */}
       <div className={styles.serachingZoneContainer}>
-        <SearchingZone pickData={pickData} setPickData={setPickData}/>
-        <RandomChampionCard allChampionData={allChampionData}/>
+        <SearchingZone pickData={pickData} setPickData={setPickData} setIsSearch={setIsSearch}/>
+        <RandomChampionCard allChampionData={allChampionData} pickData={pickData} isSearch={isSearch}/>
       </div>
     </>
   );
