@@ -104,7 +104,10 @@
   overflow: hidden;
   width:50vw;
 }
-
+.serachingZoneContainer {
+  display:flex;
+  flex-direction: row;
+}
 
 
 

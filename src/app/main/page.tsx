@@ -7,6 +7,7 @@ import styles from "./mainPage.module.css";
 
 import AramChampionTier from "../components/aramChampionTier/aramChampionTier";
 import RandomChampionCard from "../components/randomChampionCard/randomChampionCard";
+import SearchingZone from "../components/serchingZone/searchingZone";
 
 interface Champion {
   tags: string;
@@ -18,6 +19,11 @@ interface Champion {
 
 interface ChampionData {
   [key: string]: Champion;
+}
+
+interface PickData {
+  checkNormal: string;
+  lane : string;
 }
 
 export default function MainClient() {
@@ -33,6 +39,10 @@ export default function MainClient() {
   const [selectedIndex, setSelectedIndex] = useState(0); // 현재 선택된 인덱스
   const [isHorizontal, setIsHorizontal] = useState(true); // 방향
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
+  const [pickData, setPickData] = useState<PickData>({
+    checkNormal: "",
+    lane : ""
+  });
   const carouselRef = useRef<HTMLDivElement>(null);
   const [radius, setRadius] = useState(288); // Carousel 반지름 계산
   const theta = 360 / cellCount; // 각도 계산
@@ -234,7 +244,10 @@ export default function MainClient() {
         allChampionData={allChampionData}
         aramChamps={aramChamps}
       /> */}
-      <RandomChampionCard allChampionData={allChampionData}/>
+      <div className={styles.serachingZoneContainer}>
+        <SearchingZone/>
+        <RandomChampionCard allChampionData={allChampionData}/>
+      </div>
     </>
   );
 }
