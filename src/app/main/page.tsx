@@ -245,7 +245,7 @@ export default function MainClient() {
         aramChamps={aramChamps}
       /> */}
       <div className={styles.serachingZoneContainer}>
-        <SearchingZone/>
+        <SearchingZone pickData={pickData} setPickData={setPickData}/>
         <RandomChampionCard allChampionData={allChampionData}/>
       </div>
     </>

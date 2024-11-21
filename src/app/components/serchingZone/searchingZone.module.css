@@ -1,3 +1,7 @@
+.searchingZoneOuterContainer{
+    display:flex;
+    flex-direction: column;
+}
 .searchingZoneInnerContainer {
     display:flex;
     flex-direction: column;
