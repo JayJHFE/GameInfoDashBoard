@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import styles from "./layout.module.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,15 +32,17 @@ export default function RootLayout({
       {/* 왼쪽 사이드바 */}
       <aside className={styles.sidebar}>
         <header className={styles.header}>
-          <h1>Dashboard</h1>
+          <Link href="/" style={{width:"20px", height:"20px", backgroundColor:"red"}}>
+            <h1>Dashboard</h1>
+          </Link>
         </header>
         <nav>
           <ul>
             <li>
-              <div style={{width:"20px", height:"20px", backgroundColor:"red"}}></div>
+              <Link href="/main" style={{width:"20px", height:"20px", backgroundColor:"red"}}></Link>
             </li>
             <li>
-              <div style={{width:"20px", height:"20px", backgroundColor:"yellow"}}></div>
+              <Link href="/summonerSearch" style={{width:"20px", height:"20px", backgroundColor:"yellow"}}></Link>
             </li>
             <li>Champions</li>
             <li>Settings</li>

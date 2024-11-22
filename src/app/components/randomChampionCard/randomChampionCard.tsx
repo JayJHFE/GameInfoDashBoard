@@ -94,9 +94,6 @@ export default function RandomChampionCard({
       if (pickData.checkNormal === "normal") {
         const filteredChampions = Object.values(allChampionData).filter(
           (champion) => {
-            console.log(pickData.lane, "Lane filtering");
-
-            // Lane 필터링
             const laneMatch =
               (pickData.lane === "top" &&
                 champion.tags.some((tag) => tag !== "Support" && (tag === "Fighter" || tag === "Tank"))) ||
@@ -119,6 +116,23 @@ export default function RandomChampionCard({
             const damageTypeMatch =
               (pickData.damageType === "AD" && champion.info.magic <= 6) || // AD 조건
               (pickData.damageType === "AP" && champion.info.magic >= 7);   // AP 조건
+
+            // const randomIndex = Math.floor(Math.random() * 6); // 랜덤 인덱스 (0~5)
+            // const selectedRuneData = runeData[randomIndex]; // 랜덤 runeData
+
+            // if (selectedRuneData?.slots?.[0]?.runes) {
+            //     const runes = selectedRuneData.slots[0].runes; // slot[0].runes
+            //     const randomRuneIndex = Math.floor(Math.random() * runes.length); // runes 랜덤 인덱스
+            //     const randomRune = runes[randomRuneIndex]; // 랜덤 룬
+
+
+            //     // 랜덤 룬 데이터 업데이트
+            //     setTraits((prevTraits) => ({
+            //     role: prevTraits?.role || "",
+            //     type: prevTraits?.type || "",
+            //     rune: randomRune?.name,
+            //     }));
+            // }
 
             return laneMatch && damageTypeMatch;
           }
@@ -229,7 +243,8 @@ export default function RandomChampionCard({
             <div>
                 <p>{lane} {traits?.type} {traits?.role} {randomChampion?.name}</p>
                 <p>추천 룬</p>
-                <p>추천 아이템</p>
+                <p>{traits?.rune}</p>
+                {/* <p>추천 아이템</p> */}
             </div>
           )}
           {runeData && isFlipped && pickData.checkNormal === "unNormal" && (
@@ -237,7 +252,7 @@ export default function RandomChampionCard({
                 <p>{lane} {traits?.type} {traits?.role} {randomChampion?.name}</p>
                 <p>추천 룬</p>
                 <p>{traits?.rune}</p>
-                <p>추천 아이템</p>
+                {/* <p>추천 아이템</p> */}
             </div>
           )}
         </div>
