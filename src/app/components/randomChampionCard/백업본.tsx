@@ -91,6 +91,22 @@ export default function RandomChampionCard({
 
   const handleCardClick = async () => {
     if (!isFlipped) {
+      //   setImageUrl(null);
+      //   const tmpRandomChampion =
+      //     allChampionData[
+      //       Object.keys(allChampionData)[
+      //         Math.floor(Math.random() * Object.keys(allChampionData).length)
+      //       ]
+      //     ];
+      //   setRandomChampion(tmpRandomChampion);
+      //   const image = new Image();
+      //   image.src = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${tmpRandomChampion.id}_0.jpg`;
+      //   image.onload = () => {
+      //     setImageUrl(image.src); // 이미지 URL 상태 업데이트
+      //     setIsFlipped(true); // 카드 플립
+      //   };
+
+
       if (pickData.checkNormal === "normal") {
         const filteredChampions = Object.values(allChampionData).filter(
           (champion) => {
@@ -180,6 +196,67 @@ export default function RandomChampionCard({
         generateRandomTraits();
       }
 
+      // 조건에 맞는 챔피언 필터링
+    //   if (pickData.checkNormal === "normal") {
+    //     let filteredChampions = Object.values(allChampionData).filter(
+    //       (champion) => {
+    //         console.log(pickData.lane, "오승현 찌질이");
+    //         if (pickData.lane === "top") {
+    //           return champion.tags.some(
+    //             (tag) =>
+    //               tag !== "Support" && (tag === "Fighter" || tag === "Tank")
+    //           );
+    //         } else if (pickData.lane === "jg") {
+    //           return champion.tags.some((tag) => tag !== "Support");
+    //         } else if (pickData.lane === "mid") {
+    //           return champion.tags.some(
+    //             (tag) => tag !== "Support" && tag !== "Tank"
+    //           );
+    //         } else if (pickData.lane === "adc") {
+    //           return champion.tags.some((tag) => tag === "Marksman");
+    //         } else if (pickData.lane === "sup") {
+    //           return champion.tags.some(
+    //             (tag) =>
+    //               tag !== "Marksman" &&
+    //               tag !== "Fighter" &&
+    //               tag !== "Assassin" &&
+    //               (tag === "Support" || tag === "Tank" || tag === "Mage")
+    //           );
+    //         }
+    //       }
+    //     );
+    //     // dmageType으로 한번 더 필터링
+    //     if (pickData.damageType === "ad") {
+    //       filteredChampions = filteredChampions.filter((champion) =>
+    //         champion.info.magic < 7
+    //       );
+    //     } else if (pickData.damageType === "ap") {
+    //       filteredChampions = filteredChampions.filter((champion) =>
+    //         champion.info.magic > 6
+    //       );
+    //     }
+
+    //     console.log(filteredChampions);
+
+    //     // 필터링된 챔피언에서 랜덤으로 선택
+    //     if (filteredChampions.length > 0) {
+    //       const tmpRandomChampion =
+    //         filteredChampions[
+    //           Math.floor(Math.random() * filteredChampions.length)
+    //         ];
+    //       setRandomChampion(tmpRandomChampion);
+
+    //       // 이미지 로드 처리
+    //       const image = new Image();
+    //       image.src = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${tmpRandomChampion.id}_0.jpg`;
+    //       image.onload = () => {
+    //         setImageUrl(image.src); // 이미지 URL 상태 업데이트
+    //         setIsFlipped(true); // 카드 플립
+    //       };
+    //     }
+    //   } else {
+    //   }
+      // checkNormal이 "normal"이면 lane과 damageType이 ""이 아닌지 검사
     }
     await new Promise((resolve) => {
       setIsFlipped(!isFlipped);
@@ -203,6 +280,8 @@ export default function RandomChampionCard({
               <div
                 className={`${cardStyles.card_face} ${cardStyles.card_face_front}`}
               ></div>
+              {/* <img className={`${cardStyles.card_face} ${cardStyles.card_face_back}`} style={{backgroundImage: `url("https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${randomChampion?.id}_0.jpg")`, width:"100%", height:"100%", objectFit:"contain"}}></img> */}
+              {/* <div className={`${cardStyles.card_face} ${cardStyles.card_face_back}`} style={{backgroundImage: `url("https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${randomChampion?.id}_0.jpg")`, backgroundSize: "contain", backgroundPosition:"center", backgroundRepeat:"no-repeat"}}> */}
               <div
                 className={`${cardStyles.card_face} ${cardStyles.card_face_back}`}
                 style={{
@@ -237,6 +316,22 @@ export default function RandomChampionCard({
                 <p>{lane} {traits?.type} {traits?.role} {randomChampion?.name}</p>
                 <p>추천 룬</p>
                 <p>{traits?.rune}</p>
+                {/* <p>
+                    {(() => {
+                        const randomIndex = Math.floor(Math.random() * 6);
+                        const selectedRuneData = runeData[randomIndex];
+
+                        if (selectedRuneData?.slots?.[0]?.runes) {
+                        const runes = selectedRuneData.slots[0].runes; // slot[0].runes 배열
+                        const randomRuneIndex = Math.floor(Math.random() * runes.length); // runes 배열 랜덤 인덱스
+                        const randomRune = runes[randomRuneIndex]; // 랜덤 룬 데이터
+
+                        return randomRune?.name || "룬 없음"; // 랜덤 룬 이름 반환
+                        }
+
+                        return "룬 데이터 없음"; // slot[0]이나 runes가 없을 경우
+                    })()}
+                </p> */}
                 <p>추천 아이템</p>
             </div>
           )}
