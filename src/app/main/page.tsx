@@ -11,6 +11,10 @@ import SearchingZone from "../components/serchingZone/searchingZone";
 interface Champion {
   tags: Array<string>;
   id: string;
+  info: {
+    magic: number;
+    [key: string]: any;
+  };
   key: string;
   name: string;
   image: string;
