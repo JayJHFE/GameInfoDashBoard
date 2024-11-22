@@ -3,6 +3,11 @@ import localFont from "next/font/local";
 import "./globals.css";
 import styles from "./layout.module.css";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDragon } from "@fortawesome/free-solid-svg-icons";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
+
+{/* <i class="fa-solid fa-dragon"></i> */}
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,13 +44,31 @@ export default function RootLayout({
         <nav>
           <ul>
             <li>
-              <Link href="/main" style={{width:"20px", height:"20px", backgroundColor:"red"}}></Link>
+              <Link href="/main">
+                <div style={{width:"170px", display:"flex", textAlign:"center", verticalAlign:"center"}}>
+                  <div style={{width:"40px",marginRight:"20px"}}>
+                    <FontAwesomeIcon icon={faDragon}/>
+                  </div>
+                  <div style={{paddingTop:"5px"}}>
+                    인게임 정보
+                  </div>
+                </div>
+              </Link>
             </li>
             <li>
-              <Link href="/summonerSearch" style={{width:"20px", height:"20px", backgroundColor:"yellow"}}></Link>
+              <Link href="/summonerSearch">
+                <div style={{width:"170px", display:"flex", textAlign:"center", verticalAlign:"center"}}>
+                  <div style={{width:"40px",marginRight:"20px"}}>
+                    <FontAwesomeIcon icon={faCrown}/>
+                  </div>
+                  <div  style={{paddingTop:"5px"}}>
+                    전적 검색
+                  </div>
+                </div>
+              </Link>
             </li>
-            <li>Champions</li>
-            <li>Settings</li>
+            {/* <li>Champions</li>
+            <li>Settings</li> */}
           </ul>
         </nav>
       </aside>
