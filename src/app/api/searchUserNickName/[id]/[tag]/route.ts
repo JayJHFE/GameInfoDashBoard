@@ -27,29 +27,43 @@ export async function searchUserNickName(
   }
 }
 
-// 동적 경로를 처리하는 GET 핸들러
 export async function GET(
   req: Request,
-  { params }: { params: { id: string; tag: string } }
+  context: { params: { id: string; tag: string } }
 ) {
-  const { id, tag } = params;
+  const { id, tag } = context.params;
 
+  console.log("API Route hit");
   console.log("Received ID:", id, "Received Tag:", tag);
 
   if (!id || !tag) {
     return NextResponse.json(
-      { error: "아이디와 태그를 모두 입력해주세요." },
+      { error: "ID or Tag is missing" },
       { status: 400 }
     );
   }
 
   const url = `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${id}/${tag}`;
+  console.log("오찌도찌", url);
 
   try {
-    const data = await searchUserNickName(url, "GET");
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "X-Riot-Token": "RGAPI-<your-api-key>",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Riot Games API responded with status ${response.status}`
+      );
+    }
+
+    const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error in API call:", error);
+    console.error("Error fetching data from Riot Games API:", error);
     return NextResponse.json(
       { error: "Failed to fetch data from Riot Games API" },
       { status: 500 }

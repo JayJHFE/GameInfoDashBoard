@@ -11,35 +11,6 @@ export default function SummonerSearch() {
     setError(""); // 오류 메시지를 초기화
   };
 
-  // const handleSearch = async () => {
-  //   // 아이디 #태그 형식인지 확인
-  //   // const regex = /^[a-zA-Z0-9\s]+#[a-zA-Z0-9\s]+$/;
-  //   const regex = /^[\w가-힣]+#[\w가-힣]+$/;
-  //   if (!regex.test(inputValue)) {
-  //     setError("아이디와 태그는 '아이디 #태그' 형식으로 입력해주세요.");
-  //     return;
-  //   }
-
-  //   // 입력값 분리
-  //   const [id, tag] = inputValue.split("#");
-
-  //   try {
-  //     const response = await fetch(`/api/searchUserNickName/${id}/${tag}`, {
-  //       method: "GET",
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`API responded with status ${response.status}`);
-  //     }
-
-  //     const data = await response.json();
-  //     setResult(data);
-  //   } catch (error) {
-  //     console.error("Error fetching summoner data:", error);
-  //     setError("소환사 정보를 가져오는 중 오류가 발생했습니다.");
-  //   }
-  // };
-
   const handleSearch = async () => {
     // 아이디 #태그 형식인지 확인
     const regex = /^[\w가-힣]+#[\w가-힣]+$/; // 한글 포함
@@ -56,6 +27,10 @@ export default function SummonerSearch() {
       // 인코딩된 URL 생성
       const encodedId = encodeURIComponent(id);
       const encodedTag = encodeURIComponent(tag);
+      // const encodedId = id;
+      // const encodedTag = tag;
+
+      console.log("Encoded ID:", encodedId, "Encoded Tag:", encodedTag);
       const requestUrl = `/api/searchUserNickName/${encodedId}/${encodedTag}`;
       console.log("Request URL:", requestUrl);
 
@@ -73,9 +48,9 @@ export default function SummonerSearch() {
     }
   };
 
-  useEffect(() => {
-    console.log(inputValue);
-  }, [inputValue]);
+  // useEffect(() => {
+  //   console.log(inputValue);
+  // }, [inputValue]);
 
   return (
     <div>
