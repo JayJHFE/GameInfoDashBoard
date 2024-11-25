@@ -43,7 +43,11 @@ export async function GET(
     );
   }
 
-  const url = `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${id}/${tag}`;
+  const encodedId = encodeURIComponent(id);
+  const encodedTag = encodeURIComponent(tag);
+  const url = `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${encodedId}/${encodedTag}`;
+
+  // const url = `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${id}/${tag}`;
   console.log("오찌도찌", url);
 
   try {

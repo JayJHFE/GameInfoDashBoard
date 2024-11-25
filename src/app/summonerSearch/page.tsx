@@ -13,7 +13,9 @@ export default function SummonerSearch() {
 
   const handleSearch = async () => {
     // 아이디 #태그 형식인지 확인
-    const regex = /^[\w가-힣]+#[\w가-힣]+$/; // 한글 포함
+    // const regex = /^[\w가-힣]+#[\w가-힣]+$/; // 한글 포함
+    // const regex = /^[\w가-힣]+#.+$/;
+    const regex = /^[^\s#]+#[^\s].+$/;
 
     if (!regex.test(inputValue)) {
       setError("아이디와 태그는 '아이디 #태그' 형식으로 입력해주세요.");
@@ -25,13 +27,13 @@ export default function SummonerSearch() {
 
     try {
       // 인코딩된 URL 생성
-      const encodedId = encodeURIComponent(id);
-      const encodedTag = encodeURIComponent(tag);
+      // const encodedId = encodeURIComponent(id);
+      // const encodedTag = encodeURIComponent(tag);
       // const encodedId = id;
       // const encodedTag = tag;
 
-      console.log("Encoded ID:", encodedId, "Encoded Tag:", encodedTag);
-      const requestUrl = `/api/searchUserNickName/${encodedId}/${encodedTag}`;
+      const requestUrl = `/api/searchUserNickName/${id}/${tag}`;
+      // const requestUrl = `/api/searchUserNickName/${encodedId}/${encodedTag}`;
       console.log("Request URL:", requestUrl);
 
       const response = await fetch(requestUrl, { method: "GET" });
