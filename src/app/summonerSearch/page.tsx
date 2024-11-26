@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function SummonerSearch() {
   const [inputValue, setInputValue] = useState("");
@@ -25,6 +25,12 @@ export default function SummonerSearch() {
     // 입력값 분리
     const [id, tag] = inputValue.split("#");
 
+    let formattedTag = tag;
+
+    if (/^[가-힣]{2}$/.test(tag)) {
+      formattedTag = `${tag[0]} ${tag[1]}`;
+    }
+
     try {
       // 인코딩된 URL 생성
       // const encodedId = encodeURIComponent(id);
@@ -32,9 +38,9 @@ export default function SummonerSearch() {
       // const encodedId = id;
       // const encodedTag = tag;
 
-      const requestUrl = `/api/searchUserNickName/${id}/${tag}`;
+      const requestUrl = `/api/searchUserNickName/${id}/${formattedTag}`;
       // const requestUrl = `/api/searchUserNickName/${encodedId}/${encodedTag}`;
-      console.log("Request URL:", requestUrl);
+      // console.log("Request URL:", requestUrl);
 
       const response = await fetch(requestUrl, { method: "GET" });
 
@@ -43,7 +49,48 @@ export default function SummonerSearch() {
       }
 
       const data = await response.json();
-      setResult(data);
+      console.log(data);
+      setResult(result);
+
+      // const { puuid } = data.puuid;
+      // if (!puuid) {
+      //   throw new Error("puuid not found in the response.");
+      // }
+      // console.log(puuid);
+      // // 두 번째 API 호출
+      // const secondRequestUrl = `/api/searchTopChampion/${puuid}/top?count=${3}`;
+      // console.log("Second Request URL:", secondRequestUrl);
+
+      // const secondResponse = await fetch(secondRequestUrl, { method: "GET" });
+
+      // if (!secondResponse.ok) {
+      //   throw new Error(
+      //     `Second API responded with status ${secondResponse.status}`
+      //   );
+      // }
+
+      // const secondData = await secondResponse.json();
+      // console.log("Second API Data:", secondData);
+
+      const { puuid } = data;
+      if (!puuid) {
+        throw new Error("puuid not found in the response.");
+      }
+
+      // 첫 번째 API 결과가 성공적으로 도착한 후 두 번째 API 실행
+      const secondRequestUrl = `/api/searchTopChampion/${puuid}`;
+      console.log("Second Request URL:", secondRequestUrl);
+
+      const secondResponse = await fetch(secondRequestUrl, { method: "GET" });
+
+      if (!secondResponse.ok) {
+        throw new Error(
+          `Second API responded with status ${secondResponse.status}`
+        );
+      }
+
+      const secondData = await secondResponse.json();
+      console.log("Second API Data:", secondData);
     } catch (error) {
       console.error("Error fetching summoner data:", error);
       setError("소환사 정보를 가져오는 중 오류가 발생했습니다.");
@@ -71,7 +118,7 @@ export default function SummonerSearch() {
       {result && (
         <div>
           <h3>검색 결과:</h3>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(result, null, 2)}</pre> */}
         </div>
       )}
     </div>
