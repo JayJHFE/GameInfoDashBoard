@@ -1,11 +1,31 @@
 "use client";
+interface Champion {
+  championId: string;
+  // Add other properties as needed
+}
+interface ChampionInfo {
+  championId: number;
+  championLevel: number;
+  championPoints: number;
+  championPointsSinceLastLevel: number;
+  championPointsUntilNextLevel: number;
+  championSeasonMilestone: number;
+  lastPlayTime: number;
+  markRequiredForNextLevel: number;
+  milestoneGrades: string[];
+  nextSeasonMilestone: object;
+  puuid: string;
+  tokensEarned: unknown; // 정확한 타입을 알아야 수정 가능
+}
 import { useState } from "react";
+import ChampionTopLi from "../components/championTop_li/championTop_li";
 
 export default function SummonerSearch() {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
-  const [chamiponResult, setChampionResult] = useState(null);
+
+  const [chamiponResult, setChampionResult] = useState<Champion[] | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -92,8 +112,9 @@ export default function SummonerSearch() {
         <div>
           <h2>챔피언 승률</h2>
           <ul>
-            {chamiponResult.map((champion) => (
-              <li key={champion.championId}></li>
+            {chamiponResult.map((championInfo) => (
+              // <li key={champion.championId}></li>
+              <ChampionTopLi championInfo={championInfo} />
             ))}
           </ul>
         </div>
