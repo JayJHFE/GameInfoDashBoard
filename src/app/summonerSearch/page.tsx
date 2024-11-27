@@ -5,6 +5,7 @@ export default function SummonerSearch() {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
+  const [chamiponResult, setChampionResult] = useState(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -32,16 +33,7 @@ export default function SummonerSearch() {
     }
 
     try {
-      // 인코딩된 URL 생성
-      // const encodedId = encodeURIComponent(id);
-      // const encodedTag = encodeURIComponent(tag);
-      // const encodedId = id;
-      // const encodedTag = tag;
-
       const requestUrl = `/api/searchUserNickName/${id}/${formattedTag}`;
-      // const requestUrl = `/api/searchUserNickName/${encodedId}/${encodedTag}`;
-      // console.log("Request URL:", requestUrl);
-
       const response = await fetch(requestUrl, { method: "GET" });
 
       if (!response.ok) {
@@ -51,26 +43,6 @@ export default function SummonerSearch() {
       const data = await response.json();
       console.log(data);
       setResult(result);
-
-      // const { puuid } = data.puuid;
-      // if (!puuid) {
-      //   throw new Error("puuid not found in the response.");
-      // }
-      // console.log(puuid);
-      // // 두 번째 API 호출
-      // const secondRequestUrl = `/api/searchTopChampion/${puuid}/top?count=${3}`;
-      // console.log("Second Request URL:", secondRequestUrl);
-
-      // const secondResponse = await fetch(secondRequestUrl, { method: "GET" });
-
-      // if (!secondResponse.ok) {
-      //   throw new Error(
-      //     `Second API responded with status ${secondResponse.status}`
-      //   );
-      // }
-
-      // const secondData = await secondResponse.json();
-      // console.log("Second API Data:", secondData);
 
       const { puuid } = data;
       if (!puuid) {
@@ -90,6 +62,7 @@ export default function SummonerSearch() {
       }
 
       const secondData = await secondResponse.json();
+      setChampionResult(secondData);
       console.log("Second API Data:", secondData);
     } catch (error) {
       console.error("Error fetching summoner data:", error);
@@ -115,10 +88,14 @@ export default function SummonerSearch() {
         <button onClick={handleSearch}>검색</button>
       </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {result && (
+      {chamiponResult && (
         <div>
-          <h3>검색 결과:</h3>
-          {/* <pre>{JSON.stringify(result, null, 2)}</pre> */}
+          <h2>챔피언 승률</h2>
+          <ul>
+            {chamiponResult.map((champion) => (
+              <li key={champion.championId}></li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
