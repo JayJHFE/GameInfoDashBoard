@@ -1,8 +1,4 @@
 "use client";
-interface Champion {
-  championId: string;
-  // Add other properties as needed
-}
 interface ChampionInfo {
   championId: number;
   championLevel: number;
@@ -16,6 +12,22 @@ interface ChampionInfo {
   nextSeasonMilestone: object;
   puuid: string;
   tokensEarned: unknown; // 정확한 타입을 알아야 수정 가능
+}
+
+interface Champion {
+  tags: Array<string>;
+  id: string;
+  info: {
+    magic: number;
+    [key: string]: any;
+  };
+  key: string;
+  name: string;
+  image: string;
+}
+
+interface ChampionData {
+  [key: string]: Champion;
 }
 import { useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
@@ -84,6 +96,13 @@ export default function SummonerSearch() {
       const secondData = await secondResponse.json();
       setChampionResult(secondData);
       console.log("Second API Data:", secondData);
+
+      // /LeagueofLegendData/champion.json" 에서 정보를 가져오기
+      const champResponse = await fetch("/LeagueofLegendData/champion.json");
+      const championDatajson: { data: ChampionData } =
+        await champResponse.json();
+      const championData = championDatajson.data;
+      console.log(championData);
     } catch (error) {
       console.error("Error fetching summoner data:", error);
       setError("소환사 정보를 가져오는 중 오류가 발생했습니다.");

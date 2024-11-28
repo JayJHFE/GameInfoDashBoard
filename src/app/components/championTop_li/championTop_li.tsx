@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 interface ChampionInfo {
   championId: number;
   championLevel: number;
@@ -20,22 +18,5 @@ export default function ChampionTopLi({
 }: {
   championInfo: ChampionInfo;
 }) {
-  const [data, setData] = useState<ChampionInfo | null>(null);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("/api/loadRotationChamp");
-        const result = await response.json();
-        console.log(result);
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    fetchData();
-  }, []);
-  useEffect(() => {
-    console.log(data, "오찌도찌");
-  }, [data]);
   return <>{championInfo.championId == 0 && <div></div>}</>;
 }
