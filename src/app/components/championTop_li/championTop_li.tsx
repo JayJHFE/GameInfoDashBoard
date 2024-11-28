@@ -12,11 +12,28 @@ interface ChampionInfo {
   puuid: string;
   tokensEarned: unknown; // 정확한 타입을 알아야 수정 가능
 }
+interface Champion {
+  tags: Array<string>;
+  id: string;
+  info: {
+    magic: number;
+    [key: string]: number | string;
+  };
+  key: string;
+  name: string;
+  image: string;
+}
+
+interface ChampionData {
+  [key: string]: Champion;
+}
 
 export default function ChampionTopLi({
-  championInfo,
+  championRankData,
+  championData,
 }: {
-  championInfo: ChampionInfo;
+  championRankData: ChampionInfo;
+  championData: ChampionData;
 }) {
-  return <>{championInfo.championId == 0 && <div></div>}</>;
+  return <>{championRankData.championId == 0 && <div></div>}</>;
 }
