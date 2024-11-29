@@ -1,34 +1,34 @@
-// "use client";
-// interface ChampionInfo {
-//   championId: number;
-//   championLevel: number;
-//   championPoints: number;
-//   championPointsSinceLastLevel: number;
-//   championPointsUntilNextLevel: number;
-//   championSeasonMilestone: number;
-//   lastPlayTime: number;
-//   markRequiredForNextLevel: number;
-//   milestoneGrades: string[];
-//   nextSeasonMilestone: object;
-//   puuid: string;
-//   tokensEarned: unknown; // 정확한 타입을 알아야 수정 가능
-// }
+"use client";
+interface ChampionInfo {
+  championId: number;
+  championLevel: number;
+  championPoints: number;
+  championPointsSinceLastLevel: number;
+  championPointsUntilNextLevel: number;
+  championSeasonMilestone: number;
+  lastPlayTime: number;
+  markRequiredForNextLevel: number;
+  milestoneGrades: string[];
+  nextSeasonMilestone: object;
+  puuid: string;
+  tokensEarned: unknown; // 정확한 타입을 알아야 수정 가능
+}
 
-// interface Champion {
-//   tags: Array<string>;
-//   id: string;
-//   info: {
-//     magic: number;
-//     [key: string]: number | string;
-//   };
-//   key: string;
-//   name: string;
-//   image: string;
-// }
+interface Champion {
+  tags: Array<string>;
+  id: string;
+  info: {
+    magic: number;
+    [key: string]: number | string;
+  };
+  key: string;
+  name: string;
+  image: string;
+}
 
-// interface ChampionData {
-//   [key: string]: Champion;
-// }
+interface ChampionData {
+  [key: string]: Champion;
+}
 
 // import { useState } from "react";
 // import ChampionTopLi from "../components/championTop_li/championTop_li";
@@ -149,40 +149,158 @@
 //     </div>
 //   );
 // }
-"use client";
+// "use client";
+// import { useState } from "react";
+// import ChampionTopLi from "../components/championTop_li/championTop_li";
+
+// interface ChampionInfo {
+//   championId: number;
+//   championLevel: number;
+//   championPoints: number;
+//   championPointsSinceLastLevel: number;
+//   championPointsUntilNextLevel: number;
+//   championSeasonMilestone: number;
+//   lastPlayTime: number;
+//   markRequiredForNextLevel: number;
+//   milestoneGrades: string[];
+//   nextSeasonMilestone: object;
+//   puuid: string;
+//   tokensEarned: unknown; // 정확한 타입을 알아야 수정 가능
+// }
+
+// interface Champion {
+//   tags: Array<string>;
+//   id: string;
+//   info: {
+//     magic: number;
+//     [key: string]: number | string;
+//   };
+//   key: string;
+//   name: string;
+//   image: string;
+// }
+
+// interface ChampionData {
+//   [key: string]: Champion;
+// }
+
+// export default function SummonerSearch() {
+//   const [inputValue, setInputValue] = useState("");
+//   const [error, setError] = useState("");
+//   const [, setResult] = useState(null);
+
+//   const [chamiponResult, setChampionResult] = useState<Champion[] | null>(null);
+//   const [championData, setChampionData] = useState<ChampionData>({});
+
+//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setInputValue(e.target.value);
+//     setError(""); // 오류 메시지를 초기화
+//   };
+
+//   const handleSearch = async () => {
+//     const regex = /^[^\s#]+#[^\s].+$/;
+
+//     if (!regex.test(inputValue)) {
+//       setError("아이디와 태그는 '아이디 #태그' 형식으로 입력해주세요.");
+//       return;
+//     }
+
+//     const [id, tag] = inputValue.split("#");
+
+//     let formattedTag = tag;
+
+//     if (/^[가-힣]{2}$/.test(tag)) {
+//       formattedTag = `${tag[0]} ${tag[1]}`;
+//     }
+
+//     try {
+//       const requestUrl = `/api/searchUserNickName/${id}/${formattedTag}`;
+//       const response = await fetch(requestUrl, { method: "GET" });
+
+//       if (!response.ok) {
+//         throw new Error(`API responded with status ${response.status}`);
+//       }
+
+//       const data = await response.json();
+//       setResult(data);
+
+//       const { puuid } = data;
+//       if (!puuid) {
+//         throw new Error("puuid not found in the response.");
+//       }
+
+//       const secondRequestUrl = `/api/searchTopChampion/${puuid}`;
+//       const secondResponse = await fetch(secondRequestUrl, { method: "GET" });
+
+//       if (!secondResponse.ok) {
+//         throw new Error(
+//           `Second API responded with status ${secondResponse.status}`
+//         );
+//       }
+
+//       const secondData: Champion[] = await secondResponse.json();
+//       setChampionResult(secondData);
+
+//       const champResponse = await fetch("/LeagueofLegendData/champion.json");
+//       const championDatajson: { data: ChampionData } =
+//         await champResponse.json();
+//       setChampionData(championDatajson.data);
+//     } catch (error) {
+//       console.error("Error fetching summoner data:", error);
+//       setError("소환사 정보를 가져오는 중 오류가 발생했습니다.");
+//     }
+//   };
+
+//   // Champion 데이터를 ChampionInfo로 변환하는 함수
+//   const mapChampionToChampionInfo = (champion: Champion): ChampionInfo => ({
+//     championId: parseInt(champion.key),
+//     championLevel: 0, // 기본값 설정 또는 적절한 데이터 삽입
+//     championPoints: 0,
+//     championPointsSinceLastLevel: 0,
+//     championPointsUntilNextLevel: 0,
+//     championSeasonMilestone: 0,
+//     lastPlayTime: 0,
+//     markRequiredForNextLevel: 0,
+//     milestoneGrades: [],
+//     nextSeasonMilestone: {},
+//     puuid: "",
+//     tokensEarned: null,
+//   });
+
+//   return (
+//     <div>
+//       <h1>Summoner Search</h1>
+//       <div>
+//         <h2>아이디를 입력해주세요</h2>
+//         <input
+//           type="text"
+//           placeholder="아이디 #태그"
+//           value={inputValue}
+//           onChange={handleInputChange}
+//         />
+//         <button onClick={handleSearch}>검색</button>
+//       </div>
+//       {error && <p style={{ color: "red" }}>{error}</p>}
+//       {chamiponResult && (
+//         <div>
+//           <h2>챔피언 승률</h2>
+//           <ul>
+//             {chamiponResult.map((champion) => (
+//               <ChampionTopLi
+//                 key={champion.id}
+//                 championRankData={mapChampionToChampionInfo(champion)}
+//                 championData={championData}
+//               />
+//             ))}
+//           </ul>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
 import { useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
-
-interface ChampionInfo {
-  championId: number;
-  championLevel: number;
-  championPoints: number;
-  championPointsSinceLastLevel: number;
-  championPointsUntilNextLevel: number;
-  championSeasonMilestone: number;
-  lastPlayTime: number;
-  markRequiredForNextLevel: number;
-  milestoneGrades: string[];
-  nextSeasonMilestone: object;
-  puuid: string;
-  tokensEarned: unknown; // 정확한 타입을 알아야 수정 가능
-}
-
-interface Champion {
-  tags: Array<string>;
-  id: string;
-  info: {
-    magic: number;
-    [key: string]: number | string;
-  };
-  key: string;
-  name: string;
-  image: string;
-}
-
-interface ChampionData {
-  [key: string]: Champion;
-}
 
 export default function SummonerSearch() {
   const [inputValue, setInputValue] = useState("");
@@ -206,7 +324,6 @@ export default function SummonerSearch() {
     }
 
     const [id, tag] = inputValue.split("#");
-
     let formattedTag = tag;
 
     if (/^[가-힣]{2}$/.test(tag)) {
@@ -222,7 +339,7 @@ export default function SummonerSearch() {
       }
 
       const data = await response.json();
-      setResult(data);
+      setResult(data); // 상태 업데이트는 여기서 한 번만 수행
 
       const { puuid } = data;
       if (!puuid) {
@@ -239,7 +356,7 @@ export default function SummonerSearch() {
       }
 
       const secondData: Champion[] = await secondResponse.json();
-      setChampionResult(secondData);
+      setChampionResult(secondData); // 비동기 작업 완료 후 상태 업데이트
 
       const champResponse = await fetch("/LeagueofLegendData/champion.json");
       const championDatajson: { data: ChampionData } =
@@ -250,22 +367,6 @@ export default function SummonerSearch() {
       setError("소환사 정보를 가져오는 중 오류가 발생했습니다.");
     }
   };
-
-  // Champion 데이터를 ChampionInfo로 변환하는 함수
-  const mapChampionToChampionInfo = (champion: Champion): ChampionInfo => ({
-    championId: parseInt(champion.key),
-    championLevel: 0, // 기본값 설정 또는 적절한 데이터 삽입
-    championPoints: 0,
-    championPointsSinceLastLevel: 0,
-    championPointsUntilNextLevel: 0,
-    championSeasonMilestone: 0,
-    lastPlayTime: 0,
-    markRequiredForNextLevel: 0,
-    milestoneGrades: [],
-    nextSeasonMilestone: {},
-    puuid: "",
-    tokensEarned: null,
-  });
 
   return (
     <div>
@@ -288,7 +389,20 @@ export default function SummonerSearch() {
             {chamiponResult.map((champion) => (
               <ChampionTopLi
                 key={champion.id}
-                championRankData={mapChampionToChampionInfo(champion)}
+                championRankData={{
+                  championId: parseInt(champion.key),
+                  championLevel: 0,
+                  championPoints: 0,
+                  championPointsSinceLastLevel: 0,
+                  championPointsUntilNextLevel: 0,
+                  championSeasonMilestone: 0,
+                  lastPlayTime: 0,
+                  markRequiredForNextLevel: 0,
+                  milestoneGrades: [],
+                  nextSeasonMilestone: {},
+                  puuid: "",
+                  tokensEarned: null,
+                }}
                 championData={championData}
               />
             ))}
