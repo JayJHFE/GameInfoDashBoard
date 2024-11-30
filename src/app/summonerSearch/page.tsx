@@ -38,7 +38,9 @@ export default function SummonerSearch() {
     null
   );
   const [allChampionData, setAllChampionData] = useState<any>(null);
-  const [matchedChampion, setMatchedChampion] = useState<Champion | null>(null); // 일치하는 챔피언 데이터
+  const [matchedChampion, setMatchedChampion] = useState<Champion[] | null>(
+    null
+  ); // 일치하는 챔피언 데이터
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -89,18 +91,38 @@ export default function SummonerSearch() {
         );
       }
 
-      const { championId: fetchedId } = userChampionTierData;
-      console.log(userChampionTierData, "오찌기도지기");
-      if (allChampionData && fetchedId) {
-        const matched = (Object.values(allChampionData) as Champion[]).find(
-          (champion) => champion.key === fetchedId
+      // const { championId: fetchedId } = userChampionTierData;
+      // console.log(userChampionTierData, "오찌기도지기");
+      // if (allChampionData && fetchedId) {
+      //   const matched = (Object.values(allChampionData) as Champion[]).find(
+      //     (champion) => champion.key === fetchedId
+      //   );
+      //   if (matched) {
+      //     console.log("오찌도찌");
+      //     setMatchedChampion(matched); // 일치하는 챔피언 데이터를 상태로 저장
+      //   } else {
+      //     console.log("오찌도찌2");
+      //     setMatchedChampion(null); // 일치하는 데이터가 없을 경우 초기화
+      //   }
+      // }
+
+      if (allChampionData && userChampionTierData.length > 0) {
+        // 배열에서 매칭되는 championId를 순회하면서 찾기
+        const matchedChampionIds = userChampionTierData.map((item) =>
+          item.championId.toString()
         );
+        console.log("Champion IDs from Second API:", matchedChampionIds);
+
+        const matched = (Object.values(allChampionData) as Champion[]).filter(
+          (champion) => matchedChampionIds.includes(champion.key)
+        );
+
         if (matched) {
-          console.log("오찌도찌");
-          setMatchedChampion(matched); // 일치하는 챔피언 데이터를 상태로 저장
+          console.log("Matched Champion:", matched); // 매칭된 챔피언 출력
+          setMatchedChampion(matched); // 상태 업데이트
         } else {
-          console.log("오찌도찌2");
-          setMatchedChampion(null); // 일치하는 데이터가 없을 경우 초기화
+          console.log("No matched champion found.");
+          setMatchedChampion(null); // 초기화
         }
       }
     } catch (error) {
