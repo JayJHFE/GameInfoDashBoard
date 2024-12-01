@@ -36,9 +36,7 @@ export default function SummonerSearch() {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   const [, setResult] = useState(null);
-  const [userChampionTier, setUserChampionTier] = useState<ChampionInfo | null>(
-    null
-  );
+  const [userChampionTier, setUserChampionTier] = useState<ChampionInfo[]>([]);
   const [allChampionData, setAllChampionData] = useState<any>(null);
   const [matchedChampion, setMatchedChampion] = useState<Champion[] | null>(
     null
@@ -110,8 +108,8 @@ export default function SummonerSearch() {
 
       if (allChampionData && userChampionTierData.length > 0) {
         // 배열에서 매칭되는 championId를 순회하면서 찾기
-        const matchedChampionIds = userChampionTierData.map((item) =>
-          item.championId.toString()
+        const matchedChampionIds = userChampionTierData.map(
+          (item: ChampionInfo) => item.championId.toString()
         );
         console.log("Champion IDs from Second API:", matchedChampionIds);
 
@@ -177,8 +175,35 @@ export default function SummonerSearch() {
         />
         <button onClick={handleSearch}>검색</button>
       </div>
-      {/* {matchedChampion?.map((champion) => (
-      ))} */}
+      {matchedChampion?.map((champion) => {
+        // `userChampionTierData`에서 해당 챔피언에 대한 정보를 찾기
+        const correspondingChampionInfo = userChampionTier?.find(
+          (tierchampion) => tierchampion.championId.toString() === champion.key
+        );
+
+        return (
+          <ChampionTopLi
+            key={champion.key}
+            championRankData={
+              correspondingChampionInfo || {
+                championId: parseInt(champion.key),
+                championLevel: 0,
+                championPoints: 0,
+                championPointsSinceLastLevel: 0,
+                championPointsUntilNextLevel: 0,
+                championSeasonMilestone: 0,
+                lastPlayTime: 0,
+                markRequiredForNextLevel: 0,
+                milestoneGrades: [],
+                nextSeasonMilestone: {},
+                puuid: "",
+                tokensEarned: null,
+              }
+            }
+            championData={champion}
+          />
+        );
+      })}
     </div>
   );
 }

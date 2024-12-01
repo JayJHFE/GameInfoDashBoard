@@ -37,16 +37,9 @@ export default function ChampionTopLi({
   championRankData,
   championData,
 }: ChampionTopLiProps) {
-  console.log(championRankData);
-  console.log(championData);
   return (
     <>
-      <div>111</div>
+      <div></div>
     </>
   );
-  // return (
-  //   <>
-  //     <div>1111</div>
-  //   </>
-  // );
 }
