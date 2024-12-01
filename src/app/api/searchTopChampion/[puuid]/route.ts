@@ -4,7 +4,7 @@ export async function GET(
   req: Request,
   { params }: { params: { puuid: string } }
 ) {
-  const { puuid } = params;
+  const { puuid } = await params;
 
   console.log("API Route hit");
   console.log("Received PUUID:", puuid);

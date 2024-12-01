@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
+import ChampionTopLi from "../components/championTop_li/championTop_li";
 interface Champion {
   tags: Array<string>;
   id: string;
   info: {
     magic: number;
-    [key: string]: any;
+    attack: number;
+    defense: number;
   };
   key: string;
   name: string;
@@ -150,6 +152,10 @@ export default function SummonerSearch() {
   }, []);
 
   useEffect(() => {
+    console.log("All Champion Data:", allChampionData);
+  }, [allChampionData]);
+
+  useEffect(() => {
     if (matchedChampion) {
       console.log("Matched Champion:", matchedChampion);
     } else {
@@ -171,7 +177,8 @@ export default function SummonerSearch() {
         />
         <button onClick={handleSearch}>검색</button>
       </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {matchedChampion?.map((champion) => (
+      ))} */}
     </div>
   );
 }

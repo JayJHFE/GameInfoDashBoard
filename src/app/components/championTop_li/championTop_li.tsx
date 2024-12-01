@@ -24,18 +24,26 @@ interface Champion {
   image: string;
 }
 
-interface ChampionData {
-  [key: string]: Champion;
+interface ChampionTopLiProps {
+  championRankData: ChampionInfo;
+  championData: Champion;
 }
+
+// interface ChampionData {
+//   [key: string]: Champion;
+// }
 
 export default function ChampionTopLi({
   championRankData,
   championData,
-}: {
-  championRankData: ChampionInfo;
-  championData: ChampionData;
-}) {
-  return <>{championRankData.championId == 0 && <div></div>}</>;
+}: ChampionTopLiProps) {
+  console.log(championRankData);
+  console.log(championData);
+  return (
+    <>
+      <div>111</div>
+    </>
+  );
   // return (
   //   <>
   //     <div>1111</div>
