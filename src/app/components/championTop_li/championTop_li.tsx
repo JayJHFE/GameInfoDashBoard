@@ -37,9 +37,15 @@ export default function ChampionTopLi({
   championRankData,
   championData,
 }: ChampionTopLiProps) {
+  console.log("championRankData:", championRankData);
+  console.log("championData:", championData);
   return (
     <>
-      <div></div>
+      <div>
+        <img
+          src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${championData?.id}.png`}
+        />
+      </div>
     </>
   );
 }
