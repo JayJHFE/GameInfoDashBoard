@@ -256,6 +256,7 @@ export default function SummonerSearch() {
   const [matchedChampion, setMatchedChampion] = useState<Champion[] | null>(
     null
   );
+  const [puuidSearched, setPuuidSearched] = useState<string>("");
   const [championWithRank, setChampionWithRank] = useState<
     { champion: Champion; rankData: ChampionInfo | null }[]
   >([]);
@@ -265,6 +266,7 @@ export default function SummonerSearch() {
     setError("");
   };
 
+  // 소환사 검색 함수
   const handleSearch = async () => {
     const regex = /^[^\s#]+#[^\s].+$/;
 
@@ -293,6 +295,8 @@ export default function SummonerSearch() {
       setResult(data);
 
       const { puuid } = data;
+      setPuuidSearched(puuid);
+
       if (!puuid) {
         throw new Error("puuid not found in the response.");
       }
@@ -323,6 +327,27 @@ export default function SummonerSearch() {
     } catch (error) {
       console.error("Error fetching summoner data:", error);
       setError("소환사 정보를 가져오는 중 오류가 발생했습니다.");
+    }
+  };
+
+  // 진행중인게임 함수
+  const searchActiveGame = async () => {
+    try {
+      const activeGameRequestUrl = `/api/activeGame/${puuidSearched}`;
+      const activeGameResponse = await fetch(activeGameRequestUrl, {
+        method: "GET",
+      });
+
+      if (!activeGameResponse.ok) {
+        throw new Error(
+          `Active Game API responded with status ${activeGameResponse.status}`
+        );
+      }
+
+      const activeGameData = await activeGameResponse.json();
+      console.log("Active Game Data:", activeGameData);
+    } catch (error) {
+      console.error("Error fetching active game data:", error);
     }
   };
 
@@ -385,16 +410,18 @@ export default function SummonerSearch() {
         />
         <button onClick={handleSearch}>검색</button>
       </div>
-      {championWithRank.map(({ champion, rankData }) => (
-        <ChampionTopLi
-          key={champion.key}
-          championRankData={rankData!}
-          championData={champion}
-        />
-      ))}
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        {championWithRank.map(({ champion, rankData }) => (
+          <ChampionTopLi
+            key={champion.key}
+            championRankData={rankData!}
+            championData={champion}
+          />
+        ))}
+      </div>
       {championWithRank.length > 0 && (
         <>
-          <button>더보기</button>
+          <button onClick={searchActiveGame}>더보기</button>
         </>
       )}
     </div>

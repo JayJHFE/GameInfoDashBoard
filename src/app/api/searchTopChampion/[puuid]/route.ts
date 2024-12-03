@@ -14,7 +14,6 @@ export async function GET(
   }
 
   const url = `https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}/top?count=3`;
-  console.log("오찌도찌:", url);
 
   try {
     const response = await fetch(url, {
