@@ -424,6 +424,7 @@ export default function SummonerSearch() {
           <button onClick={searchActiveGame}>더보기</button>
         </>
       )}
+      {/* <img src="/summonerValleyminimap.jpg" alt="champion" /> */}
     </div>
   );
 }
