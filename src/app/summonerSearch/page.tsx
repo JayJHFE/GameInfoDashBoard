@@ -208,7 +208,10 @@ export default function SummonerSearch() {
       </div>
       {championWithRank.length > 0 && (
         <>
-          <button onClick={searchActiveGame}>실시간 게임 확인</button>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <button>최근 전적보기</button>
+            <button onClick={searchActiveGame}>실시간 게임 확인</button>
+          </div>
         </>
       )}
       {/* <img src="/summonerValleyminimap.jpg" alt="champion" /> */}
