@@ -154,6 +154,25 @@ export default function SummonerSearch() {
 
       const recentGameData = await recentGameResponse.json();
       console.log("Recent Game Data:", recentGameData);
+
+      // 5개의 값을 사용하여 추가 API 호출
+      const additionalApiUrls = recentGameData.map(
+        (item: string) => `/api/specificGame/${item}`
+        // console.log("Generated URL:", url);
+      );
+
+      // 5개의 API 호출을 병렬 처리
+      const additionalApiResponses = await Promise.all(
+        additionalApiUrls.map((url: string) =>
+          fetch(url, { method: "GET" }).then((res) => {
+            if (!res.ok) {
+              throw new Error(`API call failed with status ${res.status}`);
+            }
+            return res.json(); // JSON 데이터 파싱
+          })
+        )
+      );
+      console.log("Recent Game Data:", additionalApiResponses);
     } catch (error) {
       console.error("Error fetching recent game data:", error);
     }
