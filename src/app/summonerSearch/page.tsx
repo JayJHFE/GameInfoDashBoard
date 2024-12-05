@@ -138,6 +138,27 @@ export default function SummonerSearch() {
     }
   };
 
+  // 최근전적조회 함수
+  const searchRecentGame = async () => {
+    try {
+      const recentGameRequestUrl = `/api/recentlyGames/${puuidSearched}`;
+      const recentGameResponse = await fetch(recentGameRequestUrl, {
+        method: "GET",
+      });
+
+      if (!recentGameResponse.ok) {
+        throw new Error(
+          `Recent Game API responded with status ${recentGameResponse.status}`
+        );
+      }
+
+      const recentGameData = await recentGameResponse.json();
+      console.log("Recent Game Data:", recentGameData);
+    } catch (error) {
+      console.error("Error fetching recent game data:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchJsonData = async () => {
       try {
@@ -209,7 +230,7 @@ export default function SummonerSearch() {
       {championWithRank.length > 0 && (
         <>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <button>최근 전적보기</button>
+            <button onClick={searchRecentGame}>최근 전적보기</button>
             <button onClick={searchActiveGame}>실시간 게임 확인</button>
           </div>
         </>
