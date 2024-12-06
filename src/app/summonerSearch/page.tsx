@@ -34,6 +34,26 @@ interface ChampionInfo {
   tokensEarned: unknown;
 }
 
+interface Participant {
+  [key: string]: string | number | boolean | object;
+}
+
+// interface InfoData {
+//   gameMode: string;
+//   gameDuration: number;
+//   participants: Participants;
+// }
+interface InfoData {
+  endOfGameResult: string; // 예: "승리" 또는 "패배" 등의 결과
+  gameMode: string; // 예: "Ranked" 또는 "Normal"
+  gameDuration: number; // 게임 시간 (초 단위)
+  participants: Participant[]; // 참가자 배열
+}
+interface GameData {
+  info : InfoData;
+  metatdata : {[key: string]: string | number | object;};
+}
+
 export default function SummonerSearch() {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
@@ -47,6 +67,7 @@ export default function SummonerSearch() {
   const [championWithRank, setChampionWithRank] = useState<
     { champion: Champion; rankData: ChampionInfo | null }[]
   >([]);
+  const [matchedGame, setMatchedGame] = useState<GameData[]>([]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -172,6 +193,7 @@ export default function SummonerSearch() {
           })
         )
       );
+      setMatchedGame(additionalApiResponses);
       console.log("Recent Game Data:", additionalApiResponses);
     } catch (error) {
       console.error("Error fetching recent game data:", error);
@@ -254,6 +276,20 @@ export default function SummonerSearch() {
           </div>
         </>
       )}
+      {matchedGame.length > 0 && (
+        <>
+          <h2>최근 게임 정보</h2>
+          <div>
+            {matchedGame.map((game) => (
+              <div key={game.info.gameDuration}>
+                <p>게임 시간: {game.info.gameDuration}</p>
+                <p>게임 모드: {game.info.gameMode}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
       {/* <img src="/summonerValleyminimap.jpg" alt="champion" /> */}
     </div>
   );

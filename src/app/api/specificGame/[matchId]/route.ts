@@ -14,10 +14,8 @@ export async function GET(
   if (!matchId) {
     return NextResponse.json({ error: "PUUID is missing" }, { status: 400 });
   }
-  console.log(matchId, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   const url = `https://asia.api.riotgames.com/lol/match/v5/matches/${matchId}`;
 
-  console.log(url, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
   try {
     const response = await fetch(url, {
