@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
+import MatchedGame from "../components/matchedGame/matchedGame";
 
 interface Champion {
   tags: Array<string>;
@@ -44,10 +45,11 @@ interface Participant {
 //   participants: Participants;
 // }
 interface InfoData {
-  endOfGameResult: string; // 예: "승리" 또는 "패배" 등의 결과
-  gameMode: string; // 예: "Ranked" 또는 "Normal"
-  gameDuration: number; // 게임 시간 (초 단위)
-  participants: Participant[]; // 참가자 배열
+  endOfGameResult: string;
+  gameMode: string;
+  gameDuration: number;
+  gameId: number;
+  participants: Participant[];
 }
 interface GameData {
   info : InfoData;
@@ -281,10 +283,7 @@ export default function SummonerSearch() {
           <h2>최근 게임 정보</h2>
           <div>
             {matchedGame.map((game) => (
-              <div key={game.info.gameDuration}>
-                <p>게임 시간: {game.info.gameDuration}</p>
-                <p>게임 모드: {game.info.gameMode}</p>
-              </div>
+              <MatchedGame key={game.info.gameId} gameData={game} />
             ))}
           </div>
         </>
