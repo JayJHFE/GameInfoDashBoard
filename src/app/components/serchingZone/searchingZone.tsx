@@ -101,6 +101,13 @@ export default function SearchingZone({
                 value="AD"
                 onChange={handleCheckDamageType}
               />
+              <label>랜덤</label>
+              <input
+                type="radio"
+                name="damageType"
+                value="none"
+                onChange={handleCheckDamageType}
+              />
             </div>
             <button onClick={startSearch}>검색하기</button>
           </div>

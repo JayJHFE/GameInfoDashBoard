@@ -112,10 +112,23 @@ export default function RandomChampionCard({
                         (tag === "Support" || tag === "Tank" || tag === "Mage")
                 ));
 
+
+            // 랜덤 타입 선택 (damageType이 "none"인 경우)
+            let selectedDamageType = pickData.damageType;
+            if (pickData.damageType === "none") {
+                selectedDamageType = Math.random() < 0.5 ? "AD" : "AP"; // 50% 확률로 AD 또는 AP
+            }
+
             // Damage Type 필터링
             const damageTypeMatch =
-              (pickData.damageType === "AD" && champion.info.magic <= 6) || // AD 조건
-              (pickData.damageType === "AP" && champion.info.magic >= 7);   // AP 조건
+                (selectedDamageType === "AD" && champion.info.magic <= 6) || // AD 조건
+                (selectedDamageType === "AP" && champion.info.magic >= 7);
+
+
+            // Damage Type 필터링
+            // const damageTypeMatch =
+            //   (pickData.damageType === "AD" && champion.info.magic <= 6) || // AD 조건
+            //   (pickData.damageType === "AP" && champion.info.magic >= 7);   // AP 조건
 
             // const randomIndex = Math.floor(Math.random() * 6); // 랜덤 인덱스 (0~5)
             // const selectedRuneData = runeData[randomIndex]; // 랜덤 runeData
