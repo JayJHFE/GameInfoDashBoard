@@ -69,6 +69,7 @@ export default function SummonerSearch() {
   const [championWithRank, setChampionWithRank] = useState<
     { champion: Champion; rankData: ChampionInfo | null }[]
   >([]);
+  const [activeGame, setActiveGame] = useState<{} | null>(null);
   const [matchedGame, setMatchedGame] = useState<GameData[]>([]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,6 +156,7 @@ export default function SummonerSearch() {
       }
 
       const activeGameData = await activeGameResponse.json();
+      setActiveGame(activeGameData);
       console.log("Active Game Data:", activeGameData);
     } catch (error) {
       console.error("Error fetching active game data:", error);
@@ -277,6 +279,11 @@ export default function SummonerSearch() {
             <button onClick={searchActiveGame}>실시간 게임 확인</button>
           </div>
         </>
+      )}
+      {activeGame && (
+        <div>
+          "오찌도찌"
+        </div>
       )}
       {matchedGame.length > 0 && (
         <>
