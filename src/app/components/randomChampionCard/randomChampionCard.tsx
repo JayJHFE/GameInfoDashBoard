@@ -102,19 +102,41 @@ export default function RandomChampionCard({
                 !champion.tags.includes("Support")) ||
               (pickData.lane === "mid" &&
                 !champion.tags.includes("Support") &&
-                !champion.tags.includes("Tank"));
+                !champion.tags.includes("Tank")) ||
               (pickData.lane === "adc" &&
                 champion.tags.includes("Marksman")) ||
               (pickData.lane === "sup" &&
-                champion.tags.some(
-                    (tag) =>
-                        tag !== "Marksman" &&
-                        tag !== "Fighter" &&
-                        tag !== "Assassin" &&
-                        (tag === "Support" || tag === "Tank" || tag === "Mage")
-                )
+                !champion.tags.includes("Marksman") &&
+                !champion.tags.includes("Fighter") &&
+                !champion.tags.includes("Assassin") &&
+                (champion.tags.includes("Support") || champion.tags.includes("Tank") || champion.tags.includes("Mage"))
               );
 
+            // let laneMatch = false;
+
+            // if (pickData.lane === "top") {
+            //   laneMatch =
+            //     !champion.tags.includes("Support") &&
+            //     (champion.tags.includes("Fighter") || champion.tags.includes("Tank"));
+            //   console.log("Top Match:", laneMatch, "Tags:", champion.tags);
+            // } else if (pickData.lane === "jg") {
+            //   laneMatch = !champion.tags.includes("Support");
+            //   console.log("Jungle Match:", laneMatch, "Tags:", champion.tags);
+            // } else if (pickData.lane === "mid") {
+            //   laneMatch =
+            //     !champion.tags.includes("Support") &&
+            //     !champion.tags.includes("Tank");
+            //   console.log("Mid Match:", laneMatch, "Tags:", champion.tags);
+            // } else if (pickData.lane === "adc") {
+            //   laneMatch = champion.tags.includes("Marksman");
+            //   console.log("ADC Match:", laneMatch, "Tags:", champion.tags);
+            // } else if (pickData.lane === "sup") {
+            //   laneMatch =
+            //     !champion.tags.includes("Marksman") &&
+            //     !champion.tags.includes("Fighter") &&
+            //     !champion.tags.includes("Assassin") &&
+            //     (champion.tags.includes("Support") || champion.tags.includes("Tank") || champion.tags.includes("Mage"));
+            // }
 
             // 랜덤 타입 선택 (damageType이 "none"인 경우)
             let selectedDamageType = pickData.damageType;
