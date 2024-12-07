@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
 import MatchedGame from "../components/matchedGame/matchedGame";
+import { relative } from "path";
 
 interface Champion {
   tags: Array<string>;
@@ -18,6 +19,12 @@ interface Champion {
 
 interface ChampionData {
   [key: string]: Champion;
+}
+
+interface TeamMember{
+  riotId: string;
+  puuid: string;
+  championId: number;
 }
 
 interface ChampionInfo {
@@ -71,6 +78,15 @@ export default function SummonerSearch() {
   >([]);
   const [activeGame, setActiveGame] = useState<{} | null>(null);
   const [matchedGame, setMatchedGame] = useState<GameData[]>([]);
+  const [blueTeamImages, setBlueTeamImages] = useState<
+    { id: string; imageUrl: string; position: { top: string; left: string } }[]
+  >([]);
+
+  const [redTeamImages, setRedTeamImages] = useState<
+    { id: string; imageUrl: string; position: { top: string; left: string } }[]
+  >([]);
+  // let blueTeamImages: { id: string; imageUrl: string; position: { top: string; left: string } }[] = [];
+  // let redTeamImages: { id: string; imageUrl: string; position: { top: string; left: string } }[] = [];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -157,7 +173,66 @@ export default function SummonerSearch() {
 
       const activeGameData = await activeGameResponse.json();
       setActiveGame(activeGameData);
-      console.log("Active Game Data:", activeGameData);
+      const blueTeam: TeamMember[] = [];
+      const redTeam: TeamMember[] = [];
+
+      activeGameData.participants.forEach((participant: Participant) => {
+        const riotId = participant.riotId as string;
+        const puuid = participant.puuid as string;
+        const championId = participant.championId as number;
+
+        // 팀별로 분리
+        if (participant.teamId === 100) {
+          blueTeam.push({ riotId, puuid, championId });
+        } else if (participant.teamId === 200) {
+          redTeam.push({ riotId, puuid, championId });
+        }
+      });
+
+      const mapTeamImages = (team: TeamMember[]) =>
+        team
+          .map((participant) => {
+            const champion = Object.values(allChampionData as Champion[]).find(
+              (champ) => champ.key === participant.championId.toString()
+            );
+
+            return {
+              id: champion?.id, // 챔피언 id
+              imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
+              position: {
+                top: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
+                left: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
+              },
+            };
+          })
+          .filter((champion) => champion.id !== undefined) as {
+          id: string;
+          imageUrl: string;
+          position: { top: string; left: string };
+        }[];
+
+        // const mapTeamImages = (team: TeamMember[]) =>
+        //   team.map((participant) => {
+        //     const champion = allChampionData[participant.championId.toString()]; // 숫자를 문자열로 변환
+        //     return {
+        //       id: champion?.id, // 챔피언 id
+        //       imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
+        //       position: {
+        //         top: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
+        //         left: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
+        //       },
+        //     };
+        //   });
+
+
+      // blueTeamImages = mapTeamImages(blueTeam).filter((champion) => champion.id !== undefined) as { id: string; imageUrl: string; position: { top: string; left: string } }[];
+      // redTeamImages = mapTeamImages(redTeam).filter((champion) => champion.id !== undefined) as { id: string; imageUrl: string; position: { top: string; left: string } }[];
+      setBlueTeamImages(
+        mapTeamImages(blueTeam).filter((champion) => champion.id !== undefined)
+      );
+      setRedTeamImages(
+        mapTeamImages(redTeam).filter((champion) => champion.id !== undefined)
+      );
     } catch (error) {
       console.error("Error fetching active game data:", error);
     }
@@ -249,6 +324,12 @@ export default function SummonerSearch() {
       setChampionWithRank(combinedData);
     }
   }, [matchedChampion, userChampionTier]);
+  useEffect(() => {
+    console.log("activeGame", activeGame);
+  },[activeGame]);
+  useEffect(() => {
+    console.log("allChampionData", allChampionData);
+  }, [allChampionData]);
 
   return (
     <div>
@@ -281,8 +362,41 @@ export default function SummonerSearch() {
         </>
       )}
       {activeGame && (
-        <div>
-          "오찌도찌"
+        <div style={{position:"relative", width: "100%", height: "100%"}}>
+          <img src="/summonerValleyminimap.jpg" style={{width:"40vw"}} alt="champion" />
+          {blueTeamImages.map((champion, index) => (
+              <img
+                key={`blue-${index}`}
+                src={champion.imageUrl}
+                style={{
+                  position: "absolute",
+                  top: champion.position.top,
+                  left: champion.position.left,
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  border: "2px solid blue",
+                  zIndex: 10,
+                }}
+                alt={champion.id}
+              />
+            ))}
+            {redTeamImages.map((champion, index) => (
+              <img
+                key={`red-${index}`}
+                src={champion.imageUrl}
+                style={{
+                  position: "absolute",
+                  top: champion.position.top,
+                  left: champion.position.left,
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  border: "2px solid red",
+                }}
+                alt={champion.id}
+              />
+            ))}
         </div>
       )}
       {matchedGame.length > 0 && (
@@ -296,7 +410,6 @@ export default function SummonerSearch() {
         </>
       )}
 
-      {/* <img src="/summonerValleyminimap.jpg" alt="champion" /> */}
     </div>
   );
 }
