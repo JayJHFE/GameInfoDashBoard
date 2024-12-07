@@ -190,8 +190,7 @@ export default function SummonerSearch() {
       });
 
       const mapTeamImages = (team: TeamMember[]) =>
-        team
-          .map((participant) => {
+        team.map((participant, idx) => {
             const champion = Object.values(allChampionData as Champion[]).find(
               (champ) => champ.key === participant.championId.toString()
             );
@@ -200,8 +199,8 @@ export default function SummonerSearch() {
               id: champion?.id, // 챔피언 id
               imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
               position: {
-                top: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
-                left: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
+                top: idx * 10 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
+                left: idx * 10 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
               },
             };
           })
@@ -211,22 +210,6 @@ export default function SummonerSearch() {
           position: { top: string; left: string };
         }[];
 
-        // const mapTeamImages = (team: TeamMember[]) =>
-        //   team.map((participant) => {
-        //     const champion = allChampionData[participant.championId.toString()]; // 숫자를 문자열로 변환
-        //     return {
-        //       id: champion?.id, // 챔피언 id
-        //       imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
-        //       position: {
-        //         top: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
-        //         left: Math.random() * 80 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
-        //       },
-        //     };
-        //   });
-
-
-      // blueTeamImages = mapTeamImages(blueTeam).filter((champion) => champion.id !== undefined) as { id: string; imageUrl: string; position: { top: string; left: string } }[];
-      // redTeamImages = mapTeamImages(redTeam).filter((champion) => champion.id !== undefined) as { id: string; imageUrl: string; position: { top: string; left: string } }[];
       setBlueTeamImages(
         mapTeamImages(blueTeam).filter((champion) => champion.id !== undefined)
       );
