@@ -96,11 +96,13 @@ export default function RandomChampionCard({
           (champion) => {
             const laneMatch =
               (pickData.lane === "top" &&
-                champion.tags.some((tag) => tag !== "Support" && (tag === "Fighter" || tag === "Tank"))) ||
+                !champion.tags.includes("Support") &&
+                (champion.tags.includes("Fighter") || champion.tags.includes("Tank"))) ||
               (pickData.lane === "jg" &&
-                champion.tags.some((tag) => tag !== "Support")) ||
+                !champion.tags.includes("Support")) ||
               (pickData.lane === "mid" &&
-                champion.tags.some((tag) => tag !== "Support" && tag !== "Tank")) ||
+                !champion.tags.includes("Support") &&
+                !champion.tags.includes("Tank"));
               (pickData.lane === "adc" &&
                 champion.tags.includes("Marksman")) ||
               (pickData.lane === "sup" &&
@@ -110,7 +112,8 @@ export default function RandomChampionCard({
                         tag !== "Fighter" &&
                         tag !== "Assassin" &&
                         (tag === "Support" || tag === "Tank" || tag === "Mage")
-                ));
+                )
+              );
 
 
             // 랜덤 타입 선택 (damageType이 "none"인 경우)
@@ -171,7 +174,8 @@ export default function RandomChampionCard({
         } else {
           console.log("No champions match the criteria.");
         }
-      } else {
+      }
+      else {
         const randomIndex = Math.floor(Math.random() * 6); // 랜덤 인덱스 (0~5)
         const selectedRuneData = runeData[randomIndex]; // 랜덤 runeData
 
