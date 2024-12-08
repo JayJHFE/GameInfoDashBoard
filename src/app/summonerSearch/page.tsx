@@ -1,8 +1,7 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
 import MatchedGame from "../components/matchedGame/matchedGame";
-import { relative } from "path";
 
 interface Champion {
   tags: Array<string>;
@@ -21,7 +20,7 @@ interface ChampionData {
   [key: string]: Champion;
 }
 
-interface TeamMember{
+interface TeamMember {
   riotId: string;
   puuid: string;
   championId: number;
@@ -59,8 +58,8 @@ interface InfoData {
   participants: Participant[];
 }
 interface GameData {
-  info : InfoData;
-  metatdata : {[key: string]: string | number | object;};
+  info: InfoData;
+  metatdata: { [key: string]: string | number | object };
 }
 
 export default function SummonerSearch() {
@@ -76,7 +75,7 @@ export default function SummonerSearch() {
   const [championWithRank, setChampionWithRank] = useState<
     { champion: Champion; rankData: ChampionInfo | null }[]
   >([]);
-  const [activeGame, setActiveGame] = useState<{} | null>(null);
+  const [activeGame, setActiveGame] = useState<object | null>(null);
   const [matchedGame, setMatchedGame] = useState<GameData[]>([]);
   const [blueTeamImages, setBlueTeamImages] = useState<
     { id: string; imageUrl: string; position: { top: string; left: string } }[]
@@ -190,7 +189,8 @@ export default function SummonerSearch() {
       });
 
       const mapTeamImages = (team: TeamMember[]) =>
-        team.map((participant, idx) => {
+        team
+          .map((participant, idx) => {
             const champion = Object.values(allChampionData as Champion[]).find(
               (champ) => champ.key === participant.championId.toString()
             );
@@ -309,7 +309,7 @@ export default function SummonerSearch() {
   }, [matchedChampion, userChampionTier]);
   useEffect(() => {
     console.log("activeGame", activeGame);
-  },[activeGame]);
+  }, [activeGame]);
   useEffect(() => {
     console.log("allChampionData", allChampionData);
   }, [allChampionData]);
@@ -345,41 +345,45 @@ export default function SummonerSearch() {
         </>
       )}
       {activeGame && (
-        <div style={{position:"relative", width: "100%", height: "100%"}}>
-          <img src="/summonerValleyminimap.jpg" style={{width:"40vw"}} alt="champion" />
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          <img
+            src="/summonerValleyminimap.jpg"
+            style={{ width: "40vw" }}
+            alt="champion"
+          />
           {blueTeamImages.map((champion, index) => (
-              <img
-                key={`blue-${index}`}
-                src={champion.imageUrl}
-                style={{
-                  position: "absolute",
-                  top: champion.position.top,
-                  left: champion.position.left,
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  border: "2px solid blue",
-                  zIndex: 10,
-                }}
-                alt={champion.id}
-              />
-            ))}
-            {redTeamImages.map((champion, index) => (
-              <img
-                key={`red-${index}`}
-                src={champion.imageUrl}
-                style={{
-                  position: "absolute",
-                  top: champion.position.top,
-                  left: champion.position.left,
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  border: "2px solid red",
-                }}
-                alt={champion.id}
-              />
-            ))}
+            <img
+              key={`blue-${index}`}
+              src={champion.imageUrl}
+              style={{
+                position: "absolute",
+                top: champion.position.top,
+                left: champion.position.left,
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "2px solid blue",
+                zIndex: 10,
+              }}
+              alt={champion.id}
+            />
+          ))}
+          {redTeamImages.map((champion, index) => (
+            <img
+              key={`red-${index}`}
+              src={champion.imageUrl}
+              style={{
+                position: "absolute",
+                top: champion.position.top,
+                left: champion.position.left,
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "2px solid red",
+              }}
+              alt={champion.id}
+            />
+          ))}
         </div>
       )}
       {matchedGame.length > 0 && (
@@ -392,7 +396,6 @@ export default function SummonerSearch() {
           </div>
         </>
       )}
-
     </div>
   );
 }
