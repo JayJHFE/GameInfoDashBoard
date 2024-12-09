@@ -187,6 +187,13 @@ export default function SummonerSearch() {
           redTeam.push({ riotId, puuid, championId });
         }
       });
+      const bluePositions = [
+        { top: "40%", left: "9%" },
+        { top: "49%", left: "8.5%" },
+        { top: "58%", left: "8%" },
+        { top: "67%", left: "8.5%" },
+        { top: "76%", left: "9%" },
+      ];
 
       const mapTeamImages = (team: TeamMember[]) =>
         team
@@ -198,10 +205,7 @@ export default function SummonerSearch() {
             return {
               id: champion?.id, // 챔피언 id
               imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
-              position: {
-                top: idx * 10 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
-                left: idx * 10 + "%", // 랜덤 위치 (예제용, 실제 좌표 필요)
-              },
+              position: bluePositions[idx],
             };
           })
           .filter((champion) => champion.id !== undefined) as {
