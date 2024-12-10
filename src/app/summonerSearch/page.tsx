@@ -188,11 +188,18 @@ export default function SummonerSearch() {
         }
       });
       const bluePositions = [
-        { top: "40%", left: "9%" },
-        { top: "49%", left: "8.5%" },
+        { top: "38.7%", left: "11%" },
+        { top: "48%", left: "9%" },
         { top: "58%", left: "8%" },
-        { top: "67%", left: "8.5%" },
-        { top: "76%", left: "9%" },
+        { top: "66%", left: "10%" },
+        { top: "70%", left: "13.2%" },
+      ];
+      const redPositions = [
+        { top: "38.5%", left: "89%" },
+        { top: "48%", left: "91%" },
+        { top: "58%", left: "92%" },
+        { top: "66%", left: "90%" },
+        { top: "70%", left: "86.8%" },
       ];
 
       const mapTeamImages = (team: TeamMember[]) =>
@@ -205,7 +212,7 @@ export default function SummonerSearch() {
             return {
               id: champion?.id, // 챔피언 id
               imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
-              position: bluePositions[idx],
+              position: redPositions[idx],
             };
           })
           .filter((champion) => champion.id !== undefined) as {
