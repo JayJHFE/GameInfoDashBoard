@@ -1,0 +1,15 @@
+@keyframes drop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.falling {
+  animation: drop 0.5s ease-out;
+  position: absolute; /* 이미지 위치를 위한 기본 스타일 */
+}

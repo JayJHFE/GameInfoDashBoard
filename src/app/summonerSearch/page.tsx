@@ -24,6 +24,7 @@ interface TeamMember {
   riotId: string;
   puuid: string;
   championId: number;
+  teamId: number;
 }
 
 interface ChampionInfo {
@@ -179,12 +180,13 @@ export default function SummonerSearch() {
         const riotId = participant.riotId as string;
         const puuid = participant.puuid as string;
         const championId = participant.championId as number;
+        const teamId = participant.teamId as number;
 
         // 팀별로 분리
         if (participant.teamId === 100) {
-          blueTeam.push({ riotId, puuid, championId });
+          blueTeam.push({ riotId, puuid, championId, teamId });
         } else if (participant.teamId === 200) {
-          redTeam.push({ riotId, puuid, championId });
+          redTeam.push({ riotId, puuid, championId, teamId });
         }
       });
       const bluePositions = [
@@ -195,11 +197,11 @@ export default function SummonerSearch() {
         { top: "70%", left: "13.2%" },
       ];
       const redPositions = [
-        { top: "38.5%", left: "89%" },
-        { top: "48%", left: "91%" },
-        { top: "58%", left: "92%" },
-        { top: "66%", left: "90%" },
-        { top: "70%", left: "86.8%" },
+        { top: "4%", left: "30%" },
+        { top: "7%", left: "33.1%" },
+        { top: "14.5%", left: "35.3%" },
+        { top: "24%", left: "36%" },
+        { top: "33%", left: "35%" },
       ];
 
       const mapTeamImages = (team: TeamMember[]) =>
@@ -208,11 +210,13 @@ export default function SummonerSearch() {
             const champion = Object.values(allChampionData as Champion[]).find(
               (champ) => champ.key === participant.championId.toString()
             );
-
             return {
               id: champion?.id, // 챔피언 id
               imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
-              position: redPositions[idx],
+              position:
+                participant.teamId == 100
+                  ? bluePositions[idx]
+                  : redPositions[idx],
             };
           })
           .filter((champion) => champion.id !== undefined) as {
@@ -366,6 +370,7 @@ export default function SummonerSearch() {
             <img
               key={`blue-${index}`}
               src={champion.imageUrl}
+              className={isAnimating ? "falling" : ""}
               style={{
                 position: "absolute",
                 top: champion.position.top,
@@ -383,6 +388,7 @@ export default function SummonerSearch() {
             <img
               key={`red-${index}`}
               src={champion.imageUrl}
+              className={isAnimating ? "falling" : ""}
               style={{
                 position: "absolute",
                 top: champion.position.top,
