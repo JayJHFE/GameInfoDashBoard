@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
 import MatchedGame from "../components/matchedGame/matchedGame";
+import styles from "./page.module.css";
 
 interface Champion {
   tags: Array<string>;
@@ -85,8 +86,7 @@ export default function SummonerSearch() {
   const [redTeamImages, setRedTeamImages] = useState<
     { id: string; imageUrl: string; position: { top: string; left: string } }[]
   >([]);
-  // let blueTeamImages: { id: string; imageUrl: string; position: { top: string; left: string } }[] = [];
-  // let redTeamImages: { id: string; imageUrl: string; position: { top: string; left: string } }[] = [];
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -328,6 +328,9 @@ export default function SummonerSearch() {
   useEffect(() => {
     console.log("allChampionData", allChampionData);
   }, [allChampionData]);
+  useEffect(() => {
+    setIsAnimating(true); // 컴포넌트가 마운트될 때 애니메이션 활성화
+  }, []);
 
   return (
     <div>
@@ -370,7 +373,7 @@ export default function SummonerSearch() {
             <img
               key={`blue-${index}`}
               src={champion.imageUrl}
-              className={isAnimating ? "falling" : ""}
+              className={isAnimating ? `${styles.falling}` : ""}
               style={{
                 position: "absolute",
                 top: champion.position.top,
@@ -388,7 +391,7 @@ export default function SummonerSearch() {
             <img
               key={`red-${index}`}
               src={champion.imageUrl}
-              className={isAnimating ? "falling" : ""}
+              className={isAnimating ? `${styles.falling}` : ""}
               style={{
                 position: "absolute",
                 top: champion.position.top,
