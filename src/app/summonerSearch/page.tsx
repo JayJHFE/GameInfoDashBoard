@@ -190,7 +190,7 @@ export default function SummonerSearch() {
         }
       });
       const bluePositions = [
-        { top: "38.7%", left: "11%" },
+        { top: "38.7%", left: "10%" },
         { top: "48%", left: "9%" },
         { top: "58%", left: "8%" },
         { top: "66%", left: "10%" },
@@ -211,6 +211,7 @@ export default function SummonerSearch() {
               (champ) => champ.key === participant.championId.toString()
             );
             return {
+              puuid: participant.puuid,
               id: champion?.id, // 챔피언 id
               imageUrl: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion?.id}_0.jpg`, // 이미지 URL 생성
               position:
@@ -369,7 +370,7 @@ export default function SummonerSearch() {
             style={{ width: "40vw" }}
             alt="champion"
           />
-          {blueTeamImages.map((champion, index) => (
+          {/* {blueTeamImages.map((champion, index) => (
             <img
               key={`blue-${index}`}
               src={champion.imageUrl}
@@ -383,6 +384,7 @@ export default function SummonerSearch() {
                 borderRadius: "50%",
                 border: "2px solid blue",
                 zIndex: 10,
+                animationDelay: `${index * 0.2}s`,
               }}
               alt={champion.id}
             />
@@ -400,10 +402,60 @@ export default function SummonerSearch() {
                 height: "40px",
                 borderRadius: "50%",
                 border: "2px solid red",
+                zIndex: 10,
+                animationDelay: `${index * 0.2}s`,
               }}
               alt={champion.id}
             />
-          ))}
+          ))} */}
+          {blueTeamImages.map((champion, index) => {
+            console.log(champion);
+            const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
+
+            return (
+              <img
+                key={`blue-${index}`}
+                src={champion.imageUrl}
+                className={isAnimating ? `${styles.falling}` : ""}
+                style={{
+                  position: "absolute",
+                  top: champion.position.top,
+                  left: champion.position.left,
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  border: isCurrentUser ? "3px solid yellow" : "2px solid blue", // 조건부 스타일
+                  zIndex: 10,
+                  animationDelay: `${index * 0.2}s`,
+                }}
+                alt={champion.id}
+              />
+            );
+          })}
+
+          {redTeamImages.map((champion, index) => {
+            const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
+
+            return (
+              <img
+                key={`red-${index}`}
+                src={champion.imageUrl}
+                className={isAnimating ? `${styles.falling}` : ""}
+                style={{
+                  position: "absolute",
+                  top: champion.position.top,
+                  left: champion.position.left,
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  border: isCurrentUser ? "3px solid yellow" : "2px solid red", // 조건부 스타일
+                  zIndex: 10,
+                  animationDelay: `${index * 0.2}s`,
+                }}
+                alt={champion.id}
+              />
+            );
+          })}
         </div>
       )}
       {matchedGame.length > 0 && (
