@@ -80,11 +80,21 @@ export default function SummonerSearch() {
   const [activeGame, setActiveGame] = useState<object | null>(null);
   const [matchedGame, setMatchedGame] = useState<GameData[]>([]);
   const [blueTeamImages, setBlueTeamImages] = useState<
-    { id: string; imageUrl: string; position: { top: string; left: string } }[]
+    {
+      puuid: string;
+      id: string;
+      imageUrl: string;
+      position: { top: string; left: string };
+    }[]
   >([]);
 
   const [redTeamImages, setRedTeamImages] = useState<
-    { id: string; imageUrl: string; position: { top: string; left: string } }[]
+    {
+      puuid: string;
+      id: string;
+      imageUrl: string;
+      position: { top: string; left: string };
+    }[]
   >([]);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -221,6 +231,7 @@ export default function SummonerSearch() {
             };
           })
           .filter((champion) => champion.id !== undefined) as {
+          puuid: string;
           id: string;
           imageUrl: string;
           position: { top: string; left: string };
@@ -329,9 +340,15 @@ export default function SummonerSearch() {
   useEffect(() => {
     console.log("allChampionData", allChampionData);
   }, [allChampionData]);
+  // useEffect(() => {
+  //   setIsAnimating(true); // 컴포넌트가 마운트될 때 애니메이션 활성화
+  // }, []);
   useEffect(() => {
-    setIsAnimating(true); // 컴포넌트가 마운트될 때 애니메이션 활성화
-  }, []);
+    const timeout = setTimeout(() => {
+      setIsAnimating(true); // 애니메이션 시작
+    }, 1000); // 초기 렌더링 후 300ms 대기
+    return () => clearTimeout(timeout); // 타이머 클리어
+  }, [blueTeamImages, redTeamImages]);
 
   return (
     <div>
@@ -408,54 +425,62 @@ export default function SummonerSearch() {
               alt={champion.id}
             />
           ))} */}
-          {blueTeamImages.map((champion, index) => {
-            console.log(champion);
-            const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
+          {isAnimating
+            ? blueTeamImages.map((champion, index) => {
+                console.log(champion);
+                const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
 
-            return (
-              <img
-                key={`blue-${index}`}
-                src={champion.imageUrl}
-                className={isAnimating ? `${styles.falling}` : ""}
-                style={{
-                  position: "absolute",
-                  top: champion.position.top,
-                  left: champion.position.left,
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  border: isCurrentUser ? "3px solid yellow" : "2px solid blue", // 조건부 스타일
-                  zIndex: 10,
-                  animationDelay: `${index * 0.2}s`,
-                }}
-                alt={champion.id}
-              />
-            );
-          })}
+                return (
+                  <img
+                    key={`blue-${index}`}
+                    src={champion.imageUrl}
+                    className={isAnimating ? `${styles.falling}` : ""}
+                    style={{
+                      position: "absolute",
+                      top: champion.position.top,
+                      left: champion.position.left,
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      border: isCurrentUser
+                        ? "3px solid yellow"
+                        : "2px solid blue", // 조건부 스타일
+                      zIndex: 10,
+                      animationDelay: `${index * 0.2}s`,
+                    }}
+                    alt={champion.id}
+                  />
+                );
+              })
+            : null}
 
-          {redTeamImages.map((champion, index) => {
-            const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
+          {isAnimating
+            ? redTeamImages.map((champion, index) => {
+                const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
 
-            return (
-              <img
-                key={`red-${index}`}
-                src={champion.imageUrl}
-                className={isAnimating ? `${styles.falling}` : ""}
-                style={{
-                  position: "absolute",
-                  top: champion.position.top,
-                  left: champion.position.left,
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  border: isCurrentUser ? "3px solid yellow" : "2px solid red", // 조건부 스타일
-                  zIndex: 10,
-                  animationDelay: `${index * 0.2}s`,
-                }}
-                alt={champion.id}
-              />
-            );
-          })}
+                return (
+                  <img
+                    key={`red-${index}`}
+                    src={champion.imageUrl}
+                    className={isAnimating ? `${styles.falling}` : ""}
+                    style={{
+                      position: "absolute",
+                      top: champion.position.top,
+                      left: champion.position.left,
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      border: isCurrentUser
+                        ? "3px solid yellow"
+                        : "2px solid red", // 조건부 스타일
+                      zIndex: 10,
+                      animationDelay: `${index * 0.2}s`,
+                    }}
+                    alt={champion.id}
+                  />
+                );
+              })
+            : null}
         </div>
       )}
       {matchedGame.length > 0 && (
