@@ -1,4 +1,5 @@
 interface Participant {
+  championName: string;
   [key: string]: string | number | boolean | object;
 }
 interface InfoData {
@@ -9,18 +10,19 @@ interface InfoData {
   participants: Participant[];
 }
 interface MatchedGameProps {
-  info: InfoData;
-  metatdata: { [key: string]: string | number | object };
+  gameData: {
+    info: InfoData;
+    metatdata: { [key: string]: string | number | object };
+  };
 }
 
 export default function MatchedGame(gameData: MatchedGameProps) {
+  console.log(gameData.gameData);
   return (
     <div>
-      {gameData.info.participants.map((participant, index) => (
+      {gameData.gameData.info.participants.map((participants, index) => (
         <div key={index}>
-          {/* <p>Participant ID: {participant.id}</p> */}
-          {/* <p>Participant Name: {participant.name}</p> */}
-          {/* 필요한 데이터를 추가로 표시 */}
+          {typeof participants.puuid === "string" ? participants.puuid : ""}
         </div>
       ))}
       <h1>Matched Game</h1>

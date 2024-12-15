@@ -37,8 +37,6 @@ export default function ChampionTopLi({
   championRankData,
   championData,
 }: ChampionTopLiProps) {
-  console.log("championRankData:", championRankData);
-  console.log("championData:", championData);
   return (
     <>
       <div>
