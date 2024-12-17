@@ -15,16 +15,18 @@ interface MatchedGameProps {
     info: InfoData;
     metatdata: { [key: string]: string | number | object };
   };
+  puuidSearched: string;
 }
 
-export default function MatchedGame(
-  gameData: MatchedGameProps,
-  puuidSearched: string
-) {
+export default function MatchedGame({
+  gameData,
+  puuidSearched,
+}: MatchedGameProps) {
+  console.log(gameData);
   console.log(puuidSearched);
   return (
     <div>
-      {gameData.gameData.info.participants.map((participants, index) => (
+      {gameData.info.participants.map((participants, index) => (
         <div key={index}>
           {puuidSearched === participants.puuid ? "You" : "Enemy"}:
           {participants.puuid}
