@@ -1,5 +1,6 @@
 interface Participant {
   championName: string;
+  puuid: string;
   [key: string]: string | number | boolean | object;
 }
 interface InfoData {
@@ -16,13 +17,17 @@ interface MatchedGameProps {
   };
 }
 
-export default function MatchedGame(gameData: MatchedGameProps) {
-  console.log(gameData.gameData);
+export default function MatchedGame(
+  gameData: MatchedGameProps,
+  puuidSearched: string
+) {
+  console.log(puuidSearched);
   return (
     <div>
       {gameData.gameData.info.participants.map((participants, index) => (
         <div key={index}>
-          {typeof participants.puuid === "string" ? participants.puuid : ""}
+          {puuidSearched === participants.puuid ? "You" : "Enemy"}:
+          {participants.puuid}
         </div>
       ))}
       <h1>Matched Game</h1>

@@ -137,7 +137,6 @@ export default function SummonerSearch() {
       if (!puuid) {
         throw new Error("puuid not found in the response.");
       }
-
       const secondRequestUrl = `/api/searchTopChampion/${puuid}`;
       const secondResponse = await fetch(secondRequestUrl, { method: "GET" });
 
@@ -488,7 +487,11 @@ export default function SummonerSearch() {
           <h2>최근 게임 정보</h2>
           <div>
             {matchedGame.map((game) => (
-              <MatchedGame key={game.info.gameId} gameData={game} />
+              <MatchedGame
+                key={game.info.gameId}
+                gameData={game}
+                puuidSearched={puuidSearched}
+              />
             ))}
           </div>
         </>
