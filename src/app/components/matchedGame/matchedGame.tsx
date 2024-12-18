@@ -28,7 +28,14 @@ export default function MatchedGame({
     <div>
       {gameData.info.participants.map((participants, index) => (
         <div key={index}>
-          {puuidSearched === participants.puuid ? "You" : "Enemy"}:
+          {puuidSearched === participants.puuid ? (
+            <img
+              src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${participants?.championName}.png`}
+              alt={participants.championName}
+            />
+          ) : (
+            ""
+          )}
           {participants.puuid}
         </div>
       ))}
