@@ -1,5 +1,8 @@
 interface Participant {
   championName: string;
+  kills: number;
+  deaths: number;
+  assists: number;
   puuid: string;
   [key: string]: string | number | boolean | object;
 }
@@ -29,10 +32,16 @@ export default function MatchedGame({
       {gameData.info.participants.map((participants, index) => (
         <div key={index}>
           {puuidSearched === participants.puuid ? (
-            <img
-              src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${participants?.championName}.png`}
-              alt={participants.championName}
-            />
+            <>
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${participants?.championName}.png`}
+                alt={participants.championName}
+              />
+              <div>
+                {participants.kills}/{participants.deaths}/
+                {participants.assists}
+              </div>
+            </>
           ) : (
             ""
           )}
