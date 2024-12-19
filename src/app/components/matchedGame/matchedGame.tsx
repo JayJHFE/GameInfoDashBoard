@@ -36,7 +36,6 @@ export default function MatchedGame({
           ) : (
             ""
           )}
-          {participants.puuid}
         </div>
       ))}
       <h1>Matched Game</h1>
