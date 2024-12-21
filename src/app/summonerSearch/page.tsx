@@ -44,6 +44,17 @@ interface ChampionInfo {
 }
 
 interface Participant {
+  puuid: string;
+  championId: number;
+  teamId: number;
+  summonerName: string;
+  championName: string;
+  kills: number;
+  deaths: number;
+  assists: number;
+  champLevel: number;
+  totalDamageDealtToChampions: number;
+  lane: string;
   [key: string]: string | number | boolean | object;
 }
 

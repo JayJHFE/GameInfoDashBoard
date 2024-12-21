@@ -6,6 +6,7 @@ interface Participant {
   champLevel: number;
   totalDamageDealtToChampions: number;
   puuid: string;
+  lane: string;
   [key: string]: string | number | boolean | object;
 }
 interface InfoData {
@@ -53,6 +54,15 @@ export default function MatchedGame({
     sortedTeamParticipants.findIndex(
       (participant) => participant.puuid === puuidSearched
     ) + 1;
+
+    const displayRoleOrLane = (participant: Participant) => {
+      if (participant.individualPosition === "TOP") return "탑";
+      if (participant.individualPosition === "JUNGLE") return "정글";
+      if (participant.individualPosition === "MIDDLE") return "미드";
+      if (participant.individualPosition === "BOTTOM") return "원딜";
+      if (participant.individualPosition === "UTILITY") return "서포터";
+    };
+
   return (
     <div>
       {gameData.info.participants.map((participants, index) => (
@@ -67,8 +77,9 @@ export default function MatchedGame({
                 {participants.kills}/{participants.deaths}/
                 {participants.assists}
               </div>
-              <div>{participants.champLevel}</div>
-              <div>{currentUserRank}</div>
+              <div>레벨: {participants.champLevel}</div>
+              <div>순위: {currentUserRank}</div>
+              <div>포지션: {displayRoleOrLane(participants)}</div>
             </>
           ) : (
             ""
