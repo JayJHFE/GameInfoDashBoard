@@ -1,26 +1,12 @@
-/* @keyframes drop {
-  from {
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 .falling {
-  animation: drop 0.8s ease-out forwards;
-} */
-
-.falling {
+  opacity: 1;
   animation: drop 0.8s ease-out forwards;
   visibility: visible;
 }
 
 .hidden {
   visibility: hidden;
-  opacity: 0; /* 초기 상태 완전히 숨김 */
+  opacity: 0;
 }
 
 @keyframes drop {
@@ -33,3 +19,4 @@
     opacity: 1;
   }
 }
+

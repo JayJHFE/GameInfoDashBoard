@@ -108,6 +108,7 @@ export default function SummonerSearch() {
     }[]
   >([]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [notActiveGame, setNotActiveGame] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -186,6 +187,7 @@ export default function SummonerSearch() {
       });
 
       if (!activeGameResponse.ok) {
+        setNotActiveGame(true);
         throw new Error(
           `Active Game API responded with status ${activeGameResponse.status}`
         );
@@ -350,15 +352,23 @@ export default function SummonerSearch() {
   useEffect(() => {
     console.log("allChampionData", allChampionData);
   }, [allChampionData]);
+
   // useEffect(() => {
-  //   setIsAnimating(true); // 컴포넌트가 마운트될 때 애니메이션 활성화
-  // }, []);
+  //   const timeout = setTimeout(() => {
+  //     setIsAnimating(true); // 애니메이션 시작
+  //   }, 1000); // 초기 렌더링 후 300ms 대기
+  //   return () => clearTimeout(timeout); // 타이머 클리어
+  // }, [blueTeamImages, redTeamImages]);
+
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsAnimating(true); // 애니메이션 시작
-    }, 1000); // 초기 렌더링 후 300ms 대기
-    return () => clearTimeout(timeout); // 타이머 클리어
+    if (blueTeamImages.length > 0 || redTeamImages.length > 0) {
+      const timeout = setTimeout(() => {
+        setIsAnimating(true); // 애니메이션 시작
+      }, 1000); // 1초 대기
+      return () => clearTimeout(timeout);
+    }
   }, [blueTeamImages, redTeamImages]);
+
 
   return (
     <div>
@@ -390,6 +400,9 @@ export default function SummonerSearch() {
           </div>
         </>
       )}
+      {notActiveGame == true && (
+        <div>진행중인 게임이 없습니다.</div>
+      )}
       {activeGame && (
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
           <img
@@ -397,54 +410,17 @@ export default function SummonerSearch() {
             style={{ width: "40vw" }}
             alt="champion"
           />
-          {/* {blueTeamImages.map((champion, index) => (
-            <img
-              key={`blue-${index}`}
-              src={champion.imageUrl}
-              className={isAnimating ? `${styles.falling}` : ""}
-              style={{
-                position: "absolute",
-                top: champion.position.top,
-                left: champion.position.left,
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                border: "2px solid blue",
-                zIndex: 10,
-                animationDelay: `${index * 0.2}s`,
-              }}
-              alt={champion.id}
-            />
-          ))}
-          {redTeamImages.map((champion, index) => (
-            <img
-              key={`red-${index}`}
-              src={champion.imageUrl}
-              className={isAnimating ? `${styles.falling}` : ""}
-              style={{
-                position: "absolute",
-                top: champion.position.top,
-                left: champion.position.left,
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                border: "2px solid red",
-                zIndex: 10,
-                animationDelay: `${index * 0.2}s`,
-              }}
-              alt={champion.id}
-            />
-          ))} */}
           {isAnimating
             ? blueTeamImages.map((champion, index) => {
-                console.log(champion);
                 const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
+                const imgClass = isAnimating ? styles.falling : styles.hidden;
+
 
                 return (
                   <img
                     key={`blue-${index}`}
                     src={champion.imageUrl}
-                    className={isAnimating ? `${styles.falling}` : ""}
+                    className={imgClass}
                     style={{
                       position: "absolute",
                       top: champion.position.top,
@@ -467,12 +443,13 @@ export default function SummonerSearch() {
           {isAnimating
             ? redTeamImages.map((champion, index) => {
                 const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
+                const imgClass = isAnimating ? styles.falling : styles.hidden;
 
                 return (
                   <img
                     key={`red-${index}`}
                     src={champion.imageUrl}
-                    className={isAnimating ? `${styles.falling}` : ""}
+                    className={imgClass}
                     style={{
                       position: "absolute",
                       top: champion.position.top,
