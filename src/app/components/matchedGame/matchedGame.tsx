@@ -55,18 +55,22 @@ export default function MatchedGame({
       (participant) => participant.puuid === puuidSearched
     ) + 1;
 
-    const displayRoleOrLane = (participant: Participant) => {
-      if (participant.individualPosition === "TOP") return "탑";
-      if (participant.individualPosition === "JUNGLE") return "정글";
-      if (participant.individualPosition === "MIDDLE") return "미드";
-      if (participant.individualPosition === "BOTTOM") return "원딜";
-      if (participant.individualPosition === "UTILITY") return "서포터";
-    };
+  const displayRoleOrLane = (participant: Participant) => {
+    if (participant.individualPosition === "TOP") return "탑";
+    if (participant.individualPosition === "JUNGLE") return "정글";
+    if (participant.individualPosition === "MIDDLE") return "미드";
+    if (participant.individualPosition === "BOTTOM") return "원딜";
+    if (participant.individualPosition === "UTILITY") return "서포터";
+  };
+  const gameModeCheck = (gameInfo: InfoData) => {
+    if (gameInfo.gameMode === "CLASSIC") return "소환사의 협곡";
+    if (gameInfo.gameMode === "ARAM") return "칼바람 나락";
+  };
 
   return (
     <div>
       {gameData.info.participants.map((participants, index) => (
-        <div key={index}>
+        <div key={index} style={{ display: "flex" }}>
           {puuidSearched === participants.puuid ? (
             <>
               <img
@@ -74,19 +78,23 @@ export default function MatchedGame({
                 alt={participants.championName}
               />
               <div>
-                {participants.kills}/{participants.deaths}/
-                {participants.assists}
+                <div>게임 유형: {gameModeCheck(gameData.info)}</div>
+                <div>
+                  {participants.kills}/{participants.deaths}/
+                  {participants.assists}
+                </div>
+                <div>레벨: {participants.champLevel}</div>
+                <div>딜량: {currentUserRank}등</div>
+                {gameModeCheck(gameData.info) == "소환사의 협곡" ? (
+                  <div>포지션: {displayRoleOrLane(participants)}</div>
+                ) : ""}
               </div>
-              <div>레벨: {participants.champLevel}</div>
-              <div>순위: {currentUserRank}</div>
-              <div>포지션: {displayRoleOrLane(participants)}</div>
             </>
           ) : (
             ""
           )}
         </div>
       ))}
-      <h1>Matched Game</h1>
     </div>
   );
 }
