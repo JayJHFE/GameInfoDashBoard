@@ -70,7 +70,14 @@ export default function MatchedGame({
   return (
     <div>
       {gameData.info.participants.map((participants, index) => (
-        <div key={index} style={{ display: "flex" }}>
+        <div
+          key={index}
+          style={{
+            display: "flex",
+            backgroundColor: "gray",
+            padding: "2px 10px 2px 10px",
+          }}
+        >
           {puuidSearched === participants.puuid ? (
             <>
               <img
@@ -87,7 +94,9 @@ export default function MatchedGame({
                 <div>딜량: {currentUserRank}등</div>
                 {gameModeCheck(gameData.info) == "소환사의 협곡" ? (
                   <div>포지션: {displayRoleOrLane(participants)}</div>
-                ) : ""}
+                ) : (
+                  ""
+                )}
               </div>
             </>
           ) : (
