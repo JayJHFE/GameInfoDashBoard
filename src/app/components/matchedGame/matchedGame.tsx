@@ -69,11 +69,11 @@ export default function MatchedGame({
 
   return (
     <div>
-      {gameData.info.participants.map((participants, index) => (
+      {gameData.info.participants.map((participants) => (
         <>
           {puuidSearched === participants.puuid ? (
             <div
-              key={index}
+              key={participants.puuid}
               style={{
                 display: "flex",
                 backgroundColor: "gray",
@@ -83,8 +83,9 @@ export default function MatchedGame({
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${participants?.championName}.png`}
                 alt={participants.championName}
+                style={{ borderRadius: "50%" }}
               />
-              <div>
+              <div style={{ marginLeft: "10px", paddingTop: "10px" }}>
                 <div>게임 유형: {gameModeCheck(gameData.info)}</div>
                 <div>
                   KDA: {participants.kills}/{participants.deaths}/
