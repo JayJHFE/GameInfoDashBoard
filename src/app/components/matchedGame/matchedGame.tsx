@@ -76,8 +76,15 @@ export default function MatchedGame({
               key={participants.puuid}
               style={{
                 display: "flex",
-                backgroundColor: "gray",
                 padding: "2px 10px 2px 10px",
+                marginTop: "10px",
+                width: "60vw",
+                borderRadius: "10px",
+                backgroundColor: `${
+                  gameModeCheck(gameData.info) == "소환사의 협곡"
+                    ? "green"
+                    : "blue"
+                }`,
               }}
             >
               <img
@@ -85,7 +92,16 @@ export default function MatchedGame({
                 alt={participants.championName}
                 style={{ borderRadius: "50%" }}
               />
-              <div style={{ marginLeft: "10px", paddingTop: "10px" }}>
+              <div
+                style={{
+                  marginLeft: "10px",
+                  paddingTop: `${
+                    gameModeCheck(gameData.info) == "소환사의 협곡"
+                      ? "5px"
+                      : "15px"
+                  }`,
+                }}
+              >
                 <div>게임 유형: {gameModeCheck(gameData.info)}</div>
                 <div>
                   KDA: {participants.kills}/{participants.deaths}/
