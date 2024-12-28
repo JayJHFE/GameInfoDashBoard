@@ -138,6 +138,7 @@ export default function MainClient() {
       try {
         const response = await fetch("/api/loadRotationChamp");
         const result = await response.json();
+        setCellCount(result.freeChampionIds.length);
         setData(result);
 
         const champResponse = await fetch("/LeagueofLegendData/champion.json");
