@@ -109,12 +109,14 @@ export default function MatchedGame({
                 </div>
                 <div>레벨: {participants.champLevel}</div>
                 <div>딜량: {currentUserRank}등</div>
+
                 {gameModeCheck(gameData.info) == "소환사의 협곡" ? (
                   <div>포지션: {displayRoleOrLane(participants)}</div>
                 ) : (
                   ""
                 )}
               </div>
+              <img src="/victory.png" style={{ width: "100px" }} />
             </div>
           ) : (
             ""
