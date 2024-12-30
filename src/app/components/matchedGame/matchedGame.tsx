@@ -116,7 +116,7 @@ export default function MatchedGame({
                   ""
                 )}
               </div>
-              <img src="/victory.png" style={{ width: "100px" }} />
+              <img src="/realVictory.png" style={{ width: "100px" }} />
             </div>
           ) : (
             ""
