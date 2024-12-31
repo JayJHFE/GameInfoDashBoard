@@ -15,6 +15,7 @@ interface InfoData {
   gameDuration: number;
   gameId: number;
   participants: Participant[];
+  win: boolean;
 }
 interface MatchedGameProps {
   gameData: {
@@ -116,7 +117,11 @@ export default function MatchedGame({
                   ""
                 )}
               </div>
-              <img src="/realVictory.png" style={{ width: "100px" }} />
+              {participants.win == true ? (
+                <img src="/realVictory.png" style={{ width: "100px" }} />
+              ) : (
+                ""
+              )}
             </div>
           ) : (
             ""
