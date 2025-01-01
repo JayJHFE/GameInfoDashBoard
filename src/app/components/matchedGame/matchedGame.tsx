@@ -118,7 +118,10 @@ export default function MatchedGame({
                 )}
               </div>
               {participants.win == true ? (
-                <img src="/realVictory.png" style={{ width: "100px" }} />
+                <img
+                  src="/realVictory.png"
+                  style={{ width: "100px", marginLeft: "30vw" }}
+                />
               ) : (
                 ""
               )}
