@@ -84,7 +84,7 @@ export default function MatchedGame({
                 backgroundColor: `${
                   gameModeCheck(gameData.info) == "소환사의 협곡"
                     ? "green"
-                    : "blue"
+                    : "#4682b4"
                 }`,
               }}
             >
