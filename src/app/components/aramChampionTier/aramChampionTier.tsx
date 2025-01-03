@@ -41,7 +41,7 @@ export default function AramChampionTier({
 
   return (
     <>
-      <h2>정보 표기</h2>
+      <h2>칼바람 나락 챔피언 티어</h2>
       <div></div>
       <ul style={{ maxHeight: "50vh", overflowY: "auto" }}>
         {aramChamps.map((aramChamp) => {
