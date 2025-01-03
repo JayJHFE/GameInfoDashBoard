@@ -43,7 +43,7 @@ export default function AramChampionTier({
     <>
       <h2>칼바람 나락 챔피언 티어</h2>
       <div></div>
-      <ul style={{ maxHeight: "50vh", overflowY: "auto" }}>
+      <ul style={{ maxHeight: "50vh", overflowY: "auto", width: "20vw" }}>
         {aramChamps.map((aramChamp) => {
           // allChampionData에서 name이 일치하는 챔피언을 찾기
           const matchedChampion = Object.values(allChampionData).find(
