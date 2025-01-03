@@ -257,10 +257,10 @@ export default function MainClient() {
           </div>
         )}
       </div>
-      {/* <AramChampionTier
+      <AramChampionTier
         allChampionData={allChampionData}
         aramChamps={aramChamps}
-      /> */}
+      />
       <div className={styles.serachingZoneContainer}>
         <SearchingZone
           pickData={pickData}
