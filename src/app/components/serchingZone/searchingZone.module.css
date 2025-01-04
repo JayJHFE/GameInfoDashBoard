@@ -1,8 +1,9 @@
-.searchingZoneOuterContainer{
-    display:flex;
-    flex-direction: column;
+.searchingZoneOuterContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
 }
 .searchingZoneInnerContainer {
-    display:flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }

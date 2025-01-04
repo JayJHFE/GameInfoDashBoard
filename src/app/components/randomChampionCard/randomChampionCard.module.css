@@ -2,7 +2,7 @@
   width: 150px;
   height: 260px;
   /* border: 1px solid #CCC; */
-  margin: 30px 0;
+  margin: 30px 0 0 50px;
   perspective: 600px;
 }
 .card {

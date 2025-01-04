@@ -59,7 +59,6 @@ export default function SearchingZone({
     <div className={styles.searchingZoneOuterContainer}>
       <h1>챔피언 추천기</h1>
       <div>
-        <label>정상픽</label>
         <input
           type="radio"
           name="checkingNormal"
@@ -67,7 +66,8 @@ export default function SearchingZone({
           onChange={handleCheckNormal}
           checked={checkNormal === "normal"}
         />
-        <label>즐겜픽</label>
+        <label>정상픽</label>
+
         <input
           type="radio"
           name="checkingNormal"
@@ -75,6 +75,7 @@ export default function SearchingZone({
           onChange={handleCheckNormal}
           checked={checkNormal === "unNormal"}
         />
+        <label>즐겜픽</label>
       </div>
       <select onChange={hadnleCheckLane}>
         <option value="top">탑</option>
@@ -87,27 +88,29 @@ export default function SearchingZone({
         <>
           <div className={styles.searchingZoneInnerContainer}>
             <div>
-              <label>AP</label>
               <input
                 type="radio"
                 name="damageType"
                 value="AP"
                 onChange={handleCheckDamageType}
               />
-              <label>AD</label>
+              <label>AP</label>
+
               <input
                 type="radio"
                 name="damageType"
                 value="AD"
                 onChange={handleCheckDamageType}
               />
-              <label>랜덤</label>
+              <label>AD</label>
+
               <input
                 type="radio"
                 name="damageType"
                 value="none"
                 onChange={handleCheckDamageType}
               />
+              <label>랜덤</label>
             </div>
             <button onClick={startSearch}>검색하기</button>
           </div>
