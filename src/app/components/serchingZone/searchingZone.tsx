@@ -57,7 +57,7 @@ export default function SearchingZone({
   };
   return (
     <div className={styles.searchingZoneOuterContainer}>
-      <h1>Searching Zone</h1>
+      <h1>챔피언 추천기</h1>
       <div>
         <label>정상픽</label>
         <input

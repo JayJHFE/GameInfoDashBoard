@@ -207,10 +207,9 @@ export default function MainClient() {
   return (
     <>
       <div>
-        <h1>테스트</h1>
         {!isCarouselVisible ? (
           <div>
-            <h2>테스트2</h2>
+            <h2>이번주 로테이션 챔피언</h2>
             <div className={styles.beforeCarousel}>
               <button
                 onClick={() => {
@@ -257,7 +256,7 @@ export default function MainClient() {
           </div>
         )}
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "row", marginTop: "20px" }}>
         <AramChampionTier
           allChampionData={allChampionData}
           aramChamps={aramChamps}

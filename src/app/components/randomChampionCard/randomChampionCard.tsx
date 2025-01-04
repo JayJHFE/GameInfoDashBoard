@@ -6,7 +6,7 @@ interface Champion {
   id: string;
   info: {
     magic: number;
-    [key: string]: any;
+    [key: string]: string | number | object;
   };
   key: string;
   name: string;
@@ -24,7 +24,7 @@ interface ChampionData {
 }
 
 interface RuneData {
-    [key: string]: any;
+  [key: string]: any;
 }
 interface AramChampionTierProps {
   allChampionData: ChampionData;
@@ -32,10 +32,10 @@ interface AramChampionTierProps {
   isSearch: boolean;
 }
 interface RandomTraits {
-    role: string;
-    type: string;
-    rune: string;
-  }
+  role: string;
+  type: string;
+  rune: string;
+}
 
 export default function RandomChampionCard({
   allChampionData,
@@ -49,7 +49,6 @@ export default function RandomChampionCard({
   const [traits, setTraits] = useState<RandomTraits | null>(null);
   const [runeData, setRuneData] = useState<RuneData>({});
 
-
   useEffect(() => {
     if (pickData.lane === "top") setLane("탑");
     else if (pickData.lane === "jg") setLane("정글");
@@ -60,34 +59,33 @@ export default function RandomChampionCard({
 
   useEffect(() => {
     async function fetchRuneData() {
-        try {
-          const runeResponse = await fetch("/LeagueofLegendData/runes.json");
-          const runeDatajson: RuneData = await runeResponse.json();
-          setRuneData(runeDatajson);
-          console.log(runeDatajson, "Rune data loaded");
-        } catch (error) {
-          console.error("Error loading rune data:", error);
-        }
+      try {
+        const runeResponse = await fetch("/LeagueofLegendData/runes.json");
+        const runeDatajson: RuneData = await runeResponse.json();
+        setRuneData(runeDatajson);
+        console.log(runeDatajson, "Rune data loaded");
+      } catch (error) {
+        console.error("Error loading rune data:", error);
       }
-      fetchRuneData();
-  },[]);
+    }
+    fetchRuneData();
+  }, []);
 
-    const generateRandomTraits = () => {
-        // 랜덤 값 생성
-        const roles = ["딜", "탱"];
-        const types = ["AD", "AP"];
+  const generateRandomTraits = () => {
+    // 랜덤 값 생성
+    const roles = ["딜", "탱"];
+    const types = ["AD", "AP"];
 
-        const randomRole = roles[Math.floor(Math.random() * roles.length)];
-        const randomType = types[Math.floor(Math.random() * types.length)];
+    const randomRole = roles[Math.floor(Math.random() * roles.length)];
+    const randomType = types[Math.floor(Math.random() * types.length)];
 
-        // 상태 업데이트
-        setTraits((prevTraits) => ({
-        role: randomRole,
-        type: randomType,
-        rune: prevTraits?.rune || "룬 없음",
-        }));
-    };
-
+    // 상태 업데이트
+    setTraits((prevTraits) => ({
+      role: randomRole,
+      type: randomType,
+      rune: prevTraits?.rune || "룬 없음",
+    }));
+  };
 
   const handleCardClick = async () => {
     if (!isFlipped) {
@@ -97,80 +95,31 @@ export default function RandomChampionCard({
             const laneMatch =
               (pickData.lane === "top" &&
                 !champion.tags.includes("Support") &&
-                (champion.tags.includes("Fighter") || champion.tags.includes("Tank"))) ||
-              (pickData.lane === "jg" &&
-                !champion.tags.includes("Support")) ||
+                (champion.tags.includes("Fighter") ||
+                  champion.tags.includes("Tank"))) ||
+              (pickData.lane === "jg" && !champion.tags.includes("Support")) ||
               (pickData.lane === "mid" &&
                 !champion.tags.includes("Support") &&
                 !champion.tags.includes("Tank")) ||
-              (pickData.lane === "adc" &&
-                champion.tags.includes("Marksman")) ||
+              (pickData.lane === "adc" && champion.tags.includes("Marksman")) ||
               (pickData.lane === "sup" &&
                 !champion.tags.includes("Marksman") &&
                 !champion.tags.includes("Fighter") &&
                 !champion.tags.includes("Assassin") &&
-                (champion.tags.includes("Support") || champion.tags.includes("Tank") || champion.tags.includes("Mage"))
-              );
-
-            // let laneMatch = false;
-
-            // if (pickData.lane === "top") {
-            //   laneMatch =
-            //     !champion.tags.includes("Support") &&
-            //     (champion.tags.includes("Fighter") || champion.tags.includes("Tank"));
-            //   console.log("Top Match:", laneMatch, "Tags:", champion.tags);
-            // } else if (pickData.lane === "jg") {
-            //   laneMatch = !champion.tags.includes("Support");
-            //   console.log("Jungle Match:", laneMatch, "Tags:", champion.tags);
-            // } else if (pickData.lane === "mid") {
-            //   laneMatch =
-            //     !champion.tags.includes("Support") &&
-            //     !champion.tags.includes("Tank");
-            //   console.log("Mid Match:", laneMatch, "Tags:", champion.tags);
-            // } else if (pickData.lane === "adc") {
-            //   laneMatch = champion.tags.includes("Marksman");
-            //   console.log("ADC Match:", laneMatch, "Tags:", champion.tags);
-            // } else if (pickData.lane === "sup") {
-            //   laneMatch =
-            //     !champion.tags.includes("Marksman") &&
-            //     !champion.tags.includes("Fighter") &&
-            //     !champion.tags.includes("Assassin") &&
-            //     (champion.tags.includes("Support") || champion.tags.includes("Tank") || champion.tags.includes("Mage"));
-            // }
+                (champion.tags.includes("Support") ||
+                  champion.tags.includes("Tank") ||
+                  champion.tags.includes("Mage")));
 
             // 랜덤 타입 선택 (damageType이 "none"인 경우)
             let selectedDamageType = pickData.damageType;
             if (pickData.damageType === "none") {
-                selectedDamageType = Math.random() < 0.5 ? "AD" : "AP"; // 50% 확률로 AD 또는 AP
+              selectedDamageType = Math.random() < 0.5 ? "AD" : "AP"; // 50% 확률로 AD 또는 AP
             }
 
             // Damage Type 필터링
             const damageTypeMatch =
-                (selectedDamageType === "AD" && champion.info.magic <= 6) || // AD 조건
-                (selectedDamageType === "AP" && champion.info.magic >= 7);
-
-
-            // Damage Type 필터링
-            // const damageTypeMatch =
-            //   (pickData.damageType === "AD" && champion.info.magic <= 6) || // AD 조건
-            //   (pickData.damageType === "AP" && champion.info.magic >= 7);   // AP 조건
-
-            // const randomIndex = Math.floor(Math.random() * 6); // 랜덤 인덱스 (0~5)
-            // const selectedRuneData = runeData[randomIndex]; // 랜덤 runeData
-
-            // if (selectedRuneData?.slots?.[0]?.runes) {
-            //     const runes = selectedRuneData.slots[0].runes; // slot[0].runes
-            //     const randomRuneIndex = Math.floor(Math.random() * runes.length); // runes 랜덤 인덱스
-            //     const randomRune = runes[randomRuneIndex]; // 랜덤 룬
-
-
-            //     // 랜덤 룬 데이터 업데이트
-            //     setTraits((prevTraits) => ({
-            //     role: prevTraits?.role || "",
-            //     type: prevTraits?.type || "",
-            //     rune: randomRune?.name,
-            //     }));
-            // }
+              (selectedDamageType === "AD" && champion.info.magic <= 6) || // AD 조건
+              (selectedDamageType === "AP" && champion.info.magic >= 7);
 
             return laneMatch && damageTypeMatch;
           }
@@ -196,23 +145,21 @@ export default function RandomChampionCard({
         } else {
           console.log("No champions match the criteria.");
         }
-      }
-      else {
+      } else {
         const randomIndex = Math.floor(Math.random() * 6); // 랜덤 인덱스 (0~5)
         const selectedRuneData = runeData[randomIndex]; // 랜덤 runeData
 
         if (selectedRuneData?.slots?.[0]?.runes) {
-            const runes = selectedRuneData.slots[0].runes; // slot[0].runes
-            const randomRuneIndex = Math.floor(Math.random() * runes.length); // runes 랜덤 인덱스
-            const randomRune = runes[randomRuneIndex]; // 랜덤 룬
+          const runes = selectedRuneData.slots[0].runes; // slot[0].runes
+          const randomRuneIndex = Math.floor(Math.random() * runes.length); // runes 랜덤 인덱스
+          const randomRune = runes[randomRuneIndex]; // 랜덤 룬
 
-
-            // 랜덤 룬 데이터 업데이트
-            setTraits((prevTraits) => ({
+          // 랜덤 룬 데이터 업데이트
+          setTraits((prevTraits) => ({
             role: prevTraits?.role || "",
             type: prevTraits?.type || "",
             rune: randomRune?.name,
-            }));
+          }));
         }
         console.log(traits, "Traits");
         setImageUrl(null);
@@ -229,10 +176,9 @@ export default function RandomChampionCard({
         image.onload = () => {
           setImageUrl(image.src); // 이미지 URL 상태 업데이트
           setIsFlipped(true); // 카드 플립
-        }
+        };
         generateRandomTraits();
       }
-
     }
     await new Promise((resolve) => {
       setIsFlipped(!isFlipped);
@@ -245,7 +191,7 @@ export default function RandomChampionCard({
   return (
     <>
       {isSearch ? (
-        <div style={{display:"flex", flexDirection:"row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <div className={`${cardStyles.scene} ${cardStyles.scene_card}`}>
             <div
               className={`${cardStyles.card} ${
@@ -280,18 +226,22 @@ export default function RandomChampionCard({
           </div>
           {runeData && isFlipped && pickData.checkNormal === "normal" && (
             <div>
-                <p>{lane} {traits?.type} {traits?.role} {randomChampion?.name}</p>
-                <p>추천 룬</p>
-                <p>{traits?.rune}</p>
-                {/* <p>추천 아이템</p> */}
+              <p>
+                {lane} {traits?.type} {traits?.role} {randomChampion?.name}
+              </p>
+              <p>추천 룬</p>
+              <p>{traits?.rune}</p>
+              {/* <p>추천 아이템</p> */}
             </div>
           )}
           {runeData && isFlipped && pickData.checkNormal === "unNormal" && (
             <div>
-                <p>{lane} {traits?.type} {traits?.role} {randomChampion?.name}</p>
-                <p>추천 룬</p>
-                <p>{traits?.rune}</p>
-                {/* <p>추천 아이템</p> */}
+              <p>
+                {lane} {traits?.type} {traits?.role} {randomChampion?.name}
+              </p>
+              <p>추천 룬</p>
+              <p>{traits?.rune}</p>
+              {/* <p>추천 아이템</p> */}
             </div>
           )}
         </div>
