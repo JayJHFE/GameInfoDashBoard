@@ -257,21 +257,23 @@ export default function MainClient() {
           </div>
         )}
       </div>
-      <AramChampionTier
-        allChampionData={allChampionData}
-        aramChamps={aramChamps}
-      />
-      <div className={styles.serachingZoneContainer}>
-        <SearchingZone
-          pickData={pickData}
-          setPickData={setPickData}
-          setIsSearch={setIsSearch}
-        />
-        <RandomChampionCard
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <AramChampionTier
           allChampionData={allChampionData}
-          pickData={pickData}
-          isSearch={isSearch}
+          aramChamps={aramChamps}
         />
+        <div className={styles.serachingZoneContainer}>
+          <SearchingZone
+            pickData={pickData}
+            setPickData={setPickData}
+            setIsSearch={setIsSearch}
+          />
+          <RandomChampionCard
+            allChampionData={allChampionData}
+            pickData={pickData}
+            isSearch={isSearch}
+          />
+        </div>
       </div>
     </>
   );

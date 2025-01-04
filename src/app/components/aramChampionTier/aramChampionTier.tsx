@@ -40,7 +40,7 @@ export default function AramChampionTier({
   // console.log("allChampionData:", JSON.stringify(allChampionData, null, 2));
 
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <h2>칼바람 나락 챔피언 티어</h2>
       <div></div>
       <ul style={{ maxHeight: "50vh", overflowY: "auto", width: "20vw" }}>
@@ -70,6 +70,6 @@ export default function AramChampionTier({
           );
         })}
       </ul>
-    </>
+    </div>
   );
 }
