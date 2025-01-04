@@ -38,7 +38,7 @@ export async function scrapAramChamp() {
 
     const championTiers: { name: string; tier: string }[] = [];
 
-    $("tbody tr").each((_, element) => {
+    $("tbody tr").each((index, element) => {
       // 이미지 alt 속성에서 챔피언 이름 추출 후 기호나 공백 제거 및 형식화
       let name = $(element)
         .find("td>a>img")
@@ -46,14 +46,17 @@ export async function scrapAramChamp() {
         ?.trim()
         .replace(/[^a-zA-Z]/g, "")
         .toLowerCase();
-
       // 예외 규칙 또는 일반 규칙을 통해 이름을 형식화
       name = name ? formatChampionName(name) : undefined;
 
       const tier = $(element).find("td:nth-child(3)").text()?.trim();
-
+      console.log(name, tier);
       if (name && tier) {
         championTiers.push({ name, tier });
+      } else {
+        if (name && !tier) {
+          championTiers.push({ name, tier: "1" });
+        }
       }
     });
 
