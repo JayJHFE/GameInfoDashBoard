@@ -13,7 +13,7 @@ interface Champion {
   id: string;
   info: {
     magic: number;
-    [key: string]: any;
+    [key: string]: string | number | object;
   };
   key: string;
   name: string;

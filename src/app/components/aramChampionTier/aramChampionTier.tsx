@@ -1,6 +1,10 @@
 interface Champion {
-  tags: string;
+  tags: Array<string>;
   id: string;
+  info: {
+    magic: number;
+    [key: string]: string | number | object;
+  };
   key: string;
   name: string;
   image: string;
