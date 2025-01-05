@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Radio } from "antd";
 import styles from "./searchingZone.module.css";
+import { RadioChangeEvent } from "antd";
 
 interface PickData {
   checkNormal: string;
@@ -19,7 +21,8 @@ export default function SearchingZone({
   setIsSearch,
 }: PickDataProps) {
   const [checkNormal, setCheckNormal] = useState("normal");
-  const handleCheckNormal = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleCheckNormal = (e: RadioChangeEvent) => {
     setCheckNormal(e.target.value);
     setPickData({
       ...pickData,
@@ -59,7 +62,16 @@ export default function SearchingZone({
     <div className={styles.searchingZoneOuterContainer}>
       <h1>챔피언 추천기</h1>
       <div>
-        <input
+        <Radio.Group
+          onChange={handleCheckNormal}
+          value={checkNormal} // 현재 상태값에 따라 선택
+          optionType="button"
+          buttonStyle="solid"
+        >
+          <Radio.Button value="normal">정상픽</Radio.Button>
+          <Radio.Button value="unNormal">즐겜픽</Radio.Button>
+        </Radio.Group>
+        {/* <input
           type="radio"
           name="checkingNormal"
           value="normal"
@@ -75,7 +87,7 @@ export default function SearchingZone({
           onChange={handleCheckNormal}
           checked={checkNormal === "unNormal"}
         />
-        <label>즐겜픽</label>
+        <label>즐겜픽</label> */}
       </div>
       <select onChange={hadnleCheckLane}>
         <option value="top">탑</option>
