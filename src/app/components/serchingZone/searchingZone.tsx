@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Radio } from "antd";
+import { Radio, RadioChangeEvent, Select } from "antd";
 import styles from "./searchingZone.module.css";
-import { RadioChangeEvent } from "antd";
 
 interface PickData {
   checkNormal: string;
@@ -21,6 +20,8 @@ export default function SearchingZone({
   setIsSearch,
 }: PickDataProps) {
   const [checkNormal, setCheckNormal] = useState("normal");
+  const [damageType, setDamageType] = useState("AD");
+  const [selectedValue, setSelectedValue] = useState("탑");
 
   const handleCheckNormal = (e: RadioChangeEvent) => {
     setCheckNormal(e.target.value);
@@ -29,13 +30,15 @@ export default function SearchingZone({
       checkNormal: e.target.value,
     });
   };
-  const hadnleCheckLane = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const hadnleCheckLane = (value: string) => {
+    setSelectedValue(value);
     setPickData({
       ...pickData,
-      lane: e.target.value,
+      lane: value,
     });
   };
-  const handleCheckDamageType = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckDamageType = (e: RadioChangeEvent) => {
+    setDamageType(e.target.value);
     setPickData({
       ...pickData,
       damageType: e.target.value,
@@ -58,6 +61,13 @@ export default function SearchingZone({
       }
     }
   };
+  const options = [
+    { label: "탑", value: "top" },
+    { label: "정글", value: "jg" },
+    { label: "미드", value: "mid" },
+    { label: "원딜", value: "adc" },
+    { label: "서폿", value: "sup" },
+  ];
   return (
     <div className={styles.searchingZoneOuterContainer}>
       <h1>챔피언 추천기</h1>
@@ -89,18 +99,39 @@ export default function SearchingZone({
         />
         <label>즐겜픽</label> */}
       </div>
-      <select onChange={hadnleCheckLane}>
+      <Select
+        style={{ width: 120 }}
+        value={selectedValue}
+        // onChange={handleProvinceChange}
+        onChange={(value) => hadnleCheckLane(value)}
+        // onChange={hadnleCheckLane}
+        options={options.map((option) => ({
+          label: option.label,
+          value: option.value,
+        }))}
+      />
+      {/* <select onChange={hadnleCheckLane}>
         <option value="top">탑</option>
         <option value="jg">정글</option>
         <option value="mid">미드</option>
         <option value="adc">원딜</option>
         <option value="sup">서폿</option>
-      </select>
+      </select> */}
       {checkNormal === "normal" ? (
         <>
           <div className={styles.searchingZoneInnerContainer}>
             <div>
-              <input
+              <Radio.Group
+                onChange={handleCheckDamageType}
+                value={damageType} // 현재 상태값에 따라 선택
+                optionType="button"
+                buttonStyle="solid"
+              >
+                <Radio.Button value="AD">AD</Radio.Button>
+                <Radio.Button value="AP">AP</Radio.Button>
+                <Radio.Button value="none">랜덤</Radio.Button>
+              </Radio.Group>
+              {/* <input
                 type="radio"
                 name="damageType"
                 value="AP"
@@ -122,7 +153,7 @@ export default function SearchingZone({
                 value="none"
                 onChange={handleCheckDamageType}
               />
-              <label>랜덤</label>
+              <label>랜덤</label> */}
             </div>
             <button onClick={startSearch}>검색하기</button>
           </div>
