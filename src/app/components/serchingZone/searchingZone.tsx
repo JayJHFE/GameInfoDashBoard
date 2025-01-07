@@ -100,7 +100,7 @@ export default function SearchingZone({
         <label>즐겜픽</label> */}
       </div>
       <Select
-        style={{ width: 120 }}
+        style={{ width: 136 }}
         value={selectedValue}
         // onChange={handleProvinceChange}
         onChange={(value) => hadnleCheckLane(value)}

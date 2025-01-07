@@ -235,12 +235,12 @@ export default function RandomChampionCard({
             </div>
           )}
           {runeData && isFlipped && pickData.checkNormal === "unNormal" && (
-            <div>
-              <p>
+            <div style={{ marginTop: "30px" }}>
+              <p style={{ marginLeft: "20px" }}>
                 {lane} {traits?.type} {traits?.role} {randomChampion?.name}
               </p>
-              <p>추천 룬</p>
-              <p>{traits?.rune}</p>
+              <p style={{ marginLeft: "20px" }}>추천 룬</p>
+              <p style={{ marginLeft: "20px" }}>{traits?.rune}</p>
               {/* <p>추천 아이템</p> */}
             </div>
           )}
