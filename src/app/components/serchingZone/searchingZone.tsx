@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Radio, RadioChangeEvent, Select } from "antd";
+import { Radio, RadioChangeEvent, Select, Button } from "antd";
 import styles from "./searchingZone.module.css";
 
 interface PickData {
@@ -155,7 +155,10 @@ export default function SearchingZone({
               />
               <label>랜덤</label> */}
             </div>
-            <button onClick={startSearch}>검색하기</button>
+            <Button color="default" variant="outlined" onClick={startSearch}>
+              검 색
+            </Button>
+            {/* <button onClick={startSearch}>검색하기</button> */}
           </div>
         </>
       ) : (
