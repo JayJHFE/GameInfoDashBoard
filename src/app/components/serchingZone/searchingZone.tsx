@@ -120,7 +120,7 @@ export default function SearchingZone({
       {checkNormal === "normal" ? (
         <>
           <div className={styles.searchingZoneInnerContainer}>
-            <div>
+            <div style={{ marginBottom: "20px" }}>
               <Radio.Group
                 onChange={handleCheckDamageType}
                 value={damageType} // 현재 상태값에 따라 선택
