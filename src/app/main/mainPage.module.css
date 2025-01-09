@@ -107,6 +107,10 @@
 .serachingZoneContainer {
   display: flex;
   flex-direction: row;
+  background-color: #0eb4fc;
+  border-radius: 10px;
+  padding: 10px 20px;
+  /* margin-left: 50px; */
 }
 
 /* .carousel__cell:nth-child(9n + 1) {

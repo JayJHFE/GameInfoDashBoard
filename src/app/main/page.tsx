@@ -256,7 +256,14 @@ export default function MainClient() {
           </div>
         )}
       </div>
-      <div style={{ display: "flex", flexDirection: "row", marginTop: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginTop: "20px",
+          gap: "50px",
+        }}
+      >
         <AramChampionTier
           allChampionData={allChampionData}
           aramChamps={aramChamps}
