@@ -52,6 +52,7 @@ export default function AramChampionTier({
         borderRadius: "10px",
         paddingTop: "10px",
         paddingLeft: "20px",
+        paddingBottom: "20px",
       }}
     >
       <h2>칼바람 나락 챔피언 티어</h2>
