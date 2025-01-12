@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
 :root {
   --background: #ffffff;
@@ -7,7 +7,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: black;
+    --background: #1c1c1f;
     --foreground: #ededed;
   }
 }
@@ -23,7 +23,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   /* font-family: Arial, Helvetica, sans-serif; */
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
