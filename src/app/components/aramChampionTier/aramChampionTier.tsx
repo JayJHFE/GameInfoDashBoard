@@ -49,6 +49,7 @@ export default function AramChampionTier({
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#31313C",
+        boxShadow: "2px 2px 4.6px 0px rgba(183, 183, 201, 0.2)",
         borderRadius: "10px",
         paddingTop: "10px",
         paddingLeft: "20px",
