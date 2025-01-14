@@ -77,9 +77,14 @@ export default function SearchingZone({
           value={checkNormal} // 현재 상태값에 따라 선택
           optionType="button"
           buttonStyle="solid"
+          className={styles.radioGroup}
         >
-          <Radio.Button value="normal">정상픽</Radio.Button>
-          <Radio.Button value="unNormal">즐겜픽</Radio.Button>
+          <Radio.Button value="normal" className={styles.radioButton}>
+            정상픽
+          </Radio.Button>
+          <Radio.Button value="unNormal" className={styles.radioButton}>
+            즐겜픽
+          </Radio.Button>
         </Radio.Group>
         {/* <input
           type="radio"

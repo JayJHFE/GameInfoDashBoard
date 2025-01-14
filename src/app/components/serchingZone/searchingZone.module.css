@@ -7,3 +7,8 @@
   display: flex;
   flex-direction: column;
 }
+
+.radioGroup {
+  box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
+  border-radius: 5px;
+}
