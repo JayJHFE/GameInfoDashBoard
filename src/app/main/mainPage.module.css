@@ -68,7 +68,7 @@
   border-radius: 18px;
   border: 2.5px solid rgb(200, 170, 110);
   /* border: 2.5px solid rgb(240, 170, 0); */
-  box-shadow: 6px 7px 10px 1px rgb(127, 125, 125);
+  box-shadow: 3px 2px 10px 1px rgb(127, 125, 125);
   width: 55vw;
 }
 /* .beforeCarousel:hover {
