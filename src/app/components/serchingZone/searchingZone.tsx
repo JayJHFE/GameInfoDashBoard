@@ -131,6 +131,7 @@ export default function SearchingZone({
                 value={damageType} // 현재 상태값에 따라 선택
                 optionType="button"
                 buttonStyle="solid"
+                className={styles.radioGroup}
               >
                 <Radio.Button value="AD">AD</Radio.Button>
                 <Radio.Button value="AP">AP</Radio.Button>
