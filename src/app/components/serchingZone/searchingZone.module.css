@@ -12,3 +12,13 @@
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
   border-radius: 5px;
 }
+
+.selectAntd {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
+}
+
+.buttonAntd {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
+}

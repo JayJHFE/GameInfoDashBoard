@@ -114,6 +114,7 @@ export default function SearchingZone({
           label: option.label,
           value: option.value,
         }))}
+        className={styles.selectAntd}
       />
       {/* <select onChange={hadnleCheckLane}>
         <option value="top">탑</option>
@@ -161,7 +162,12 @@ export default function SearchingZone({
               />
               <label>랜덤</label> */}
             </div>
-            <Button color="default" variant="outlined" onClick={startSearch}>
+            <Button
+              color="default"
+              variant="outlined"
+              onClick={startSearch}
+              className={styles.buttonAntd}
+            >
               검 색
             </Button>
             {/* <button onClick={startSearch}>검색하기</button> */}
@@ -169,7 +175,14 @@ export default function SearchingZone({
         </>
       ) : (
         <>
-          <button onClick={startSearch}>돌리기</button>
+          <Button
+            color="default"
+            variant="outlined"
+            onClick={startSearch}
+            className={styles.buttonAntd}
+          >
+            돌리기
+          </Button>
         </>
       )}
     </div>
