@@ -22,3 +22,12 @@
   border-radius: 5px;
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
 }
+
+.radioButton :global(.ant-radio-button.ant-radio-button-checked) {
+  background-color: #28344E; /* 선택된 버튼 배경 */
+  color: white; /* 선택된 버튼 텍스트 */
+}
+.radioButton :global(.ant-radio-button-wrapper-checked:not) {
+  border-color: #28344E; /* 선택된 버튼 테두리 */
+}
+
