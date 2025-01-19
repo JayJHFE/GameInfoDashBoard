@@ -49,3 +49,20 @@ a {
   background-color: #28344E !important;
   color: #ffffff !important;
 }
+/* .ant-radio-button-wrapper:hover {
+  border-color: #40a9ff;
+  background-color: #e6f7ff;
+  color: #40a9ff;
+}
+
+.ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
+  border-color: #28344E;
+  background-color: #f0f2f5;
+  color: #28344E;
+}
+
+.ant-radio-button-wrapper.ant-radio-button-wrapper-checked:hover {
+  border-color: #1f2937;
+  background-color: #d3dce6;
+  color: #1f2937;
+} */
