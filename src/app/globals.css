@@ -44,3 +44,8 @@ a {
     color-scheme: dark;
   }
 }
+.ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
+  border-color: #28344E !important;
+  background-color: #28344E !important;
+  color: #ffffff !important;
+}
