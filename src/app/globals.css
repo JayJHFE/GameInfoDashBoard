@@ -26,6 +26,7 @@ body {
   font-family: "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
 }
 
 * {
@@ -45,8 +46,8 @@ a {
   }
 }
 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked {
-  border-color: #28344E !important;
-  background-color: #28344E !important;
+  border-color: #28344e !important;
+  background-color: #28344e !important;
   color: #ffffff !important;
 }
 /* .ant-radio-button-wrapper:hover {
