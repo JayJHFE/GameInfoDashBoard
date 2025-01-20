@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Radio, RadioChangeEvent, Select, Button } from "antd";
+import { GiBrassEye } from "react-icons/gi";
 import styles from "./searchingZone.module.css";
 
 interface PickData {
@@ -70,7 +71,10 @@ export default function SearchingZone({
   ];
   return (
     <div className={styles.searchingZoneOuterContainer}>
-      <h1>챔피언 추천기</h1>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <GiBrassEye size={25} style={{ marginRight: "10px" }} />
+        <h1>챔피언 추천기</h1>
+      </div>
       <div>
         <Radio.Group
           onChange={handleCheckNormal}
