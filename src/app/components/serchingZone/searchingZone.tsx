@@ -90,26 +90,8 @@ export default function SearchingZone({
             즐겜픽
           </Radio.Button>
         </Radio.Group>
-        {/* <input
-          type="radio"
-          name="checkingNormal"
-          value="normal"
-          onChange={handleCheckNormal}
-          checked={checkNormal === "normal"}
-        />
-        <label>정상픽</label>
-
-        <input
-          type="radio"
-          name="checkingNormal"
-          value="unNormal"
-          onChange={handleCheckNormal}
-          checked={checkNormal === "unNormal"}
-        />
-        <label>즐겜픽</label> */}
       </div>
       <Select
-        style={{ width: 136 }}
         value={selectedValue}
         // onChange={handleProvinceChange}
         onChange={(value) => hadnleCheckLane(value)}
@@ -120,13 +102,6 @@ export default function SearchingZone({
         }))}
         className={styles.selectAntd}
       />
-      {/* <select onChange={hadnleCheckLane}>
-        <option value="top">탑</option>
-        <option value="jg">정글</option>
-        <option value="mid">미드</option>
-        <option value="adc">원딜</option>
-        <option value="sup">서폿</option>
-      </select> */}
       {checkNormal === "normal" ? (
         <>
           <div className={styles.searchingZoneInnerContainer}>
@@ -142,29 +117,6 @@ export default function SearchingZone({
                 <Radio.Button value="AP">AP</Radio.Button>
                 <Radio.Button value="none">랜덤</Radio.Button>
               </Radio.Group>
-              {/* <input
-                type="radio"
-                name="damageType"
-                value="AP"
-                onChange={handleCheckDamageType}
-              />
-              <label>AP</label>
-
-              <input
-                type="radio"
-                name="damageType"
-                value="AD"
-                onChange={handleCheckDamageType}
-              />
-              <label>AD</label>
-
-              <input
-                type="radio"
-                name="damageType"
-                value="none"
-                onChange={handleCheckDamageType}
-              />
-              <label>랜덤</label> */}
             </div>
             <Button
               color="default"
@@ -174,7 +126,6 @@ export default function SearchingZone({
             >
               검 색
             </Button>
-            {/* <button onClick={startSearch}>검색하기</button> */}
           </div>
         </>
       ) : (

@@ -11,14 +11,17 @@
 .radioGroup {
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
   border-radius: 5px;
+  width: 150px;
 }
 
 .selectAntd {
   border-radius: 5px;
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
+  width: 150px;
 }
 
 .buttonAntd {
   border-radius: 5px;
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
+  width: 150px;
 }
