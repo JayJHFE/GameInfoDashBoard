@@ -1,3 +1,5 @@
+import { GiAbstract005 } from "react-icons/gi";
+
 interface Champion {
   tags: Array<string>;
   id: string;
@@ -56,7 +58,12 @@ export default function AramChampionTier({
         paddingBottom: "20px",
       }}
     >
-      <h2>칼바람 나락 챔피언 티어</h2>
+      <div
+        style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+      >
+        <GiAbstract005 size={25} style={{ marginRight: "10px" }} />
+        <h2>칼바람 나락 챔피언 티어</h2>
+      </div>
       <div></div>
       <ul style={{ maxHeight: "50vh", overflowY: "auto", width: "20vw" }}>
         {aramChamps.map((aramChamp) => {
