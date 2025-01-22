@@ -25,3 +25,9 @@
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
   width: 150px;
 }
+.radioTwoButton {
+  width: 75px;
+}
+.radioThreeButton {
+  width: 50px;
+}

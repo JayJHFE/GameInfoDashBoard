@@ -83,10 +83,10 @@ export default function SearchingZone({
           buttonStyle="solid"
           className={styles.radioGroup}
         >
-          <Radio.Button value="normal" className={styles.radioButton}>
+          <Radio.Button value="normal" className={styles.radioTwoButton}>
             정상픽
           </Radio.Button>
-          <Radio.Button value="unNormal" className={styles.radioButton}>
+          <Radio.Button value="unNormal" className={styles.radioTwoButton}>
             즐겜픽
           </Radio.Button>
         </Radio.Group>
@@ -113,9 +113,15 @@ export default function SearchingZone({
                 buttonStyle="solid"
                 className={styles.radioGroup}
               >
-                <Radio.Button value="AD">AD</Radio.Button>
-                <Radio.Button value="AP">AP</Radio.Button>
-                <Radio.Button value="none">랜덤</Radio.Button>
+                <Radio.Button value="AD" className={styles.radioThreeButton}>
+                  AD
+                </Radio.Button>
+                <Radio.Button value="AP" className={styles.radioThreeButton}>
+                  AP
+                </Radio.Button>
+                <Radio.Button value="none" className={styles.radioThreeButton}>
+                  랜덤
+                </Radio.Button>
               </Radio.Group>
             </div>
             <Button
