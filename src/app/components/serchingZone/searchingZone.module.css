@@ -11,23 +11,25 @@
 .radioGroup {
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
   border-radius: 5px;
-  width: 150px;
+  width: 210px;
 }
 
 .selectAntd {
   border-radius: 5px;
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
-  width: 150px;
+  width: 210px;
 }
 
 .buttonAntd {
   border-radius: 5px;
   box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
-  width: 150px;
+  width: 210px;
 }
 .radioTwoButton {
-  width: 75px;
+  width: 105px;
+  text-align: center;
 }
 .radioThreeButton {
-  width: 50px;
+  width: 70px;
+  text-align: center;
 }

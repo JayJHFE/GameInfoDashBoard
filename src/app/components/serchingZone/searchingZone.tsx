@@ -119,7 +119,11 @@ export default function SearchingZone({
                 <Radio.Button value="AP" className={styles.radioThreeButton}>
                   AP
                 </Radio.Button>
-                <Radio.Button value="none" className={styles.radioThreeButton}>
+                <Radio.Button
+                  style={{ fontSize: "13px" }}
+                  value="none"
+                  className={styles.radioThreeButton}
+                >
                   랜덤
                 </Radio.Button>
               </Radio.Group>
