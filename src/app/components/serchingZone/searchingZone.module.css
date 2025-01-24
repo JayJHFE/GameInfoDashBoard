@@ -33,3 +33,12 @@
   width: 70px;
   text-align: center;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
