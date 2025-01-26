@@ -50,6 +50,7 @@ export default function MainClient() {
   });
   const [isSearch, setIsSearch] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [radius, setRadius] = useState(288); // Carousel 반지름 계산
   const theta = 360 / cellCount; // 각도 계산
 
@@ -198,6 +199,15 @@ export default function MainClient() {
     fetchData();
     fetchData2();
   }, []);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      // 개별 카드의 너비 * 카드 개수로 전체 너비 설정
+      const cardWidth = 200; // 카드 하나의 너비 (예제)
+      const cardCount = isSearch ? 2 : 1; // 렌더링된 카드 개수
+      containerRef.current.style.width = `${cardWidth * cardCount}px`;
+    }
+  }, [isSearch]); // isSearch가 변경될 때 실행
 
   // useEffect(() => {
   //   console.log(aramChamps);
