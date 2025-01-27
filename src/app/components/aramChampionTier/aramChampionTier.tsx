@@ -95,13 +95,16 @@ export default function AramChampionTier({
                 listStyle: "none",
                 border: "1px solid",
                 marginBottom: "10px",
+                borderRadius: "5px",
+                backgroundColor: "#1c1c1f",
+                borderColor: "#1c1c1f",
               }}
               key={aramChamp.name}
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${matchedChampion?.id}.png`}
               />
-              <strong>{matchedChampion?.name}</strong> - Tier: {aramChamp.tier}
+              <strong>{matchedChampion?.name}</strong> - {aramChamp.tier}티어
             </li>
           );
         })}
