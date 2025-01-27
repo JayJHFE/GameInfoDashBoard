@@ -55,6 +55,7 @@ export default function AramChampionTier({
         borderRadius: "10px",
         paddingTop: "10px",
         paddingLeft: "20px",
+        paddingRight: "20px",
         paddingBottom: "20px",
       }}
     >
@@ -65,7 +66,13 @@ export default function AramChampionTier({
         <h2>칼바람 나락 챔피언 티어</h2>
       </div>
       <div></div>
-      <ul style={{ maxHeight: "50vh", overflowY: "auto", width: "20vw" }}>
+      <ul
+        style={{
+          maxHeight: "50vh",
+          overflowY: "auto",
+          width: "20vw",
+        }}
+      >
         {aramChamps.map((aramChamp) => {
           // allChampionData에서 name이 일치하는 챔피언을 찾기
           const matchedChampion = Object.values(allChampionData).find(
@@ -83,7 +90,14 @@ export default function AramChampionTier({
           }
 
           return (
-            <li style={{ listStyle: "none" }} key={aramChamp.name}>
+            <li
+              style={{
+                listStyle: "none",
+                border: "1px solid",
+                marginBottom: "10px",
+              }}
+              key={aramChamp.name}
+            >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${matchedChampion?.id}.png`}
               />
