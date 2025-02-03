@@ -383,7 +383,7 @@ export default function SummonerSearch() {
         />
         <button onClick={handleSearch}>검색</button>
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ width:"31vw", backgroundColor:"red", display: "flex", flexDirection: "row", marginTop: "20px", marginBottom: "20px", gap: "10px", paddingLeft: "10px", paddingTop:"10px", paddingBottom:"10px" }}>
         {championWithRank.map(({ champion, rankData }) => (
           <ChampionTopLi
             key={champion.key}
