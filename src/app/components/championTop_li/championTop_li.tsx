@@ -43,7 +43,7 @@ export default function ChampionTopLi({
         <div style={{ borderRadius: "50%", backgroundColor: "white" }}>
           <img
             src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${championData?.id}.png`}
-            style={{ borderRadius: "50%" }}
+            style={{ borderRadius: "50%", transform: "translateY(2px)" }}
           />
         </div>
       </div>

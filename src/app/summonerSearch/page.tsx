@@ -372,9 +372,9 @@ export default function SummonerSearch() {
 
   return (
     <div>
-      <h1>Summoner Search</h1>
+      <h1>전적검색</h1>
       <div>
-        <h2>아이디를 입력해주세요</h2>
+        <h3>아이디를 입력해주세요</h3>
         <input
           type="text"
           placeholder="아이디 #태그"
