@@ -46,6 +46,9 @@ export default function ChampionTopLi({
             style={{ borderRadius: "50%", transform: "translateY(2px)" }}
           />
         </div>
+        <div style={{paddingLeft:"40px"}}>{championData.name}</div>
+        <div>{championRankData.championLevel}</div>
+        <div>{championRankData.championPoints}</div>
       </div>
     </>
   );

@@ -373,7 +373,7 @@ export default function SummonerSearch() {
   return (
     <div>
       <h1>전적검색</h1>
-      <div>
+      <div style={{ marginTop: "20px" }}>
         <h3>아이디를 입력해주세요</h3>
         <input
           type="text"
@@ -383,7 +383,7 @@ export default function SummonerSearch() {
         />
         <button onClick={handleSearch}>검색</button>
       </div>
-      <div style={{ width:"31vw", backgroundColor:"red", display: "flex", flexDirection: "row", marginTop: "20px", marginBottom: "20px", gap: "10px", paddingLeft: "10px", paddingTop:"10px", paddingBottom:"10px" }}>
+      <div style={{ width:"31vw", backgroundColor: championWithRank.length ?  "#31313c" : "transparent", display: "flex", flexDirection: "row", marginTop: "20px", marginBottom: "20px", gap: "10px", paddingLeft: "10px", paddingTop:"10px", paddingBottom:"10px", borderRadius: "15px" }}>
         {championWithRank.map(({ champion, rankData }) => (
           <ChampionTopLi
             key={champion.key}
