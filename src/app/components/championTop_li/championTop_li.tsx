@@ -47,8 +47,8 @@ export default function ChampionTopLi({
           />
         </div>
         <div style={{paddingLeft:"40px"}}>{championData.name}</div>
-        <div>{championRankData.championLevel}</div>
-        <div>{championRankData.championPoints}</div>
+        <div style={{paddingLeft:"10px"}}>숙련도 레벨: {championRankData.championLevel}</div>
+        <div style={{paddingLeft:"10px"}}>숙련도: {championRankData.championPoints}</div>
       </div>
     </>
   );
