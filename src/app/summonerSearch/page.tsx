@@ -383,14 +383,17 @@ export default function SummonerSearch() {
         />
         <button onClick={handleSearch}>검색</button>
       </div>
-      <div style={{ width:"31vw", backgroundColor: championWithRank.length ?  "#31313c" : "transparent", display: "flex", flexDirection: "row", marginTop: "20px", marginBottom: "20px", gap: "10px", paddingLeft: "10px", paddingTop:"10px", paddingBottom:"10px", borderRadius: "15px" }}>
-        {championWithRank.map(({ champion, rankData }) => (
-          <ChampionTopLi
-            key={champion.key}
-            championRankData={rankData!}
-            championData={champion}
-          />
-        ))}
+      <div style={{ width:"31vw", backgroundColor: championWithRank.length ?  "#31313c" : "transparent", display: "flex", flexDirection: "column", marginTop: "20px", marginBottom: "20px", gap: "10px", paddingLeft: "10px", paddingTop:"10px", paddingBottom:"10px", borderRadius: "15px" }}>
+        <div style={{fontSize:"20px"}}>숙련도 TOP 3</div>
+        <div style={{display:"flex", flexDirection:"row"}}>
+          {championWithRank.map(({ champion, rankData }) => (
+            <ChampionTopLi
+              key={champion.key}
+              championRankData={rankData!}
+              championData={champion}
+            />
+          ))}
+        </div>
       </div>
       {championWithRank.length > 0 && (
         <>
