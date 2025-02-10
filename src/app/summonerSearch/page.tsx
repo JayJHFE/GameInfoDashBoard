@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
 import MatchedGame from "../components/matchedGame/matchedGame";
 import styles from "./page.module.css";
+import { Input } from "antd";
 
 interface Champion {
   tags: Array<string>;
@@ -109,6 +110,8 @@ export default function SummonerSearch() {
   >([]);
   const [isAnimating, setIsAnimating] = useState(false);
   const [notActiveGame, setNotActiveGame] = useState(false);
+
+  const { Search } = Input;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -352,14 +355,6 @@ export default function SummonerSearch() {
   useEffect(() => {
     console.log("allChampionData", allChampionData);
   }, [allChampionData]);
-
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setIsAnimating(true); // 애니메이션 시작
-  //   }, 1000); // 초기 렌더링 후 300ms 대기
-  //   return () => clearTimeout(timeout); // 타이머 클리어
-  // }, [blueTeamImages, redTeamImages]);
-
   useEffect(() => {
     if (blueTeamImages.length > 0 || redTeamImages.length > 0) {
       const timeout = setTimeout(() => {
@@ -375,16 +370,26 @@ export default function SummonerSearch() {
       <h1>전적검색</h1>
       <div style={{ marginTop: "20px" }}>
         <h3>아이디를 입력해주세요</h3>
-        <input
+        <Search
+          className={styles.searchInput} 
+          placeholder="아이디 #태그"
+          value={inputValue} 
+          onChange={handleInputChange}  
+          onSearch={handleSearch} 
+          enterButton 
+        />
+        {/* <input
           type="text"
           placeholder="아이디 #태그"
           value={inputValue}
           onChange={handleInputChange}
         />
-        <button onClick={handleSearch}>검색</button>
+        <button onClick={handleSearch}>검색</button> */}
       </div>
       <div style={{ width:"31vw", backgroundColor: championWithRank.length ?  "#31313c" : "transparent", display: "flex", flexDirection: "column", marginTop: "20px", marginBottom: "20px", gap: "10px", paddingLeft: "10px", paddingTop:"10px", paddingBottom:"10px", borderRadius: "15px" }}>
-        <div style={{fontSize:"20px"}}>숙련도 TOP 3</div>
+        {championWithRank.length > 0 && (
+          <div style={{fontSize:"20px"}}>숙련도 TOP 3</div>
+        )}
         <div style={{display:"flex", flexDirection:"row"}}>
           {championWithRank.map(({ champion, rankData }) => (
             <ChampionTopLi

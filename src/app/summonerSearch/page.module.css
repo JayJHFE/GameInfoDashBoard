@@ -20,3 +20,15 @@
   }
 }
 
+.searchInput {
+  width: 15vw;
+  margin-top: 10px;
+}
+
+.searchInput :global(.ant-btn-variant-solid) {
+  background-color: rgb(49, 49, 60) !important; /* 버튼 배경색 변경 */
+  color: white !important; /* 텍스트 색상 */
+  border-radius: 5px; /* 버튼 둥글게 */
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
