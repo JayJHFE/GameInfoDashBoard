@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ChampionTopLi from "../components/championTop_li/championTop_li";
 import MatchedGame from "../components/matchedGame/matchedGame";
 import styles from "./page.module.css";
-import { Input } from "antd";
+import { Input, Button } from "antd";
 
 interface Champion {
   tags: Array<string>;
@@ -402,9 +402,25 @@ export default function SummonerSearch() {
       </div>
       {championWithRank.length > 0 && (
         <>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <button onClick={searchRecentGame}>최근 전적보기</button>
-            <button onClick={searchActiveGame}>실시간 게임 확인</button>
+          <div style={{ display: "flex", flexDirection: "row", gap:"20px" }}>
+            {/* <button onClick={searchRecentGame}>최근 전적보기</button> */}
+            <Button
+              color="default"
+              variant="outlined"
+              onClick={searchRecentGame}
+              className={styles.buttonAntd}
+            >
+              최근 전적보기
+            </Button>
+            <Button
+              color="default"
+              variant="outlined"
+              onClick={searchActiveGame}
+              className={styles.buttonAntd}
+            >
+              실시간 게임 확인
+            </Button>
+            {/* <button onClick={searchActiveGame}>실시간 게임 확인</button> */}
           </div>
         </>
       )}

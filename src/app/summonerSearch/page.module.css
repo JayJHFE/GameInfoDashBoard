@@ -32,3 +32,8 @@
   font-weight: bold;
   transition: background-color 0.3s ease-in-out, transform 0.2s;
 }
+.buttonAntd {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 0.5px rgb(127, 125, 125);
+  width: 210px;
+}
