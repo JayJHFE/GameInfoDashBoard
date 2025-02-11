@@ -4,6 +4,7 @@ import ChampionTopLi from "../components/championTop_li/championTop_li";
 import MatchedGame from "../components/matchedGame/matchedGame";
 import styles from "./page.module.css";
 import { Input, Button } from "antd";
+import { GiMagnifyingGlass } from "react-icons/gi";
 
 interface Champion {
   tags: Array<string>;
@@ -367,7 +368,10 @@ export default function SummonerSearch() {
 
   return (
     <div>
-      <h1>전적검색</h1>
+      <div style={{ display: "flex" }}>
+        <GiMagnifyingGlass size={25} style={{ marginRight: "10px", marginTop: "8px" }}/>
+        <h1>전적검색</h1>
+      </div>
       <div style={{ marginTop: "20px" }}>
         <h3>아이디를 입력해주세요</h3>
         <Search
