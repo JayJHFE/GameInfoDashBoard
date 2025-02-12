@@ -117,6 +117,13 @@ export default function MatchedGame({
                   ""
                 )}
               </div>
+              <div>{participants.item0}</div>
+              <div>{participants.item1}</div>
+              <div>{participants.item2}</div>
+              <div>{participants.item3}</div>
+              <div>{participants.item4}</div>
+              <div>{participants.item5}</div>
+              <div>{participants.item6}</div>
               {participants.win == true ? (
                 <img
                   src="/realVictory.png"
