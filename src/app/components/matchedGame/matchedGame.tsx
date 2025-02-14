@@ -27,14 +27,9 @@ interface MatchedGameProps {
   puuidSearched: string;
 }
 interface ItemData {
-  type: string;
-  version: string;
-  basic: object;
-  data: {
-    [key: number]: {
-      name: string;
-    };
-  };
+  [key: string]: {
+    name: string;
+  }
 }
 // totalDamageDealtToChampions
 export default function MatchedGame({
@@ -43,12 +38,7 @@ export default function MatchedGame({
 }: MatchedGameProps) {
   console.log(gameData);
   console.log(puuidSearched);
-  const [allItems, setAllItems] = useState<ItemData>({
-    type: "",
-    version: "",
-    basic: {},
-    data: {},
-  });
+  const [allItems, setAllItems] = useState<ItemData>({});
   const currentUser = gameData.info.participants.find(
     (participant) => participant.puuid === puuidSearched
   );
@@ -99,6 +89,10 @@ export default function MatchedGame({
   
     fetchItems(); 
   }, []);
+
+  useEffect(() => {
+    console.log("allItems data:", allItems);
+  }, [allItems]);
   
 
   return (
@@ -157,21 +151,22 @@ export default function MatchedGame({
                   .filter((itemId) => typeof itemId === "number" && itemId !== 0) // 🔹 숫자만 필터링
                   .map((itemId, index) => {
                     const itemKey = Number(itemId); // 🔹 숫자로 변환
-                    console.log(`Item ${index}:`, itemKey, "Data:", allItems?.data?.[itemKey].name);
+                    console.log(`Item ${index}:`, itemKey, "Data:", allItems[itemKey]);
                     return (
                       <div key={index}>
-                        {allItems?.data?.[itemKey] ? ( // 🔹 변환된 숫자 키로 접근
+                        {allItems[itemKey] ? ( // 🔹 변환된 숫자 키로 접근
                           <div>
                             <img
                               // src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/item/${itemKey}.png`}
                               src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/item/${itemKey}.png`}
-                              alt={allItems.data[itemKey].name}
+                              alt={allItems[itemKey].name}
                               style={{ width: "40px", height: "40px", borderRadius: "5px" }}
                             />
-                            <p style={{ fontSize: "12px", textAlign: "center" }}>{allItems.data[itemKey].name}</p>
+                            <p style={{ fontSize: "12px", textAlign: "center" }}>{allItems[itemKey].name}</p>
                           </div>
                         ) : (
-                          <div style={{ width: "40px", height: "40px", backgroundColor: "#444", borderRadius: "5px" }} />
+                          // <div style={{ width: "40px", height: "40px", backgroundColor: "#444", borderRadius: "5px" }} />
+                          ""
                         )}
                       </div>
                     );
