@@ -43,7 +43,12 @@ export default function MatchedGame({
 }: MatchedGameProps) {
   console.log(gameData);
   console.log(puuidSearched);
-  const [allItems, setAllItems] = useState<ItemData>({});
+  const [allItems, setAllItems] = useState<ItemData>({
+    type: "",
+    version: "",
+    basic: {},
+    data: {},
+  });
   const currentUser = gameData.info.participants.find(
     (participant) => participant.puuid === puuidSearched
   );
@@ -83,13 +88,18 @@ export default function MatchedGame({
 
   useEffect(() => {
     const fetchItems = async () => {
-      const ItemResponse = await fetch("/LeagueofLegendData/item.json");
-      const itemDatajson: { data: ItemData } =
-        await ItemResponse.json();
-      const itemData = itemDatajson.data;
-      setAllItems(itemData);
-    }
-  }, []);  
+      try {
+        const ItemResponse = await fetch("/LeagueofLegendData/item.json");
+        const itemDatajson: { data: ItemData } = await ItemResponse.json();
+        setAllItems(itemDatajson.data);
+      } catch (error) {
+        console.error("아이템 데이터를 불러오는 중 오류 발생:", error);
+      }
+    };
+  
+    fetchItems(); 
+  }, []);
+  
 
   return (
     <div>
@@ -140,13 +150,36 @@ export default function MatchedGame({
                   ""
                 )}
               </div>
-              <div>{participants.item0}</div>
-              <div>{participants.item1}</div>
-              <div>{participants.item2}</div>
-              <div>{participants.item3}</div>
-              <div>{participants.item4}</div>
-              <div>{participants.item5}</div>
-              <div>{participants.item6}</div>
+              
+              {/* 아이템 정보 출력 */}
+              <div style={{ display: "flex", gap: "5px", marginLeft: "10px" }}>
+                {[participants.item0, participants.item1, participants.item2, participants.item3, participants.item4, participants.item5, participants.item6]
+                  .filter((itemId) => typeof itemId === "number" && itemId !== 0) // 🔹 숫자만 필터링
+                  .map((itemId, index) => {
+                    const itemKey = Number(itemId); // 🔹 숫자로 변환
+                    console.log(`Item ${index}:`, itemKey, "Data:", allItems?.data?.[itemKey].name);
+                    return (
+                      <div key={index}>
+                        {allItems?.data?.[itemKey] ? ( // 🔹 변환된 숫자 키로 접근
+                          <div>
+                            <img
+                              // src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/item/${itemKey}.png`}
+                              src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/item/${itemKey}.png`}
+                              alt={allItems.data[itemKey].name}
+                              style={{ width: "40px", height: "40px", borderRadius: "5px" }}
+                            />
+                            <p style={{ fontSize: "12px", textAlign: "center" }}>{allItems.data[itemKey].name}</p>
+                          </div>
+                        ) : (
+                          <div style={{ width: "40px", height: "40px", backgroundColor: "#444", borderRadius: "5px" }} />
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
+
+
+
               {participants.win == true ? (
                 <img
                   src="/realVictory.png"
