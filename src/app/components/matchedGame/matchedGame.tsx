@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 interface Participant {
   championName: string;
   kills: number;
@@ -24,6 +26,16 @@ interface MatchedGameProps {
   };
   puuidSearched: string;
 }
+interface ItemData {
+  type: string;
+  version: string;
+  basic: object;
+  data: {
+    [key: number]: {
+      name: string;
+    };
+  };
+}
 // totalDamageDealtToChampions
 export default function MatchedGame({
   gameData,
@@ -31,6 +43,7 @@ export default function MatchedGame({
 }: MatchedGameProps) {
   console.log(gameData);
   console.log(puuidSearched);
+  const [allItems, setAllItems] = useState<ItemData>({});
   const currentUser = gameData.info.participants.find(
     (participant) => participant.puuid === puuidSearched
   );
@@ -67,6 +80,16 @@ export default function MatchedGame({
     if (gameInfo.gameMode === "CLASSIC") return "소환사의 협곡";
     if (gameInfo.gameMode === "ARAM") return "칼바람 나락";
   };
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const ItemResponse = await fetch("/LeagueofLegendData/item.json");
+      const itemDatajson: { data: ItemData } =
+        await ItemResponse.json();
+      const itemData = itemDatajson.data;
+      setAllItems(itemData);
+    }
+  }, []);  
 
   return (
     <div>
