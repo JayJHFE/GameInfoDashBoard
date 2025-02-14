@@ -20,6 +20,18 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const originalWarn = console.warn;
+console.warn = (...args) => {
+  if (
+    typeof args[0] === "string" &&
+    args[0].includes("[antd: compatible] antd v5 support React is 16 ~ 18")
+  ) {
+    return; // `antd` 호환성 경고 무시
+  }
+  originalWarn(...args);
+};
+
+
 export const metadata: Metadata = {
   // title: "Game Dashboard",
   title: "Dashboard",

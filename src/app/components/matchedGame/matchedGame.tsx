@@ -147,31 +147,48 @@ export default function MatchedGame({
               
               {/* 아이템 정보 출력 */}
               <div style={{ display: "flex", gap: "5px", marginLeft: "10px" }}>
-                {[participants.item0, participants.item1, participants.item2, participants.item3, participants.item4, participants.item5, participants.item6]
-                  .filter((itemId) => typeof itemId === "number" && itemId !== 0) // 🔹 숫자만 필터링
-                  .map((itemId, index) => {
-                    const itemKey = Number(itemId); // 🔹 숫자로 변환
-                    console.log(`Item ${index}:`, itemKey, "Data:", allItems[itemKey]);
-                    return (
-                      <div key={index}>
-                        {allItems[itemKey] ? ( // 🔹 변환된 숫자 키로 접근
-                          <div>
-                            <img
-                              // src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/item/${itemKey}.png`}
-                              src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/item/${itemKey}.png`}
-                              alt={allItems[itemKey].name}
-                              style={{ width: "40px", height: "40px", borderRadius: "5px" }}
+                  {[
+                    participants.item0,
+                    participants.item1,
+                    participants.item2,
+                    participants.item3,
+                    participants.item4,
+                    participants.item5,
+                    participants.item6,
+                  ]
+                    .filter((itemId) => typeof itemId === "number" && itemId > 0) // 🔹 숫자만 남기고 0 제거
+                    .sort((a, b) => a - b) // 🔹 아이템 ID 순서대로 정렬
+                    .map((itemId, index) => {
+                      const itemKey = String(itemId); // 🔹 key를 문자열로 변환 (객체의 키는 문자열)
+                      const itemData = allItems?.[itemKey]; // 🔹 allItems에서 해당 아이템 정보 가져오기
+                      return (
+                        <div key={index}>
+                          {itemData ? (
+                            <div>
+                              <img
+                                src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/item/${itemKey}.png`}
+                                alt={itemData.name}
+                                style={{ width: "40px", height: "40px", borderRadius: "5px" }}
+                              />
+                              {/* <p style={{ fontSize: "12px", textAlign: "center" }}>
+                                {itemData.name}
+                              </p> */}
+                            </div>
+                          ) : (
+                            <div
+                              style={{
+                                width: "40px",
+                                height: "40px",
+                                backgroundColor: "#444",
+                                borderRadius: "5px",
+                              }}
                             />
-                            <p style={{ fontSize: "12px", textAlign: "center" }}>{allItems[itemKey].name}</p>
-                          </div>
-                        ) : (
-                          // <div style={{ width: "40px", height: "40px", backgroundColor: "#444", borderRadius: "5px" }} />
-                          ""
-                        )}
-                      </div>
-                    );
-                  })}
-              </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
+
 
 
 
