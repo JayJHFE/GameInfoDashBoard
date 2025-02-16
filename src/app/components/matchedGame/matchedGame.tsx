@@ -29,7 +29,7 @@ interface MatchedGameProps {
 interface ItemData {
   [key: string]: {
     name: string;
-  }
+  };
 }
 // totalDamageDealtToChampions
 export default function MatchedGame({
@@ -86,14 +86,9 @@ export default function MatchedGame({
         console.error("아이템 데이터를 불러오는 중 오류 발생:", error);
       }
     };
-  
-    fetchItems(); 
-  }, []);
 
-  useEffect(() => {
-    console.log("allItems data:", allItems);
-  }, [allItems]);
-  
+    fetchItems();
+  }, []);
 
   return (
     <div>
@@ -106,12 +101,13 @@ export default function MatchedGame({
                 display: "flex",
                 padding: "2px 10px 2px 10px",
                 marginTop: "10px",
-                width: "60vw",
+                width: "45vw",
                 borderRadius: "10px",
                 backgroundColor: `${
-                  gameModeCheck(gameData.info) == "소환사의 협곡"
-                    ? "green"
-                    : "#31313c"
+                  participants.win == true ? "green" : "red"
+                  // gameModeCheck(gameData.info) == "소환사의 협곡"
+                  //   ? "green"
+                  //   : "#31313c"
                 }`,
               }}
             >
@@ -144,62 +140,63 @@ export default function MatchedGame({
                   ""
                 )}
               </div>
-              
+
               {/* 아이템 정보 출력 */}
               <div style={{ display: "flex", gap: "5px", marginLeft: "10px" }}>
-                  {[
-                    participants.item0,
-                    participants.item1,
-                    participants.item2,
-                    participants.item3,
-                    participants.item4,
-                    participants.item5,
-                    participants.item6,
-                  ]
-                    .filter((itemId) => typeof itemId === "number" && itemId > 0) // 🔹 숫자만 남기고 0 제거
-                    .sort((a, b) => a - b) // 🔹 아이템 ID 순서대로 정렬
-                    .map((itemId, index) => {
-                      const itemKey = String(itemId); // 🔹 key를 문자열로 변환 (객체의 키는 문자열)
-                      const itemData = allItems?.[itemKey]; // 🔹 allItems에서 해당 아이템 정보 가져오기
-                      return (
-                        <div key={index}>
-                          {itemData ? (
-                            <div>
-                              <img
-                                src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/item/${itemKey}.png`}
-                                alt={itemData.name}
-                                style={{ width: "40px", height: "40px", borderRadius: "5px" }}
-                              />
-                              {/* <p style={{ fontSize: "12px", textAlign: "center" }}>
-                                {itemData.name}
-                              </p> */}
-                            </div>
-                          ) : (
-                            <div
+                {[
+                  participants.item0,
+                  participants.item1,
+                  participants.item2,
+                  participants.item3,
+                  participants.item4,
+                  participants.item5,
+                  participants.item6,
+                ]
+                  .filter((itemId) => typeof itemId === "number" && itemId > 0) // 🔹 숫자만 남기고 0 제거
+                  .sort((a, b) => a - b) // 🔹 아이템 ID 순서대로 정렬
+                  .map((itemId, index) => {
+                    const itemKey = String(itemId); // 🔹 key를 문자열로 변환 (객체의 키는 문자열)
+                    const itemData = allItems?.[itemKey]; // 🔹 allItems에서 해당 아이템 정보 가져오기
+                    return (
+                      <div key={index} style={{ paddingTop: "50px" }}>
+                        {itemData ? (
+                          <div>
+                            <img
+                              src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/item/${itemKey}.png`}
+                              alt={itemData.name}
                               style={{
                                 width: "40px",
                                 height: "40px",
-                                backgroundColor: "#444",
                                 borderRadius: "5px",
                               }}
                             />
-                          )}
-                        </div>
-                      );
-                    })}
-                </div>
+                            {/* <p style={{ fontSize: "12px", textAlign: "center" }}>
+                                {itemData.name}
+                              </p> */}
+                          </div>
+                        ) : (
+                          <div
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              backgroundColor: "#444",
+                              borderRadius: "5px",
+                            }}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
 
-
-
-
-              {participants.win == true ? (
+              {/* {participants.win == true ? (
                 <img
                   src="/realVictory.png"
-                  style={{ width: "100px", marginLeft: "30vw" }}
+                  style={{ width: "3vw", marginLeft: "100px" }}
                 />
               ) : (
                 ""
-              )}
+              )} */}
             </div>
           ) : (
             ""

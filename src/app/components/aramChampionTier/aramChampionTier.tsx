@@ -103,7 +103,7 @@ export default function AramChampionTier({
               key={aramChamp.name}
             >
               <img
-                src={`https://ddragon.leagueoflegends.com/cdn/14.22.1/img/champion/${matchedChampion?.id}.png`}
+                src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/champion/${matchedChampion?.id}.png`}
               />
               <div style={{ paddingTop: "50px", marginLeft: "10px" }}>
                 <strong>{matchedChampion?.name}</strong> - {aramChamp.tier}티어

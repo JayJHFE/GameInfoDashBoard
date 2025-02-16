@@ -365,22 +365,24 @@ export default function SummonerSearch() {
     }
   }, [blueTeamImages, redTeamImages]);
 
-
   return (
     <div>
       <div style={{ display: "flex" }}>
-        <GiMagnifyingGlass size={25} style={{ marginRight: "10px", marginTop: "8px" }}/>
+        <GiMagnifyingGlass
+          size={25}
+          style={{ marginRight: "10px", marginTop: "8px" }}
+        />
         <h1>전적검색</h1>
       </div>
       <div style={{ marginTop: "20px" }}>
         <h3>아이디를 입력해주세요</h3>
         <Search
-          className={styles.searchInput} 
+          className={styles.searchInput}
           placeholder="아이디 #태그"
-          value={inputValue} 
-          onChange={handleInputChange}  
-          onSearch={handleSearch} 
-          enterButton 
+          value={inputValue}
+          onChange={handleInputChange}
+          onSearch={handleSearch}
+          enterButton
         />
         {/* <input
           type="text"
@@ -390,11 +392,25 @@ export default function SummonerSearch() {
         />
         <button onClick={handleSearch}>검색</button> */}
       </div>
-      <div style={{ width:"31vw", backgroundColor: championWithRank.length ?  "#31313c" : "transparent", display: "flex", flexDirection: "column", marginTop: "20px", marginBottom: "20px", gap: "10px", paddingLeft: "10px", paddingTop:"10px", paddingBottom:"10px", borderRadius: "15px" }}>
+      <div
+        style={{
+          width: "fit-content",
+          backgroundColor: championWithRank.length ? "#31313c" : "transparent",
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "20px",
+          marginBottom: "20px",
+          gap: "10px",
+          paddingLeft: "10px",
+          paddingTop: "10px",
+          paddingBottom: "10px",
+          borderRadius: "15px",
+        }}
+      >
         {championWithRank.length > 0 && (
-          <div style={{fontSize:"20px"}}>숙련도 TOP 3</div>
+          <div style={{ fontSize: "20px" }}>숙련도 TOP 3</div>
         )}
-        <div style={{display:"flex", flexDirection:"row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           {championWithRank.map(({ champion, rankData }) => (
             <ChampionTopLi
               key={champion.key}
@@ -406,7 +422,7 @@ export default function SummonerSearch() {
       </div>
       {championWithRank.length > 0 && (
         <>
-          <div style={{ display: "flex", flexDirection: "row", gap:"20px" }}>
+          <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
             {/* <button onClick={searchRecentGame}>최근 전적보기</button> */}
             <Button
               color="default"
@@ -428,9 +444,7 @@ export default function SummonerSearch() {
           </div>
         </>
       )}
-      {notActiveGame == true && (
-        <div>진행중인 게임이 없습니다.</div>
-      )}
+      {notActiveGame == true && <div>진행중인 게임이 없습니다.</div>}
       {activeGame && (
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
           <img
@@ -442,7 +456,6 @@ export default function SummonerSearch() {
             ? blueTeamImages.map((champion, index) => {
                 const isCurrentUser = champion.puuid === puuidSearched; // 조건 추가
                 const imgClass = isAnimating ? styles.falling : styles.hidden;
-
 
                 return (
                   <img
@@ -500,7 +513,9 @@ export default function SummonerSearch() {
       )}
       {matchedGame.length > 0 && (
         <>
-          <h2>최근 게임 정보</h2>
+          <div style={{ paddingTop: "20px" }}>
+            <h2>최근 게임 정보</h2>
+          </div>
           <div>
             {matchedGame.map((game) => (
               <MatchedGame
