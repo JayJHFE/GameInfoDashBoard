@@ -104,7 +104,7 @@ export default function MatchedGame({
                 width: "45vw",
                 borderRadius: "10px",
                 backgroundColor: `${
-                  participants.win == true ? "green" : "red"
+                  participants.win == true ? "#495057" : "#212529"
                   // gameModeCheck(gameData.info) == "소환사의 협곡"
                   //   ? "green"
                   //   : "#31313c"
