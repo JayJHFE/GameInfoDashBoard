@@ -3,9 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import styles from "./layout.module.css";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDragon } from "@fortawesome/free-solid-svg-icons";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { GiMagnifyingGlass } from "react-icons/gi";
 
 {
   /* <i class="fa-solid fa-dragon"></i> */
@@ -53,8 +51,9 @@ export default function RootLayout({
         <aside className={styles.sidebar}>
           <header className={styles.header}>
             <Link href="/" style={{ width: "20px", height: "20px" }}>
-              <img src="/lolIcon.png" style={{ width: "30px" }} />
-              LoL.gg
+              {/* <img src="/lolIcon.png" style={{ width: "30px" }} />
+              LoL.gg */}
+              <img src="/leagueOfLegendIcon.png" style={{ width: "150px" }} />
             </Link>
           </header>
           <nav>
@@ -70,7 +69,8 @@ export default function RootLayout({
                     }}
                   >
                     <div style={{ width: "40px", marginRight: "20px" }}>
-                      <FontAwesomeIcon icon={faDragon} />
+                      {/* <FontAwesomeIcon icon={faDragon} /> */}
+                      <img src="/ingameIcon.png" style={{ width: "30px" }} />
                     </div>
                     <div style={{ paddingTop: "5px" }}>인게임 정보</div>
                   </div>
@@ -87,7 +87,10 @@ export default function RootLayout({
                     }}
                   >
                     <div style={{ width: "40px", marginRight: "20px" }}>
-                      <FontAwesomeIcon icon={faCrown} />
+                      <GiMagnifyingGlass
+                        size={25}
+                        style={{ marginRight: "10px", marginTop: "8px" }}
+                      />
                     </div>
                     <div style={{ paddingTop: "5px" }}>전적 검색</div>
                   </div>
