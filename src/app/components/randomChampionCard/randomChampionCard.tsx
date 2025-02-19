@@ -24,8 +24,27 @@ interface ChampionData {
 }
 
 interface RuneData {
-  [key: string]: any;
+  [key: number]: RuneDataItem;
 }
+interface RuneDataItem {
+  id: number;
+  key: string;
+  icon: string;
+  name: string;
+  slots: RuneSlot[];
+}
+interface RuneSlot {
+  runes: Rune[];
+}
+
+interface Rune {
+  id: number;
+  key: string;
+  name: string;
+  shortDesc: string;
+  longDesc: string;
+}
+
 interface AramChampionTierProps {
   allChampionData: ChampionData;
   pickData: PickData;

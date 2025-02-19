@@ -39,6 +39,21 @@ export default function MatchedGame({
   console.log(gameData);
   console.log(puuidSearched);
   const [allItems, setAllItems] = useState<ItemData>({});
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const ItemResponse = await fetch("/LeagueofLegendData/item.json");
+        const itemDatajson: { data: ItemData } = await ItemResponse.json();
+        setAllItems(itemDatajson.data);
+      } catch (error) {
+        console.error("아이템 데이터를 불러오는 중 오류 발생:", error);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
   const currentUser = gameData.info.participants.find(
     (participant) => participant.puuid === puuidSearched
   );
@@ -75,20 +90,6 @@ export default function MatchedGame({
     if (gameInfo.gameMode === "CLASSIC") return "소환사의 협곡";
     if (gameInfo.gameMode === "ARAM") return "칼바람 나락";
   };
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const ItemResponse = await fetch("/LeagueofLegendData/item.json");
-        const itemDatajson: { data: ItemData } = await ItemResponse.json();
-        setAllItems(itemDatajson.data);
-      } catch (error) {
-        console.error("아이템 데이터를 불러오는 중 오류 발생:", error);
-      }
-    };
-
-    fetchItems();
-  }, []);
 
   return (
     <div>
@@ -152,6 +153,7 @@ export default function MatchedGame({
                   participants.item5,
                   participants.item6,
                 ]
+                  .map(Number)
                   .filter((itemId) => typeof itemId === "number" && itemId > 0) // 🔹 숫자만 남기고 0 제거
                   .sort((a, b) => a - b) // 🔹 아이템 ID 순서대로 정렬
                   .map((itemId, index) => {

@@ -50,7 +50,6 @@ export async function scrapAramChamp() {
       name = name ? formatChampionName(name) : undefined;
 
       const tier = $(element).find("td:nth-child(3)").text()?.trim();
-      console.log(name, tier);
       if (name && tier) {
         championTiers.push({ name, tier });
       } else {

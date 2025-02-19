@@ -82,7 +82,9 @@ export default function SummonerSearch() {
   const [error, setError] = useState("");
   const [, setResult] = useState(null);
   const [userChampionTier, setUserChampionTier] = useState<ChampionInfo[]>([]);
-  const [allChampionData, setAllChampionData] = useState<any>(null);
+  const [allChampionData, setAllChampionData] = useState<ChampionData | null>(
+    null
+  );
   const [matchedChampion, setMatchedChampion] = useState<Champion[] | null>(
     null
   );
@@ -117,6 +119,7 @@ export default function SummonerSearch() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setError("");
+    console.log(error);
   };
 
   // 소환사 검색 함수
@@ -177,8 +180,8 @@ export default function SummonerSearch() {
         setMatchedChampion(matched.length > 0 ? matched : null);
       }
     } catch (error) {
-      console.error("Error fetching summoner data:", error);
       setError("소환사 정보를 가져오는 중 오류가 발생했습니다.");
+      console.log(error);
     }
   };
 
@@ -233,9 +236,11 @@ export default function SummonerSearch() {
       const mapTeamImages = (team: TeamMember[]) =>
         team
           .map((participant, idx) => {
-            const champion = Object.values(allChampionData as Champion[]).find(
-              (champ) => champ.key === participant.championId.toString()
-            );
+            const champion =
+              allChampionData &&
+              Object.values(allChampionData).find(
+                (champ) => champ.key === participant.championId.toString()
+              );
             return {
               puuid: participant.puuid,
               id: champion?.id, // 챔피언 id
