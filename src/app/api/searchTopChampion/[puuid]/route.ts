@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
 
+// const API_KEY: string = process.env.API_KEY || "";
+
+// console.log("API_KEY in API Handler:", API_KEY);
+
 export async function GET(
   req: Request,
-  { params }: { params: { puuid: string } }
+  // { params }: { params: { puuid: string } }
+  { params }: { params: Promise<{ puuid: string }> }
 ) {
   const { puuid } = await params;
 
@@ -19,7 +24,7 @@ export async function GET(
     const response = await fetch(url, {
       method: "GET",
       headers: {
-        "X-Riot-Token": "RGAPI-d0ef7619-7f3f-4fae-a38b-68eff7631dff",
+        "X-Riot-Token": String(process.env.API_KEY)!,
       },
     });
 

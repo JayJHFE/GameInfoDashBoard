@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { matchId: string } }
+  // { params }: { params: { matchId: string } }
+  { params }: { params: Promise<{ matchId: string }> }
 ) {
   const { matchId } = await params;
 
@@ -16,12 +17,11 @@ export async function GET(
   }
   const url = `https://asia.api.riotgames.com/lol/match/v5/matches/${matchId}`;
 
-
   try {
     const response = await fetch(url, {
       method: "GET",
       headers: {
-        "X-Riot-Token": "RGAPI-d0ef7619-7f3f-4fae-a38b-68eff7631dff",
+        "X-Riot-Token": String(process.env.API_KEY)!,
       },
     });
 

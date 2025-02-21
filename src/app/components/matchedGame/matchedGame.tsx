@@ -17,7 +17,8 @@ interface InfoData {
   gameDuration: number;
   gameId: number;
   participants: Participant[];
-  win: boolean;
+  // win: boolean;
+  win?: boolean;
 }
 interface MatchedGameProps {
   gameData: {

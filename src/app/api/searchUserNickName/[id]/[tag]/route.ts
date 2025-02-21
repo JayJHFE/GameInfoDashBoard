@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
 
-export async function searchUserNickName(
+// 🔹 내부에서만 사용할 함수 (export 제거!)
+async function searchUserNickName(
   url: string,
-  method: "GET" | "POST" | "PUT" | "DELETE" = "GET"
+  method: "GET" | "POST" | "PUsT" | "DELETE" = "GET"
 ) {
   try {
     const response = await fetch(url, {
       method,
       headers: {
-        "X-Riot-Token": "RGAPI-d0ef7619-7f3f-4fae-a38b-68eff7631dff", // 환경 변수 사용
+        "X-Riot-Token": String(process.env.API_KEY)!, // 환경 변수 사용
       },
     });
 
     if (!response.ok) {
-      // 서버에서 받은 상태 코드와 에러 메시지 출력
-      const errorMessage = await response.text(); // 서버 응답을 텍스트로 읽기
+      const errorMessage = await response.text();
       console.error(`API Error: ${response.status} - ${response.statusText}`);
       console.error(`Error Message from API: ${errorMessage}`);
       throw new Error(
@@ -22,19 +22,24 @@ export async function searchUserNickName(
       );
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error("Error fetching data from Riot Games API:", error);
-    throw error; // 원본 에러를 그대로 전달
+    throw error;
   }
 }
 
+// ✅ Next.js API Route에서 `GET` 핸들러만 export
 export async function GET(
   req: Request,
-  context: { params: { id: string; tag: string } }
+  // context: { params: { id: string; tag: string } }
+  { params }: { params: Promise<{ id: string; tag: string }> }
 ) {
-  const { id, tag } = await context.params;
+  //   { params }: { params: Promise<{ puuid: string }> }
+  // ) {
+  //   const { puuid } = await params;
+  const { id, tag } = await params;
+  // const { id, tag } = context.params;
 
   console.log("API Route hit");
   console.log("Received ID:", id, "Received Tag:", tag);
@@ -50,27 +55,7 @@ export async function GET(
   console.log("Constructed URL:", url);
 
   try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "X-Riot-Token": "RGAPI-d0ef7619-7f3f-4fae-a38b-68eff7631dff", // 환경 변수 사용
-      },
-    });
-
-    if (!response.ok) {
-      // 서버 에러 메시지를 텍스트로 출력
-      const errorMessage = await response.text();
-      console.error(`API Error: ${response.status} - ${response.statusText}`);
-      console.error(`Error Message from API: ${errorMessage}`);
-      return NextResponse.json(
-        {
-          error: `Riot API responded with ${response.status}: ${errorMessage}`,
-        },
-        { status: response.status }
-      );
-    }
-
-    const data = await response.json();
+    const data = await searchUserNickName(url, "GET");
     return NextResponse.json(data);
   } catch (error) {
     console.error("Unhandled Error:", error);
