@@ -41,7 +41,7 @@ export default function MainClient() {
   >([]);
   const [cellCount, setCellCount] = useState(25); // 슬라이드 개수
   const [selectedIndex, setSelectedIndex] = useState(0); // 현재 선택된 인덱스
-  const [isHorizontal] = useState(true); // 방향
+  const [isHorizontal, setisHorizontal] = useState(true); // 방향
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [pickData, setPickData] = useState<PickData>({
     checkNormal: "normal",
@@ -66,6 +66,7 @@ export default function MainClient() {
       //     300 // 최소 반지름 제한
       //   );
       //   setRadius(newRadius);
+      setisHorizontal(true);
       const cellSize = carousel.offsetWidth || 300; // 기본 크기 보장
       const newRadius = Math.min(
         Math.max(Math.round(cellSize / 2 / Math.sin(Math.PI / cellCount)), 300), // 최소 반지름 제한
