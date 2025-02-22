@@ -37,8 +37,8 @@ export default function MatchedGame({
   gameData,
   puuidSearched,
 }: MatchedGameProps) {
-  console.log(gameData);
-  console.log(puuidSearched);
+  // console.log(gameData);
+  // console.log(puuidSearched);
   const [allItems, setAllItems] = useState<ItemData>({});
 
   useEffect(() => {

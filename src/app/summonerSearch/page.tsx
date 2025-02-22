@@ -284,7 +284,7 @@ export default function SummonerSearch() {
       }
 
       const recentGameData = await recentGameResponse.json();
-      console.log("Recent Game Data:", recentGameData);
+      // console.log("Recent Game Data:", recentGameData);
 
       // 5개의 값을 사용하여 추가 API 호출
       const additionalApiUrls = recentGameData.map(
@@ -304,7 +304,7 @@ export default function SummonerSearch() {
         )
       );
       setMatchedGame(additionalApiResponses);
-      console.log("Recent Game Data:", additionalApiResponses);
+      // console.log("Recent Game Data:", additionalApiResponses);
     } catch (error) {
       console.error("Error fetching recent game data:", error);
     }
@@ -355,12 +355,12 @@ export default function SummonerSearch() {
       setChampionWithRank(combinedData);
     }
   }, [matchedChampion, userChampionTier]);
-  useEffect(() => {
-    console.log("activeGame", activeGame);
-  }, [activeGame]);
-  useEffect(() => {
-    console.log("allChampionData", allChampionData);
-  }, [allChampionData]);
+  // useEffect(() => {
+  //   console.log("activeGame", activeGame);
+  // }, [activeGame]);
+  // useEffect(() => {
+  //   console.log("allChampionData", allChampionData);
+  // }, [allChampionData]);
   useEffect(() => {
     if (blueTeamImages.length > 0 || redTeamImages.length > 0) {
       const timeout = setTimeout(() => {

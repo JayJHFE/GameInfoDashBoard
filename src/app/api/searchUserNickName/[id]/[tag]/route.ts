@@ -41,8 +41,8 @@ export async function GET(
   const { id, tag } = await params;
   // const { id, tag } = context.params;
 
-  console.log("API Route hit");
-  console.log("Received ID:", id, "Received Tag:", tag);
+  // console.log("API Route hit");
+  // console.log("Received ID:", id, "Received Tag:", tag);
 
   if (!id || !tag) {
     return NextResponse.json(
@@ -52,7 +52,7 @@ export async function GET(
   }
 
   const url = `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${id}/${tag}`;
-  console.log("Constructed URL:", url);
+  // console.log("Constructed URL:", url);
 
   try {
     const data = await searchUserNickName(url, "GET");

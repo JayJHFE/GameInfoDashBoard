@@ -11,8 +11,8 @@ export async function GET(
 ) {
   const { puuid } = await params;
 
-  console.log("API Route hit");
-  console.log("Received PUUID:", puuid);
+  // console.log("API Route hit");
+  // console.log("Received PUUID:", puuid);
 
   if (!puuid) {
     return NextResponse.json({ error: "PUUID is missing" }, { status: 400 });

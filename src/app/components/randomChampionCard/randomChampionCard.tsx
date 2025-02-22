@@ -82,7 +82,7 @@ export default function RandomChampionCard({
         const runeResponse = await fetch("/LeagueofLegendData/runes.json");
         const runeDatajson: RuneData = await runeResponse.json();
         setRuneData(runeDatajson);
-        console.log(runeDatajson, "Rune data loaded");
+        // console.log(runeDatajson, "Rune data loaded");
       } catch (error) {
         console.error("Error loading rune data:", error);
       }
@@ -144,7 +144,7 @@ export default function RandomChampionCard({
           }
         );
 
-        console.log(filteredChampions, "Filtered Champions");
+        // console.log(filteredChampions, "Filtered Champions");
 
         // 필터링된 챔피언에서 랜덤으로 선택
         if (filteredChampions.length > 0) {
@@ -162,7 +162,7 @@ export default function RandomChampionCard({
             setIsFlipped(true); // 카드 플립
           };
         } else {
-          console.log("No champions match the criteria.");
+          // console.log("No champions match the criteria.");
         }
       } else {
         const randomIndex = Math.floor(Math.random() * 6); // 랜덤 인덱스 (0~5)
@@ -180,7 +180,7 @@ export default function RandomChampionCard({
             rune: randomRune?.name,
           }));
         }
-        console.log(traits, "Traits");
+        // console.log(traits, "Traits");
         setImageUrl(null);
         const tmpRandomChampion =
           allChampionData[
@@ -204,7 +204,7 @@ export default function RandomChampionCard({
       resolve(null);
     });
   };
-  console.log(allChampionData);
+  // console.log(allChampionData);
   // allChampionData에서 랜덤으로 챔피언을 한개 뽑아서 표기
 
   return (

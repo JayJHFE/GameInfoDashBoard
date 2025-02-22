@@ -7,10 +7,10 @@ export async function GET(
 ) {
   const { matchId } = await params;
 
-  console.log("Params received:", params);
+  // console.log("Params received:", params);
 
-  console.log("API Route hit");
-  console.log("Received PUUID:", matchId);
+  // console.log("API Route hit");
+  // console.log("Received PUUID:", matchId);
 
   if (!matchId) {
     return NextResponse.json({ error: "PUUID is missing" }, { status: 400 });
