@@ -34,6 +34,7 @@ interface PickData {
 export default function MainClient() {
   const [, setData] = useState<{ freeChampionIds: number[] } | null>(null);
   const [allChampionData, setAllChampionData] = useState<ChampionData>({});
+  const [rotation, setRoatation] = useState(false);
   const [freeChampions, setFreeChampions] = useState<
     { name: string; tags: string; image: string; key: string; id: string }[]
   >([]);
@@ -149,6 +150,7 @@ export default function MainClient() {
           await champResponse.json();
         const championData = championDatajson.data;
         setAllChampionData(championData);
+        setRoatation(true);
 
         // console.log(championData);
 
@@ -226,6 +228,11 @@ export default function MainClient() {
               <button
                 onClick={() => {
                   setIsCarouselVisible(true);
+                }}
+                disabled={!rotation} // rotation이 false면 비활성화
+                style={{
+                  opacity: rotation ? 1 : 0.5, // 비활성화 시 흐리게
+                  cursor: rotation ? "pointer" : "not-allowed", // 비활성화 시 커서 변경
                 }}
               >
                 열기
