@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import CharacterLi from "../components/character_li/character_li";
 import styles from "./mainPage.module.css";
-
 import AramChampionTier from "../components/aramChampionTier/aramChampionTier";
 import RandomChampionCard from "../components/randomChampionCard/randomChampionCard";
 import SearchingZone from "../components/serchingZone/searchingZone";
+import { Button } from "antd";
 
 interface Champion {
   tags: Array<string>;
@@ -254,15 +254,24 @@ export default function MainClient() {
               </p>
               </div> */}
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-evenly",
-              }}
-            >
-              <button onClick={handlePrev}>◀︎</button>
-              <button onClick={handleNext}>►</button>
+            <div className={styles.buttonContainer}>
+              <Button
+                type="primary"
+                onClick={handlePrev}
+                className={styles.buttonAntd}
+              >
+                ◀︎
+              </Button>
+              <Button
+                type="primary"
+                onClick={handleNext}
+                className={styles.buttonAntd}
+              >
+                ►
+              </Button>
+
+              {/* <button onClick={handlePrev}>◀︎</button>
+              <button onClick={handleNext}>►</button> */}
             </div>
           </div>
         )}

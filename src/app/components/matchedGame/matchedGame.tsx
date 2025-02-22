@@ -161,15 +161,18 @@ export default function MatchedGame({
                     const itemKey = String(itemId); // 🔹 key를 문자열로 변환 (객체의 키는 문자열)
                     const itemData = allItems?.[itemKey]; // 🔹 allItems에서 해당 아이템 정보 가져오기
                     return (
-                      <div key={index} style={{ paddingTop: "50px" }}>
+                      <div
+                        key={index}
+                        style={{ paddingTop: "30px", paddingLeft: "10px" }}
+                      >
                         {itemData ? (
                           <div>
                             <img
                               src={`https://ddragon.leagueoflegends.com/cdn/15.3.1/img/item/${itemKey}.png`}
                               alt={itemData.name}
                               style={{
-                                width: "40px",
-                                height: "40px",
+                                width: "60px",
+                                height: "60px",
                                 borderRadius: "5px",
                               }}
                             />
