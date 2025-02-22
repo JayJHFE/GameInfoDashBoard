@@ -7,6 +7,7 @@ import AramChampionTier from "../components/aramChampionTier/aramChampionTier";
 import RandomChampionCard from "../components/randomChampionCard/randomChampionCard";
 import SearchingZone from "../components/serchingZone/searchingZone";
 import { Button } from "antd";
+import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
 
 interface Champion {
   tags: Array<string>;
@@ -260,14 +261,14 @@ export default function MainClient() {
                 onClick={handlePrev}
                 className={styles.buttonAntd}
               >
-                ◀︎
+                <CaretLeftOutlined />
               </Button>
               <Button
                 type="primary"
                 onClick={handleNext}
                 className={styles.buttonAntd}
               >
-                ►
+                <CaretRightOutlined />
               </Button>
 
               {/* <button onClick={handlePrev}>◀︎</button>

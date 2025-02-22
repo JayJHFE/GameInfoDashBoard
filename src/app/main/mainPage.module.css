@@ -125,6 +125,9 @@
   @media (min-width: 2000px) {
     width: 35vw;
   }
+  @media (max-width: 1800px) {
+    width: 45vw;
+  }
 }
 /* .carousel__cell:nth-child(9n + 1) {
   background: hsla(0, 100%, 50%, 0.8);
