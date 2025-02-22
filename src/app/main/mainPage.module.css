@@ -126,7 +126,7 @@
     width: 35vw;
   }
   @media (max-width: 1800px) {
-    width: 40vw;
+    width: 38vw;
   }
 }
 /* .carousel__cell:nth-child(9n + 1) {
