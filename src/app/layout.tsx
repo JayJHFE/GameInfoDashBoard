@@ -106,7 +106,7 @@ export default function RootLayout({
         <main className={styles.main}>
           <section className={styles.content}>{children}</section>
           <footer className={styles.footer}>
-            <p>© 2023 My App. All rights reserved.</p>
+            <p>© 2025 JayJHFE. All rights reserved.</p>
           </footer>
         </main>
       </body>
