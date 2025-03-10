@@ -48,7 +48,7 @@ export default function MainClient() {
   const [pickData, setPickData] = useState<PickData>({
     checkNormal: "normal",
     lane: "top",
-    damageType: "",
+    damageType: "AD",
   });
   const [isSearch, setIsSearch] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);

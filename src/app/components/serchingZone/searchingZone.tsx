@@ -52,13 +52,13 @@ export default function SearchingZone({
       if (pickData.lane !== "" && pickData.damageType !== "") {
         setIsSearch(true);
       } else {
-        alert("오승현찌질이");
+        alert("옵션을 선택해주세요");
       }
     } else {
       if (pickData.lane !== "") {
         setIsSearch(true);
       } else {
-        alert("오승현찌질이");
+        alert("옵션을 선택해주세요");
       }
     }
   };
