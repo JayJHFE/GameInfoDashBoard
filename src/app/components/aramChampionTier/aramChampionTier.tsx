@@ -66,7 +66,7 @@ export default function AramChampionTier({
         <h2>칼바람 나락 챔피언 티어</h2>
       </div>
       <div></div>
-      <ul
+      {/* <ul
         style={{
           maxHeight: "50vh",
           overflowY: "auto",
@@ -111,7 +111,12 @@ export default function AramChampionTier({
             </li>
           );
         })}
-      </ul>
+      </ul> */}
+      <div>
+        OP.GG 사이트 구조 변경 및 스크래핑 금지처리로 인해 현재는 표기하지
+        않습니다. <br />
+        추후 임시 리스트로 업데이트됩니다
+      </div>
     </div>
   );
 }

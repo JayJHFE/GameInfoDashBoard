@@ -29,10 +29,9 @@ function formatChampionName(name: string) {
   );
 }
 
-// 🔹 내부에서만 사용할 함수 (export 제거!)
 async function scrapAramChamp() {
   try {
-    const { data } = await axios.get("https://www.op.gg/modes/aram");
+    const { data } = await axios.get("https://op.gg/ko/lol/modes/aram");
     const $ = cheerio.load(data);
 
     const championTiers: { name: string; tier: string }[] = [];

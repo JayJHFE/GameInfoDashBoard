@@ -5,6 +5,7 @@ import MatchedGame from "../components/matchedGame/matchedGame";
 import styles from "./page.module.css";
 import { Input, Button } from "antd";
 import { GiMagnifyingGlass } from "react-icons/gi";
+import { request } from "http";
 
 interface Champion {
   tags: Array<string>;
@@ -124,12 +125,15 @@ export default function SummonerSearch() {
 
   // 소환사 검색 함수
   const handleSearch = async () => {
-    const regex = /^[^\s#]+#[^\s].+$/;
+    // console.log("입력된 값:", inputValue);
 
-    if (!regex.test(inputValue)) {
-      setError("아이디와 태그는 '아이디 #태그' 형식으로 입력해주세요.");
-      return;
-    }
+    // const regex = /^[^\s#]+#[^\s].+$/;
+
+    // const cleanedValue = inputValue.trim();
+    // if (!regex.test(cleanedValue)) {
+    //   setError("아이디와 태그는 '아이디 #태그' 형식으로 입력해주세요.");
+    //   return;
+    // }
 
     const [id, tag] = inputValue.split("#");
 
