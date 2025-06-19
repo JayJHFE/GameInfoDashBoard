@@ -5,7 +5,7 @@ import MatchedGame from "../components/matchedGame/matchedGame";
 import styles from "./page.module.css";
 import { Input, Button } from "antd";
 import { GiMagnifyingGlass } from "react-icons/gi";
-import { request } from "http";
+// import { request } from "http";
 
 interface Champion {
   tags: Array<string>;

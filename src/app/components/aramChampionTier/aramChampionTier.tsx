@@ -20,28 +20,27 @@ interface AramChampionTierProps {
   allChampionData: ChampionData; // ChampionData 타입을 사용하여 allChampionData 선언
 }
 
-const exceptions: { [key: string]: string } = {
-  Wukong: "MonkeyKing",
-  Drmundo: "DrMundo",
-  Twistedfate: "TwistedFate",
-  Tahmkench: "TahmKench",
-  Xinzhao: "XinZhao",
-  Kogmaw: "KogMaw",
-  Reksai: "RekSai",
-  Jarvaniv: "JarvanIV",
-  Leesin: "LeeSin",
-  Renataglasc: "Renata",
-  Ksante: "KSante",
-  Masteryi: "MasterYi",
-  Missfortune: "MissFortune",
-  Nunuwillump: "Nunu",
-  Aurelionsol: "AurelionSol",
-};
+// const exceptions: { [key: string]: string } = {
+//   Wukong: "MonkeyKing",
+//   Drmundo: "DrMundo",
+//   Twistedfate: "TwistedFate",
+//   Tahmkench: "TahmKench",
+//   Xinzhao: "XinZhao",
+//   Kogmaw: "KogMaw",
+//   Reksai: "RekSai",
+//   Jarvaniv: "JarvanIV",
+//   Leesin: "LeeSin",
+//   Renataglasc: "Renata",
+//   Ksante: "KSante",
+//   Masteryi: "MasterYi",
+//   Missfortune: "MissFortune",
+//   Nunuwillump: "Nunu",
+//   Aurelionsol: "AurelionSol",
+// };
 
-export default function AramChampionTier({
-  aramChamps,
-  allChampionData,
-}: AramChampionTierProps) {
+export default function AramChampionTier({}: // aramChamps,
+// allChampionData,
+AramChampionTierProps) {
   // console.log(allChampionData, "도찌");
   // console.log("allChampionData:", JSON.stringify(allChampionData, null, 2));
 
